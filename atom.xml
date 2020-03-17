@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://cyh-toby.github.io</id>
+    <id>https://cyh_toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-03-17T13:18:51.071Z</updated>
+    <updated>2020-03-17T13:29:00.111Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://cyh-toby.github.io"/>
-    <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
+    <link rel="alternate" href="https://cyh_toby.github.io"/>
+    <link rel="self" href="https://cyh_toby.github.io/atom.xml"/>
     <subtitle>欢迎来到 cyh_toby 的小窝</subtitle>
-    <logo>https://cyh-toby.github.io/images/avatar.png</logo>
-    <icon>https://cyh-toby.github.io/favicon.ico</icon>
+    <logo>https://cyh_toby.github.io/images/avatar.png</logo>
+    <icon>https://cyh_toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
     <entry>
         <title type="html"><![CDATA[实验]]></title>
-        <id>https://cyh-toby.github.io/post/shi-yan/</id>
-        <link href="https://cyh-toby.github.io/post/shi-yan/">
+        <id>https://cyh_toby.github.io/post/shi-yan/</id>
+        <link href="https://cyh_toby.github.io/post/shi-yan/">
         </link>
         <updated>2020-02-26T05:37:20.000Z</updated>
         <content type="html"><![CDATA[<p>实验</p>
@@ -27,8 +27,8 @@ using namespace std;
     </entry>
     <entry>
         <title type="html"><![CDATA[CSP-J/S2019游记]]></title>
-        <id>https://cyh-toby.github.io/post/csp-js2019-you-ji/</id>
-        <link href="https://cyh-toby.github.io/post/csp-js2019-you-ji/">
+        <id>https://cyh_toby.github.io/post/csp-js2019-you-ji/</id>
+        <link href="https://cyh_toby.github.io/post/csp-js2019-you-ji/">
         </link>
         <updated>2020-02-20T13:20:20.000Z</updated>
         <content type="html"><![CDATA[<p><s>话说在比赛结束很久以后(也就一两个月左右)才知道有游记这个东东。。。那么补上好了</s></p>
@@ -148,8 +148,8 @@ using namespace std;
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：数论-逆元]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-ni-yuan/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-ni-yuan/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-shu-lun-ni-yuan/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-shu-lun-ni-yuan/">
         </link>
         <updated>2020-02-16T09:17:11.000Z</updated>
         <content type="html"><![CDATA[<h1 id="注意">注意</h1>
@@ -323,8 +323,8 @@ for(int i = 2; i &lt;= n; i++)
     </entry>
     <entry>
         <title type="html"><![CDATA[题解 UVA1262 【密码 Password】]]></title>
-        <id>https://cyh-toby.github.io/post/ti-jie-uva1262-mi-ma-password/</id>
-        <link href="https://cyh-toby.github.io/post/ti-jie-uva1262-mi-ma-password/">
+        <id>https://cyh_toby.github.io/post/ti-jie-uva1262-mi-ma-password/</id>
+        <link href="https://cyh_toby.github.io/post/ti-jie-uva1262-mi-ma-password/">
         </link>
         <updated>2020-02-06T05:40:09.000Z</updated>
         <content type="html"><![CDATA[<h2 id="题目">题目</h2>
@@ -423,8 +423,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：树链剖分]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lian-pou-fen/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lian-pou-fen/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-shu-lian-pou-fen/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-shu-lian-pou-fen/">
         </link>
         <updated>2020-02-05T08:40:53.000Z</updated>
         <content type="html"><![CDATA[<p>待完成</p>
@@ -434,8 +434,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：线段树]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-xian-duan-shu/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-xian-duan-shu/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-xian-duan-shu/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-xian-duan-shu/">
         </link>
         <updated>2020-02-05T08:39:41.000Z</updated>
         <content type="html"><![CDATA[<h1 id="概念">概念</h1>
@@ -593,8 +593,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：图论-最短路]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-zui-duan-lu/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-zui-duan-lu/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-tu-lun-zui-duan-lu/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-tu-lun-zui-duan-lu/">
         </link>
         <updated>2020-02-05T08:37:46.000Z</updated>
         <content type="html"><![CDATA[<p>待完成</p>
@@ -602,8 +602,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：图论-二分图与最大匹配]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-er-fen-tu-yu-zui-da-pi-pei/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-er-fen-tu-yu-zui-da-pi-pei/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-tu-lun-er-fen-tu-yu-zui-da-pi-pei/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-tu-lun-er-fen-tu-yu-zui-da-pi-pei/">
         </link>
         <updated>2020-02-04T10:23:40.000Z</updated>
         <content type="html"><![CDATA[<h1 id="概念定义">概念&amp;定义</h1>
@@ -652,8 +652,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：图论-LCA]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-lca/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-lca/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-tu-lun-lca/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-tu-lun-lca/">
         </link>
         <updated>2020-01-17T08:57:27.000Z</updated>
         <content type="html"><![CDATA[<h2 id="概念">概念</h2>
@@ -799,8 +799,8 @@ int main() {
     </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：差分约束]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-chai-fen-yue-shu/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-chai-fen-yue-shu/">
+        <id>https://cyh_toby.github.io/post/xue-xi-bi-ji-chai-fen-yue-shu/</id>
+        <link href="https://cyh_toby.github.io/post/xue-xi-bi-ji-chai-fen-yue-shu/">
         </link>
         <updated>2020-01-16T14:15:49.000Z</updated>
         <content type="html"><![CDATA[<h2 id="概念">概念</h2>
