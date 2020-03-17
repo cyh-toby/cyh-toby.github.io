@@ -1,0 +1,285 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CSP-J/S2019考前梳理 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584450925967">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="CSP-J/S2019考前梳理 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+
+冷静读题，咬文嚼字 ，结合样例理解
+
+
+数组大小是否足够？变量或数组有没有赋初始值？访问会不会存在越界？
+
+
+模拟题或简单题考虑是否周全？有没有漏解？是否正确理解题意？有没有 ** 自己给题目添加条件 ** ？题目信息是否暗含 ** 隐..." />
+    <meta name="keywords" content="梳理" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584450925967" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    欢迎来到 cyh_toby 的小窝
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              CSP-J/S2019考前梳理
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-11-15
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/shu-li/" class="post-tag">
+                  # 梳理
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ol>
+<li>
+<p>冷静读题，咬文嚼字 ，结合样例理解</p>
+</li>
+<li>
+<p>数组大小是否足够？变量或数组有没有赋初始值？访问会不会存在越界？</p>
+</li>
+<li>
+<p>模拟题或简单题考虑是否周全？有没有漏解？是否正确理解题意？有没有 ** 自己给题目添加条件 ** ？题目信息是否暗含 ** 隐藏条件 ** ？</p>
+</li>
+<li>
+<p>题中有些默认条件，例如 多项式输出 中，多项式为空也得输出0；如果拿不准可以尝试询问</p>
+</li>
+<li>
+<p>题目的最终答案是否看清？有没有搞错待求结果？</p>
+</li>
+<li>
+<p>有没有注意数据范围的大小及特殊性？有没有考虑数据分治？需不需要高精度？需不需要快读？同级的算法有哪些？可不可以尝试用？</p>
+</li>
+<li>
+<p>是否合理规划好了时间的分配？方法是否成熟？</p>
+</li>
+<li>
+<p>暴搜之前，先考虑递推，$ dp $ , 贪心；没有思路再直接暴搜。暴搜时注意，可不可以剪枝？有没有处理边界？</p>
+</li>
+<li>
+<p>任何方法写完后，思考有没有考虑边界。</p>
+</li>
+<li>
+<p>先从题目本质入手，思维 ** 不要跳跃太快 ** ，可能会错过正解或关键。</p>
+</li>
+<li>
+<p>打代码前，应手出数据验证代码正确性。</p>
+</li>
+<li>
+<p>题目简短、疑似数学，先尝试手推，再尝试打表。</p>
+</li>
+<li>
+<p>基础代码形成后，检查变量名、运算符等，多打 ** 注释 ** 。</p>
+</li>
+<li>
+<p>基础代码正确后，尝试寻找：有没有一个东西重复算？有没有题目信息没有用到？</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>像 解方程 这种题，看似要用高精，但想不出正解时可以尝试 ** hash式的取模 ** 骗分</p>
+</li>
+<li>
+<p>关于图：- 巧妙方法 ：scc 、建反向 、拓扑后 $ DP $</p>
+<pre><code>- 删点后判断图的连通性: 转换为添加点+并查集判连通
+
+- 数：基环数可以枚举断边转树，** tatjan ** 求 ** $ LCA $ ** ，树上差分 
+</code></pre>
+</li>
+<li>
+<p>关于坐标系：二维前缀和</p>
+</li>
+<li>
+<p>关于数学：** 杨辉三角 ** 很常用，各种式子展开，以及 ** 筛素数 ** 去寻找 ** 整倍数关系 **</p>
+</li>
+<li>
+<p>关于贪心/ $ DP $ / 数学： 找规律、打表</p>
+</li>
+<li>
+<p>关于贪心/ $ DP $ ： 寻找 ** 相邻状态 ** 之间的 ** 潜在联系 ** ，** 寻找待求状态与已求状态 ** 的联系</p>
+</li>
+<li>
+<p>关于环形计数问题 例如 转圈游戏 和 能量项链 ：尝试取 $ mod $ ,或将数组 ** 倍长 **</p>
+</li>
+<li>
+<p>关于计数题，和算大量数据的，考虑 ** 前缀和 ** ，以及数学公式，例如 联合权值 的 ** 完全平方式展开 **</p>
+</li>
+<li>
+<p>条件中若有 <strong>分组选择</strong> 这种意思，可以尝试输入时用 $ vector $ 等预处理 。</p>
+</li>
+<li>
+<p>遇到纯暴力的枚举题，考虑是 <strong>枚举方案</strong> 还是 ** 枚举结果 ** 更优.</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>M</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">RMQ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">Q</span></span></span></span> : $ ST $ 表，单调队列 =&gt; 尺取法</p>
+</li>
+<li>
+<p>单调性和 $ O(log N) $ 都预示着 ** 二分 ** ， 其答案判定可能涉及 ** $ DP $ 、贪心、差分 **</p>
+<p>$ O(N^3) $ : 枚举 （其实很多不好正向做的题都可以 ** 从其他方向枚举 ** ）</p>
+</li>
+<li>
+<p>关于模拟，一定要 ** 再三注意细节 **</p>
+</li>
+<li>
+<p>当计数题有多个数值需枚举时，可以探寻变量之间的数量关系，从而 ** 枚举数量关系 ** （和、差之类的）</p>
+</li>
+<li>
+<p>** 表达式 ** ： 栈</p>
+</li>
+<li>
+<p>排序：优先队列；构造有序数列归并 $ O(N) $ 合并</p>
+</li>
+<li>
+<p>在时间复杂度过高时，分解题目所给信息，预处理筛选出更有用的单独存，有效降低复杂度 例如：寻宝</p>
+</li>
+<li>
+<p>善用 <strong>二进制</strong></p>
+</li>
+<li>
+<p>遇到高精度，先写long long 类的程序，然后依照这个写高精</p>
+</li>
+</ol>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/ti-jie-p1097-tong-ji-shu-zi/">
+              <h3 class="post-title">
+                题解 P1097 【统计数字】
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

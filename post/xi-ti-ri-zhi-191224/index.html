@@ -1,0 +1,277 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志19.12.24 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584450925967">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志19.12.24 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="原题：acwing143(关于Trie的应用题)
+源码：
+#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+#define maxn 100005
+
+int n;
+
+int trie..." />
+    <meta name="keywords" content="低级错误日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584450925967" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    欢迎来到 cyh_toby 的小窝
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志19.12.24
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-24
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/di-ji-cuo-wu-ri-zhi/" class="post-tag">
+                  # 低级错误日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>原题：acwing143(关于Trie的应用题)</p>
+<p>源码：</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+#define maxn 100005
+
+int n;
+
+int trie[32*maxn][2];
+int endt[32*maxn];
+int s[35];
+int a[maxn];
+int ans = 0;
+int tot = 1;
+inline void insert_trie(int str[], int x)
+{
+	int p = 1;
+	int len = 32;
+	for(int i = 0; i &lt; len; i++){
+		int c = str[i];
+		if(!trie[p][c]) trie[p][c] = ++tot;
+		p = trie[p][c];
+	}	
+	endt[p] = x;
+	return;
+}
+inline int search_trie(int str[]){
+	int p = 1;
+	int len = 32;
+	for(int i = 0; i &lt; len; i++){
+		int c = (str[i]==1?0:1);
+		if(trie[p][c]){
+			p = trie[p][c];
+			continue;
+		}
+		else{
+			c = (c==1?0:1);
+			p = trie[p][c];
+			continue;
+		}	
+	}
+	return endt[p];
+}
+
+int main() 
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i = 1; i &lt;= n; i++){
+//		int a[i];
+		scanf(&quot;%d&quot;, &amp;a[i]);
+		int tt = a[i];
+		for(int j = 32-1; j &gt;= 0; j--){
+			if(tt==0){
+				s[j] = 0;
+				continue;
+			}
+			s[j] = tt&amp;1;
+			tt&gt;&gt;=1;
+		}
+		insert_trie(s, i);
+		int t = search_trie(s);
+		ans = max(ans, a[t]^a[i]);
+//		printf(&quot;%d = (&quot;, a[i]);
+//		for(int k = 0; k &lt;= 31; k++){
+//			printf(&quot;%d&quot;, s[k]);
+//		}
+//		printf(&quot;)2\n&quot;);
+	}
+
+	printf(&quot;%d\n&quot;, ans);
+	
+	return 0;
+}
+</code></pre>
+<p>之所以专门写这个习题日志，是因为在本题犯了一个<strong>不可饶恕</strong>的错误 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>!</mo><mo>!</mo></mrow><annotation encoding="application/x-tex">!!</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mclose">!</span><span class="mclose">!</span></span></span></span></p>
+<p>就是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">main</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 函数的第三行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>:</mo></mrow><annotation encoding="application/x-tex">:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mrel">:</span></span></span></span></p>
+<pre><code class="language-cpp">int a[i];
+</code></pre>
+<p>原因是之前打算每次读一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">int</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span>不用数组，后来发现存起来更好，便手抖加了个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span></p>
+<p>关键在于，这个错很玄幻，以至于在本地跑 <strong>有时</strong> 是对的，但是如果中间加入打印语句，结果又不正确了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>!</mo></mrow><annotation encoding="application/x-tex">!</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mclose">!</span></span></span></span></p>
+<p>这意味着，这种错<strong>很容易被忽略，检查不出来</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>!</mo><mo>!</mo><mo>!</mo></mrow><annotation encoding="application/x-tex">!!!</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mclose">!</span><span class="mclose">!</span><span class="mclose">!</span></span></span></span></p>
+<p>因此特写次日志引以为戒。</p>
+<p>切记不可再<strong>随便在已有代码上做如下操作：</strong></p>
+<ul>
+<li>
+<p>加数组下标</p>
+</li>
+<li>
+<p>加变量声明类型（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">int</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>h</mi><mi>a</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">char</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">h</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 等）</p>
+</li>
+<li>
+<p>对于链表这类数据结构或算法，在已有代码中间插入新代码打乱原有顺序</p>
+</li>
+<li>
+<p>可能还有别的，遇见了再继续总结</p>
+</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/csp-js2019-kao-qian-shu-li/">
+              <h3 class="post-title">
+                CSP-J/S2019考前梳理
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

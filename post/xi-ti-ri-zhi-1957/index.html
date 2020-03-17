@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志-19.5.7 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584450925967">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志-19.5.7 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目：机器翻译
+知识点：队列？
+分析：第一次提交7个WA，主要是本地RUN的时候没有打印出程序的中间结果，只是结果恰巧正确，因此直接测评并没检查出错误。后来活学活用使用队列顺利解决了内存第一项的元素。
+源码第一次：
+#include &lt..." />
+    <meta name="keywords" content="习题日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584450925967" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    欢迎来到 cyh_toby 的小窝
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志-19.5.7
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-05-07
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
+                  # 习题日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>题目：机器翻译</p>
+<p>知识点：队列？</p>
+<p>分析：第一次提交7个WA，主要是本地RUN的时候<strong>没有打印出程序的中间结果</strong>，只是结果恰巧正确，<strong>因此直接测评并没检查出错误</strong>。后来活学活用使用队列顺利解决了内存第一项的元素。</p>
+<p>源码第一次：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+using namespace std;
+
+int m, n;
+int a[1000];
+bool ok[1000] = {0};
+int ans = 0;
+
+int main()
+{
+	cin &gt;&gt; m &gt;&gt; n;
+	int first = 0;
+	int tm = 0;
+	for (int i = 0; i &lt; n; i++){
+		cin &gt;&gt; a[i];
+	}
+	
+	for (int i = 0; i &lt; n; i++){
+		if(ok[a[i]] == false){
+			ans++;
+			if (tm &lt; m){
+				ok[a[i]] = true;
+				tm++;
+			}
+			else{
+				while(ok[a[first]] == false){
+					first++;//错大概在这部分吧
+				}
+				ok[a[first]] = false;
+				first++;
+				ok[a[i]] = true;
+				first++;
+			}
+		}
+		
+//		for (int j = 0; j &lt; n; j++){
+//			if (ok[j]){
+//				cout&lt;&lt;j&lt;&lt;&quot; &quot;;
+//			}
+//		}
+//		cout &lt;&lt; endl;
+		
+	}
+	
+		
+	cout &lt;&lt; ans &lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p>源码第二次：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+
+using namespace std;
+
+int n, m;
+int ans = 0;
+int a[1000];
+bool ok[1000];
+queue &lt;int&gt; q;
+
+int main(){
+	cin &gt;&gt; m &gt;&gt; n;
+	for (int i = 0; i &lt; n; i++){
+		cin &gt;&gt; a[i];
+	}
+	
+	int tm = 0;
+	for (int i = 0; i &lt; n; i++){
+		if (ok[a[i]] == false){
+			ans++;
+			if (tm &lt; m){
+				tm++;
+				//if (ok[a[i]] == false){
+					ok[a[i]] = true;
+					q.push(a[i]);
+				//}
+			}
+			else{
+				ok[q.front()] = false;
+				q.pop();
+				ok[a[i]] = true;
+				q.push(a[i]);
+			}
+		}
+		
+	/*	for (int j = 0; j &lt; n; j++){
+			if (ok[j]){
+				cout&lt;&lt;j&lt;&lt;&quot; &quot;;
+			}
+		}
+		cout &lt;&lt; endl;*/
+		
+	}
+	
+	cout&lt;&lt;ans&lt;&lt;endl;
+	
+	return 0;
+}
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/xi-ti-ri-zhi-1955/">
+              <h3 class="post-title">
+                习题日志-19.5.5
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

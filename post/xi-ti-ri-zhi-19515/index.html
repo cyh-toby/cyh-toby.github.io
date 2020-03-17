@@ -1,0 +1,309 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志-19.5.15 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584450925967">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志-19.5.15 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目：树(Uva548)
+知识点：树，dfs, stringstream
+源码(已AC)：
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;..." />
+    <meta name="keywords" content="习题日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584450925967" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    欢迎来到 cyh_toby 的小窝
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志-19.5.15
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-05-15
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
+                  # 习题日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>题目：树(Uva548)</p>
+<p>知识点：树，dfs, stringstream</p>
+<p>源码(已AC)：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+#include &lt;algorithm&gt;
+#include &lt;climits&gt; 
+
+using namespace std;
+
+const int maxv = 10000+10;
+
+int ans = INT_MAX;
+int fans;
+int in_order[maxv], post_order[maxv],lch[maxv],rch[maxv];
+int  n;
+
+void setagain(){
+	ans = INT_MAX;
+	for (int i = 0; i &lt; n; i++){
+		in_order[i] = post_order[i] = 0;
+	}
+}
+
+bool read_list(int s){ 
+	string line;
+	if (!getline (cin, line))
+		return false;
+	stringstream ss(line);
+	n = 0;
+	int x;
+	while (ss&gt;&gt;x){
+		if (s == 1){
+			in_order[n++] = x;
+		}
+		else{
+			post_order[n++] = x;
+		}
+		
+	}
+	return n&gt;0;
+}
+
+int build(int L1, int R1, int L2, int R2){
+	if (L1 &gt; R1){
+		return 0;
+	}
+	int root = post_order[R2];
+	int r;
+	for (int i = L1; i &lt;= R1;i++){
+		if (in_order[i] == root){
+			r = i;
+			break;
+		}
+	}
+	
+	lch[root] = build(L1, r-1, L2, L2+r-L1-1);
+	rch[root] = build(r+1, R1, L2+r-L1,R2-1);
+	
+	return root;
+}
+
+void dfs(int cur, int sum){
+	if (!lch[cur] &amp;&amp; !rch[cur]){
+		sum += cur;
+		if (ans &gt; sum){
+			ans = sum;
+			fans = cur;
+		}
+		if (ans == sum &amp;&amp; fans &gt; cur){
+			fans = cur;
+		}
+	//	fans = cur;
+	//	cout&lt;&lt;&quot;ans: &quot;&lt;&lt;ans&lt;&lt;endl;
+	//	cout&lt;&lt;&quot;fans: &quot;&lt;&lt;fans&lt;&lt;endl;
+		return;
+	}
+	
+	if (lch[cur]){
+		dfs(lch[cur], sum+cur);
+	}
+	if (rch[cur]){
+		dfs(rch[cur], sum+cur);
+	}
+	if (sum &gt;= ans)
+		return;
+	
+}
+
+int main(){
+	while (read_list(1)){
+		read_list(2);
+	
+		build(0, n-1, 0, n-1);
+
+		dfs(post_order[n-1], 0);
+	
+		cout&lt;&lt;fans&lt;&lt;endl;
+		
+		setagain();
+	}
+	return 0;
+}
+/*
+3 2 1 4 5 7 6
+3 1 2 5 6 7 4
+
+7 8 11 3 5 16 12 18
+8 3 11 7 16 18 12 5
+*/
+</code></pre>
+<p>心得：本题主要考察树的构造，dfs只是插曲。具体要点如下。</p>
+<ol>
+<li>build	函数的递归语句行值得注意，容易出错，类似的加/减数组下标找位置的代码，需要反复验算后再写。</li>
+<li>read_list函数含金量较大，用到<sstream>下的stringstream，需要巩固复习其用法；在函数括号内定义的数组不知是否就是地址，有待查证eg. void f(int a[]//那此处a是不是传地址呢) 。<br>
+1.最后发现几次本地都跑不对的原因是，题目要求最小和的路径，默认的是包括叶子节点本身的值，自己在写dfs的终止条件时写的是如下，且fans赋值没给判定条件(注释掉的是正确代码)</li>
+</ol>
+<pre><code class="language-cpp">if (!lch[cur] &amp;&amp; !rch[cur]){
+		//sum += cur;
+		
+		/*if (ans &gt; sum){
+			ans = sum;
+			fans = cur;
+		}
+		if (ans == sum &amp;&amp; fans &gt; cur){
+			fans = cur;
+		}*/
+		
+		max(ans, sum);//不正确代码
+		fans = cur;//不正确代码
+			
+		return;
+	}
+</code></pre>
+<p>总结：写代码许多细节都需反复验证，人工用纸模拟，严谨读题分析。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/xi-ti-ri-zhi-1957/">
+              <h3 class="post-title">
+                习题日志-19.5.7
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,382 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志-算竞0x17(堆)-数据备份 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584450925967">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志-算竞0x17(堆)-数据备份 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="//思维题，分析见&lt;&lt;算法竞赛进阶指南&gt;&gt;0x17
+//书上有这样一个操作：删除堆中对应p-&gt;prev和p-&gt;next
+//如果这样，就需要在链表中记录此节点所对应的在堆中的节点的编号
+//然而，这样以来..." />
+    <meta name="keywords" content="习题日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584450925967" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    欢迎来到 cyh_toby 的小窝
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志-算竞0x17(堆)-数据备份
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-27
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
+                  # 习题日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <pre><code class="language-cpp">//思维题，分析见&lt;&lt;算法竞赛进阶指南&gt;&gt;0x17
+//书上有这样一个操作：删除堆中对应p-&gt;prev和p-&gt;next
+//如果这样，就需要在链表中记录此节点所对应的在堆中的节点的编号
+//然而，这样以来，修改就会很麻烦
+//考虑用book数组打标记，也就是说，一旦堆顶元素的book = 1, 表明它是某个已被删除的p的prev或next,应当忽略，直接弹出，访问下一个，并重复此操作
+//那么堆数组就得开得和链表一样大，但总时间复杂度是不变的 
+
+//还有值得注意的是，对于链表边界情况的处理
+//显然对于一个p满足p-&gt;prev==head || p-&gt;next==tail ，是不能按普通操作删除后将w[p.pr]+w[p.nx]-w[p]入表的
+//所以我的做法是，特判这种情况， if(p1!=hd) x+=L[p1].v, book[p1] = 1, remove_list(p1);
+//								 if(p2!=tl) x+=L[p2].v, book[p2] = 1, remove_list(p2);
+//然后再入链表
+
+//但这样是不正确的（因此WA半天）
+
+//假如这样操作，就存在x=w[p1/p2]-w[p]入了链表，但实际不存在这种情况
+//所以应该干脆不入链表，或者制成inf (IMPORTANT)
+
+#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+#define N 100005
+#define ll long long
+#define inf 0x3f3f3f3f3f3f3f3f
+
+ll n, k;
+ll d[N];
+ll ans = 0;
+bool book[2*N];
+
+struct Node{
+	ll nx, pr;
+	ll v;
+} L[2*N];
+ll hd = 2, tl = 1, totl = 2;
+
+ll hp[2*N];//small root heap
+ll toth = 0;
+
+//linked list-----------------
+inline void initialize(){
+	totl = 2;
+	hd = 2, tl = 1;
+	L[hd].nx = tl, L[tl].pr = hd;
+	return;
+}
+inline void insert_list(ll p, ll x)
+{
+	L[++totl].v = x;
+	L[L[p].nx].pr = totl;
+	L[totl].nx = L[p].nx;
+	L[totl].pr = p;
+	L[p].nx = totl;
+	return;
+}
+inline void remove_list(ll p){
+	L[L[p].nx].pr = L[p].pr;
+	L[L[p].pr].nx = L[p].nx;
+	return;
+}
+inline void print_list()
+{
+	ll p = L[hd].nx;
+	printf(&quot;the list is : &quot;);
+	while(p!=tl){
+		printf(&quot;%lld &quot;, L[p].v);
+		p = L[p].nx;
+	}
+	printf(&quot;\n&quot;);
+	return;
+}
+//---------------------------
+
+//heap----store indexs in the linked list---------
+inline void up(ll p)
+{
+	while(p&gt;1){
+		if(L[hp[p]].v&lt;L[hp[p/2]].v){
+			swap(hp[p], hp[p/2]);
+			p/=2;
+		}
+		else break;
+	}
+	return;
+}
+inline void down(ll p){
+	ll q = p*2;
+	while(q&lt;=toth){
+		if(q&lt;toth &amp;&amp; L[hp[q+1]].v&lt;L[hp[q]].v) q++;
+		if(L[hp[p]].v&gt;L[hp[q]].v){
+			swap(hp[p], hp[q]);
+			p = q;
+			q *= 2;
+		}
+		else break;
+	}
+	return;
+}
+inline void insert_heap(ll x)
+{
+	hp[++toth] = x;
+	up(toth);
+	return;
+}
+inline void extract_heap()
+{
+	hp[1] = hp[toth--];
+	down(1);
+	return;
+}
+inline void remove_heap(ll p){
+	hp[p] = hp[toth--];
+	up(p), down(p);
+}
+inline void print_heap()
+{
+	printf(&quot;the heap is:\n&quot;);
+	for(ll i = 1; i &lt;= toth; i++){
+		printf(&quot;hp[%lld] = %lld , w = %lld \n&quot;, i, hp[i], L[hp[i]].v);
+	}
+	printf(&quot;\n&quot;);
+	return;
+}
+//------------------------------------------------
+
+int main()
+{
+	scanf(&quot;%lld%lld&quot;, &amp;n, &amp;k);
+	ll a1,a2;
+	scanf(&quot;%lld&quot;, &amp;a1);
+	n--;
+	initialize();
+	for (ll i = 1; i &lt;= n; i++) {
+		scanf(&quot;%lld&quot;, &amp;a2);
+		d[i] = a2-a1;
+		insert_list(totl, d[i]);
+		insert_heap(totl);
+//		printf(&quot;d[%d] = %d\n&quot;,i, d[i]);
+		a1 = a2;
+	}
+//	print_list();
+	
+	for(ll i = 1; i &lt;= k; i++){
+//		printf(&quot;as i = %d:\n&quot;, i);
+//		print_list();
+//		print_heap();
+		ll p = hp[1];
+		extract_heap();
+		while(book[p]){
+			p = hp[1];
+			extract_heap();
+		}
+		
+		ll p1 = L[p].pr, p2 = L[p].nx;
+		ll q;
+		if(p1==hd){
+			q = hd;
+		}
+		else{
+			q = L[p1].pr;
+		}
+		
+		ans += L[p].v;
+//		printf(&quot;ans = %d, p = %d\n&quot;, ans, p);
+		ll x = 0;
+		x-=L[p].v, remove_list(p);
+		if(p1!=hd) x+=L[p1].v, book[p1] = 1, remove_list(p1);
+		else x = inf;//IMPORTANT
+		if(p2!=tl) x+=L[p2].v, book[p2] = 1, remove_list(p2);
+		else x = inf;//IMPORTANT
+		insert_list(q, x);
+		insert_heap(totl);
+		
+//		printf(&quot;\n&quot;);
+	}
+	
+	printf(&quot;%lld&quot;, ans);
+	
+	return 0;
+}
+
+</code></pre>
+<h3 id="重要细节处理">重要细节处理</h3>
+<p>书上有这样一个操作：删除堆中对应p-&gt;prev和p-&gt;next</p>
+<p>如果这样，就需要在链表中记录此节点所对应的在堆中的节点的编号</p>
+<p>然而，这样以来，修改就会很麻烦</p>
+<p>考虑用book数组<strong>打标记</strong>，也就是说，一旦堆顶元素的book = 1, 表明它是某个已被删除的p的prev或next,应当忽略，直接弹出，访问下一个，并重复此操作</p>
+<p>那么堆数组就得开得和链表一样大，但总时间复杂度是不变的</p>
+<hr>
+<p>还有值得注意的是，对于链表边界情况的处理</p>
+<p>显然对于一个p满足p-&gt;prev<mark>head || p-&gt;next</mark>tail ，是不能按普通操作删除后将w[p.pr]+w[p.nx]-w[p]入表的</p>
+<p>所以我的做法是，<strong>特判</strong> 这种情况</p>
+<pre><code class="language-cpp">if(p1!=hd) x+=L[p1].v, book[p1] = 1, remove_list(p1);
+if(p2!=tl) x+=L[p2].v, book[p2] = 1, remove_list(p2);
+</code></pre>
+<p>然后再入链表</p>
+<p>但这样是<strong>不正确的</strong>（因此WA半天）</p>
+<p>假如这样操作，就存在x=w[p1/p2]-w[p]入了链表，但实际不存在这种情况</p>
+<p>所以应该干脆不入链表，或者<strong>制成inf</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>I</mi><mi>M</mi><mi>P</mi><mi>O</mi><mi>R</mi><mi>T</mi><mi>A</mi><mi>N</mi><mi>T</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(IMPORTANT)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span></span></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%87%8D%E8%A6%81%E7%BB%86%E8%8A%82%E5%A4%84%E7%90%86">重要细节处理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/xi-ti-ri-zhi-191224/">
+              <h3 class="post-title">
+                习题日志19.12.24
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
