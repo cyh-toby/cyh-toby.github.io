@@ -1,0 +1,273 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>题解 [NOIp2013]/P1966 【火柴排队】 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584503943379">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="题解 [NOIp2013]/P1966 【火柴排队】 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题意
+原题：P1966 火柴排队
+
+
+给定两个序列 aaa ，bbb ，同一序列无重，每次可以交换某一序列的相邻两位置，最终使 ∑(ai−bi)2\sum(a_i-b_i)^2∑(ai​−bi​)2 最小。
+
+
+求最小操作次数。
+
+
+分析
+..." />
+    <meta name="keywords" content="题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584503943379" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              题解 [NOIp2013]/P1966 【火柴排队】
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-08 20:09
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/ti-jie/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="题意">题意</h1>
+<p>原题：<a href="https://www.luogu.com.cn/problem/P1966">P1966 火柴排队</a></p>
+<ul>
+<li>
+<p>给定两个序列 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> ，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> ，同一序列无重，每次可以交换某一序列的相邻两位置，最终使 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mo>(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>−</mo><msub><mi>b</mi><mi>i</mi></msub><msup><mo>)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum(a_i-b_i)^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> 最小。</p>
+</li>
+<li>
+<p>求最小操作次数。</p>
+</li>
+</ul>
+<h1 id="分析">分析</h1>
+<p>不难得知，要满足上式最小，应该小的和小的配对，大的和大的配对。</p>
+<p>具体而言，就是让 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 中的第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 大数在同一位置 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 即可</p>
+<p>由【物理知识：运动是相对的】知：任意操作在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 上做和在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 上做是等价的。</p>
+<p>那么为了简化问题，统一以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 为范本，在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 上操作。</p>
+<p>所以，我们需要预先处理 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 中第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 大的数的位置，随后让 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 中的相同地位的数与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 数组中的位置匹配起来。</p>
+<p>具体而言就是把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 中第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 大数的位置给 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 中第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 大的数记下来，再求出这个<strong>位置序列</strong>的逆序对个数，即是答案。</p>
+<p>求逆序对可以用树状数组或者归并排序</p>
+<p>具体参考代码</p>
+<h1 id="源码">源码</h1>
+<pre><code class="language-cpp">/**********************************
+
+Problem: [NOIpTG2013]火柴排队 
+
+State: Accepted
+
+From: [NOIpTG2013]
+
+Algorithm: 归并排序, 逆序对 
+
+Author: cyh_toby
+
+last updated on 2020.3.8
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 100005, mod = 99999997;
+int n, a[N], b[N];
+int ans = 0;
+struct h{
+	int v, id;
+} c[N], d[N];
+void merge(int l, int mid, int r)//归并排序求逆序对个数 
+{
+	if (l &gt;= r) return; 
+	merge(l, (l+mid)&gt;&gt;1, mid);
+	merge(mid+1, (mid+1+r)&gt;&gt;1, r);
+	int i = l, j = mid+1;
+	for (int k = l; k &lt;= r; k++) 
+		if (j &gt; r || (i &lt;= mid &amp;&amp; a[i] &lt; a[j]))
+			b[k] = a[i++];                                        
+		else
+			b[k] = a[j++], ans = (ans + mid - i + 1) % mod;
+	for (int k = l; k &lt;= r; k++)
+		a[k] = b[k];
+	return;
+}
+inline bool cmp(h x, h y)
+{
+	return x.v &lt; y.v;
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++) {
+		scanf(&quot;%d&quot;, &amp;c[i].v);
+		c[i].id = i;
+	}
+	sort(c+1, c+1+n, cmp);	
+	for (int i = 1; i &lt;= n; i++) {
+		scanf(&quot;%d&quot;, &amp;d[i].v);
+		d[i].id = i;
+	}
+	sort(d+1, d+1+n, cmp);
+	for (int i = 1; i &lt;= n; i++) {
+		a[d[i].id] = c[i].id;
+	}	
+	merge(1, (1+n)&gt;&gt;1, n);
+	printf(&quot;%d&quot;, ans);
+	return 0;
+}
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A2%98%E6%84%8F">题意</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/ti-jie-noi-online-neng-li-ce-shi-2020/">
+              <h3 class="post-title">
+                题解 【NOI Online 能力测试2020】
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> 
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>学习笔记：数论-最大公约数 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1584503943379">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="学习笔记：数论-最大公约数 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="相关概念/定义/性质
+公约数就会公有的约数。
+显然最大公约数(gcd)就是最大的那个。
+最小公倍数(lcm)类似。
+有公式：
+x×y=gcd⁡(x,y)×lcm(x,y)x\times y = \gcd(x,y)\times \text{l..." />
+    <meta name="keywords" content="学习笔记" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1584503943379" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          文章分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于我
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              学习笔记：数论-最大公约数
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-15 20:55
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xue-xi-bi-ji/" class="post-tag">
+                  # 学习笔记
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="相关概念定义性质">相关概念/定义/性质</h1>
+<p>公约数就会公有的约数。</p>
+<p>显然最大公约数(gcd)就是最大的那个。</p>
+<p>最小公倍数(lcm)类似。</p>
+<p>有公式：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>×</mo><mi>y</mi><mo>=</mo><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo><mo>×</mo><mtext>lcm</mtext><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">x\times y = \gcd(x,y)\times \text{lcm}(x,y)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">lcm</span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span></p>
+<p>证明比较显然，分别把 gcd 和 lcm 设出来然后倒一倒，详细过程略。</p>
+<h1 id="求解最大公约数">求解最大公约数</h1>
+<blockquote>
+<p>引理：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>a</mi><mtext>  </mtext><mo separator="true">,</mo><mi>b</mi><mo>)</mo><mo>=</mo><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>b</mi><mtext>  </mtext><mo separator="true">,</mo><mtext>  </mtext><mi>a</mi><mtext> </mtext><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mi>b</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\gcd(a\;,b)=\gcd(b\;,\;a\bmod b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.05555555555555555em;"></span><span class="mbin"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.05555555555555555em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span></span></span></span></p>
+</blockquote>
+<p>引理证明：</p>
+<ul>
+<li>
+<p>记 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>=</mo><mi>k</mi><mi>b</mi><mo>+</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">a=kb+r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> ，设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span> 的某一个公因数为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> ，即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>≡</mo><mn>0</mn><mspace></mspace><mspace width="0.4444444444444444em"/><mo>(</mo><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.3333333333333333em"/><mi>t</mi><mo>)</mo><mtext>  </mtext><mo separator="true">,</mo><mtext>  </mtext><mi>b</mi><mo>≡</mo><mn>0</mn><mspace></mspace><mspace width="0.4444444444444444em"/><mo>(</mo><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.3333333333333333em"/><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">a\equiv0\pmod t\;,\;b\equiv0\pmod t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46375em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≡</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:0.4444444444444444em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.3333333333333333em;"></span><span class="mord mathdefault">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≡</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:0.4444444444444444em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.3333333333333333em;"></span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span>，而 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo>=</mo><mi>a</mi><mo>−</mo><mi>k</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">r=a-kb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">b</span></span></span></span>，故 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo>≡</mo><mn>0</mn><mspace></mspace><mspace width="0.4444444444444444em"/><mo>(</mo><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.3333333333333333em"/><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">r\equiv0\pmod t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46375em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≡</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:0.4444444444444444em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.3333333333333333em;"></span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span> 。所以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">r, b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span> 公因数，即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo separator="true">,</mo><mi>a</mi><mtext> </mtext><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">b,a\bmod b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.05555555555555555em;"></span><span class="mbin"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.05555555555555555em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 的公因数。</p>
+</li>
+<li>
+<p>同理可证 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo separator="true">,</mo><mi>a</mi><mtext> </mtext><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">b, a\bmod b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.05555555555555555em;"></span><span class="mbin"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace" style="margin-right:0.05555555555555555em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 的公因数亦为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a, b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span> 的公因数。</p>
+</li>
+</ul>
+<p>所以，它们所有因数等价。因此，最大公因数也等价。即引理命题成立。</p>
+<p>有了这个引理，就可以递归求解 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>gcd</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\gcd</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span></span></span></span> 了。</p>
+<pre><code class="language-cpp">int gcd(int a, int b) {
+	if (b == 0)
+		return a;
+	return a % b;
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%AE%9A%E4%B9%89%E6%80%A7%E8%B4%A8">相关概念/定义/性质</a></li>
+<li><a href="#%E6%B1%82%E8%A7%A3%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0">求解最大公约数</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-zhi-shu-yu-yue-shu/">
+              <h3 class="post-title">
+                学习笔记：数论-质数与约数
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> 
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

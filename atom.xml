@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-03-18T01:40:04.668Z</updated>
+    <updated>2020-03-18T03:59:23.662Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -11,73 +11,73 @@
     <icon>https://cyh-toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
     <entry>
-        <title type="html"><![CDATA[实验]]></title>
-        <id>https://cyh-toby.github.io/post/shi-yan/</id>
-        <link href="https://cyh-toby.github.io/post/shi-yan/">
+        <title type="html"><![CDATA[题解 [NOIp2012]/P1080 【国王游戏】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-noip2012p1080-guo-wang-you-xi/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-noip2012p1080-guo-wang-you-xi/">
         </link>
-        <updated>2020-02-26T05:37:20.000Z</updated>
+        <updated>2020-03-17T12:38:59.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[CSP-J/S2019游记]]></title>
-        <id>https://cyh-toby.github.io/post/csp-js2019-you-ji/</id>
-        <link href="https://cyh-toby.github.io/post/csp-js2019-you-ji/">
+        <title type="html"><![CDATA[题解 CF1324E 【Sleeping Schedule】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-cf1324e-sleeping-schedule/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-cf1324e-sleeping-schedule/">
         </link>
-        <updated>2020-02-20T13:20:20.000Z</updated>
+        <updated>2020-03-16T01:54:13.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：数论-逆元]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-ni-yuan/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-ni-yuan/">
+        <title type="html"><![CDATA[学习笔记：数论-欧拉函数]]></title>
+        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-ou-la-han-shu/</id>
+        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-ou-la-han-shu/">
         </link>
-        <updated>2020-02-16T09:17:11.000Z</updated>
+        <updated>2020-03-15T12:55:35.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[题解 UVA1262 【密码 Password】]]></title>
-        <id>https://cyh-toby.github.io/post/ti-jie-uva1262-mi-ma-password/</id>
-        <link href="https://cyh-toby.github.io/post/ti-jie-uva1262-mi-ma-password/">
+        <title type="html"><![CDATA[学习笔记：数论-最大公约数]]></title>
+        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-zui-da-gong-yue-shu/</id>
+        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-zui-da-gong-yue-shu/">
         </link>
-        <updated>2020-02-06T05:40:09.000Z</updated>
+        <updated>2020-03-15T12:55:05.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：树链剖分]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lian-pou-fen/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lian-pou-fen/">
+        <title type="html"><![CDATA[学习笔记：数论-质数与约数]]></title>
+        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-zhi-shu-yu-yue-shu/</id>
+        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-shu-lun-zhi-shu-yu-yue-shu/">
         </link>
-        <updated>2020-02-05T08:40:53.000Z</updated>
+        <updated>2020-03-15T11:59:00.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：线段树]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-xian-duan-shu/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-xian-duan-shu/">
+        <title type="html"><![CDATA[题解 [NOIp2009]/P1072 【Hankson的趣味题】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-noip2009p1072-hankson-de-qu-wei-ti/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-noip2009p1072-hankson-de-qu-wei-ti/">
         </link>
-        <updated>2020-02-05T08:39:41.000Z</updated>
+        <updated>2020-03-15T06:47:09.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：图论-最短路]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-zui-duan-lu/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-zui-duan-lu/">
+        <title type="html"><![CDATA[题解 P1445【 [Violet]樱花】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-p1445-violetying-hua/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-p1445-violetying-hua/">
         </link>
-        <updated>2020-02-05T08:37:46.000Z</updated>
+        <updated>2020-03-15T06:06:43.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：图论-二分图与最大匹配]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-er-fen-tu-yu-zui-da-pi-pei/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-er-fen-tu-yu-zui-da-pi-pei/">
+        <title type="html"><![CDATA[题解 [NOIp2013]/P1966 【火柴排队】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-noip2013p1966-huo-chai-pai-dui/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-noip2013p1966-huo-chai-pai-dui/">
         </link>
-        <updated>2020-02-04T10:23:40.000Z</updated>
+        <updated>2020-03-08T12:09:00.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：图论-LCA]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-lca/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-tu-lun-lca/">
+        <title type="html"><![CDATA[题解 【NOI Online 能力测试2020】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-noi-online-neng-li-ce-shi-2020/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-noi-online-neng-li-ce-shi-2020/">
         </link>
-        <updated>2020-01-17T08:57:27.000Z</updated>
+        <updated>2020-03-07T04:42:33.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[学习笔记：差分约束]]></title>
-        <id>https://cyh-toby.github.io/post/xue-xi-bi-ji-chai-fen-yue-shu/</id>
-        <link href="https://cyh-toby.github.io/post/xue-xi-bi-ji-chai-fen-yue-shu/">
+        <title type="html"><![CDATA[题解 CF1305B 【Kuroni and Simple Strings】]]></title>
+        <id>https://cyh-toby.github.io/post/ti-jie-cf1305b-kuroni-and-simple-strings/</id>
+        <link href="https://cyh-toby.github.io/post/ti-jie-cf1305b-kuroni-and-simple-strings/">
         </link>
-        <updated>2020-01-16T14:15:49.000Z</updated>
+        <updated>2020-03-04T02:33:41.000Z</updated>
     </entry>
 </feed>
