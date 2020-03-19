@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-03-18T12:28:41.170Z</updated>
+    <updated>2020-03-19T07:42:28.137Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://cyh-toby.github.io/images/avatar.png</logo>
     <icon>https://cyh-toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[采用Gridea和Github Page制作的新博客已完成搭建]]></title>
+        <id>https://cyh-toby.github.io/post/cai-yong-gridea-he-github-page-zhi-zuo-de-xin-bo-ke-yi-wan-cheng-da-jian/</id>
+        <link href="https://cyh-toby.github.io/post/cai-yong-gridea-he-github-page-zhi-zuo-de-xin-bo-ke-yi-wan-cheng-da-jian/">
+        </link>
+        <updated>2020-03-19T07:28:45.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[题解 [NOIp2012]/P1080 【国王游戏】]]></title>
         <id>https://cyh-toby.github.io/post/ti-jie-noip2012p1080-guo-wang-you-xi/</id>
@@ -72,12 +79,5 @@
         <link href="https://cyh-toby.github.io/post/ti-jie-noi-online-neng-li-ce-shi-2020/">
         </link>
         <updated>2020-03-07T04:42:33.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 CF1305B 【Kuroni and Simple Strings】]]></title>
-        <id>https://cyh-toby.github.io/post/ti-jie-cf1305b-kuroni-and-simple-strings/</id>
-        <link href="https://cyh-toby.github.io/post/ti-jie-cf1305b-kuroni-and-simple-strings/">
-        </link>
-        <updated>2020-03-04T02:33:41.000Z</updated>
     </entry>
 </feed>
