@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-03-20T02:16:17.672Z</updated>
+    <updated>2020-03-20T11:40:04.303Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://cyh-toby.github.io/images/avatar.png</logo>
     <icon>https://cyh-toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[题解 AcWing172/POJ3322 【立体推箱子】]]></title>
+        <id>https://cyh-toby.github.io/post/solution-acwing172poj3322-li-ti-tui-xiang-zi/</id>
+        <link href="https://cyh-toby.github.io/post/solution-acwing172poj3322-li-ti-tui-xiang-zi/">
+        </link>
+        <updated>2020-03-20T11:38:24.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[题解 [NOIp2009]/P1074 【靶形数独】]]></title>
         <id>https://cyh-toby.github.io/post/solution-noip2009p1074-ba-xing-shu-du/</id>
@@ -72,12 +79,5 @@
         <link href="https://cyh-toby.github.io/post/ti-jie-p1445-violetying-hua/">
         </link>
         <updated>2020-03-15T06:06:43.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[题解 [NOIp2013]/P1966 【火柴排队】]]></title>
-        <id>https://cyh-toby.github.io/post/ti-jie-noip2013p1966-huo-chai-pai-dui/</id>
-        <link href="https://cyh-toby.github.io/post/ti-jie-noip2013p1966-huo-chai-pai-dui/">
-        </link>
-        <updated>2020-03-08T12:09:00.000Z</updated>
     </entry>
 </feed>
