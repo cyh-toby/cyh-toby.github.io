@@ -1,0 +1,460 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>学习笔记：图论-缩点 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1585633162228">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="学习笔记：图论-缩点 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="强连通分量(scc)
+
+
+针对有向图定义(无向图就等价于连通块了)
+
+
+通俗来讲，在有向图某个点集中，如果每个点都可以到达这个点集中其他所有点，则此点集为一个强连通分量。
+
+
+一般，强连通分量允许只包含一个点
+
+
+拓扑排序(topsort)..." />
+    <meta name="keywords" content="学习笔记" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1585633162228" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/post/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/post/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              学习笔记：图论-缩点
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-03 09:27
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xue-xi-bi-ji/" class="post-tag">
+                  # 学习笔记
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="强连通分量scc">强连通分量(scc)</h1>
+<ul>
+<li>
+<p>针对有向图定义(无向图就等价于连通块了)</p>
+</li>
+<li>
+<p>通俗来讲，在有向图某个点集中，如果每个点都可以到达这个点集中其他所有点，则此点集为一个强连通分量。</p>
+</li>
+<li>
+<p>一般，强连通分量允许只包含一个点</p>
+</li>
+</ul>
+<h1 id="拓扑排序topsort">拓扑排序(topsort)</h1>
+<ul>
+<li>
+<p>针对有向图定义</p>
+</li>
+<li>
+<p>把入度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的点丢到序列最前端</p>
+</li>
+<li>
+<p>通过某种排序，使得： 从某个入度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的点进入图后，在同一条路径上，排序中靠前的点总比靠后的点先访问到。</p>
+</li>
+<li>
+<p>可以转化为课程修学安排理解(广义讲就是<a href="https://baike.baidu.com/item/AOE%E7%BD%91">AOE网</a>)</p>
+<p>如图：<br>
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/y12k66u1.png" alt="" loading="lazy"><br>
+此处找到一种合理的学习顺序，就是拓扑排序</p>
+</li>
+<li>
+<p>只有 <strong>有向无环图</strong> (DAG) 可以实现拓扑排序</p>
+</li>
+</ul>
+<h1 id="作用">作用</h1>
+<ul>
+<li>
+<p>如果我们可以把图中的所有强联通分量找到，并把所有强连通分量中的点都分别打包压缩成一个大点，再由这些大点构成一张新图，那么新图就是一个 <strong>有向无环图</strong><br>
+即 DAG ，那么就可以实现拓扑排序。</p>
+<p><strong>值得注意</strong>的是，我们需要寻找最优的强连通分量。例如：<br>
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/uqajhgfi.png" alt="" loading="lazy"></p>
+<p>在此图中，显然 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo>}</mo></mrow><annotation encoding="application/x-tex">\{ 1,2,3\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mclose">}</span></span></span></span> 可以构成强连通分量，但我们应选择更优的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>5</mn><mo>}</mo></mrow><annotation encoding="application/x-tex">\{ 1,2,3,4,5\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mclose">}</span></span></span></span></p>
+<p>只有这样，缩点后的图才是 DAG。</p>
+</li>
+<li>
+<p>而一旦一个 <strong>复杂的图结构</strong> 被我们用拓扑排序转化成 <strong>线性结构</strong>，我们就可以在上面做递推或者 DP 了</p>
+</li>
+</ul>
+<blockquote>
+<p>我们就可以在上面做 DP 了。</p>
+</blockquote>
+<blockquote>
+<p>DP!!!!!!!!!</p>
+</blockquote>
+<p><s>被 DP 吓到了</s></p>
+<h1 id="实现">实现</h1>
+<h2 id="强连通分量">强连通分量</h2>
+<p>求强连通分量一般来讲有两种算法</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>tarjan 和 kosaraju</mtext></mrow><annotation encoding="application/x-tex">\text{tarjan 和 kosaraju}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">tarjan </span><span class="mord cjk_fallback">和</span><span class="mord"> kosaraju</span></span></span></span></span></span></p>
+<p>tarjan 时间复杂度是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span>的，十分高效。相比之下，kosaraju 复杂度略高(常数)，适用范围更局限，但更好理解。</p>
+<p>显然 OI 不能追求好理解，一般我们会采用高效的 tarjan 算法(也不是很难，<s>就是不好讲</s>)</p>
+<p>tarjan 算法的核心是两个数组和一个栈</p>
+<ul>
+<li>
+<p>栈：每访问到一个点，入栈；被归到某个强连通分量后，出栈</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dfn[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span>：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 号点的时间戳，即第几个被访问的节点(类似于 dfs 序)</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">low[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span>：从 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 节点出发，可以访问到的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">dfn</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span></span></span></span> 最小且处在栈中的节点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">dfn</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span></span></span></span> 值。初始值与自己 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">dfn</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span></span></span></span> 相等。</p>
+</li>
+<li>
+<p>显然访问了所有子节点后，根据定义，如果 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>=</mo><mo>=</mo><mi>d</mi><mi>f</mi><mi>n</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">low[u] == dfn[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span> ，说明 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 无法到达比自己更早的节点了。而此时栈中所保留的点能到达最早至少是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> (否则它们就在被访问时出栈，归入另一个强连通分量，即经历了此步骤)。那么从栈顶到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 的所有节点都可以切仅可以最早到达 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> ，那么它们在一个强连通分量中。</p>
+</li>
+<li>
+<p>接着，考虑如何计算 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi></mrow><annotation encoding="application/x-tex">low</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span> 。假设先处在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 号点，遍历到一条边 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>u</mi><mo separator="true">,</mo><mtext> </mtext><mi>v</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(u,\,v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 的父亲。由定义，显然</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo>(</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo separator="true">,</mo><mtext>  </mtext><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">low[u] = min(low[u],\;low[v])
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mclose">)</span></span></span></span></span></p>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>u</mi><mo separator="true">,</mo><mtext> </mtext><mi>v</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(u,\,v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span> 是指向栈中节点的一条横叉边，即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 已被搜索且在栈中。这说明，从 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 开始搜索，经过一条路径到达 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> ，此时又可以回到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> ，那这条路径上所有的点构成了一个环，即强连通分量。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo>(</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo separator="true">,</mo><mtext>  </mtext><mi>d</mi><mi>f</mi><mi>n</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">low[u] = min(low[u],\;dfn[v])
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mclose">)</span></span></span></span></span></p>
+<p>为什么 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 不可能是与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 有公共祖先的点而不是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 的祖先呢？也就是如图所示<br>
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/xpj9s57s.png" alt="" loading="lazy"></p>
+<p>这种情况不存在。</p>
+<p>访问了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> ，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 能保留在栈中，<strong>当且仅当</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 可以到达比自己<strong>更早的节点</strong>，但 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 的子树<strong>搜索完毕</strong>(1)；或者其子树还<strong>没搜索完毕</strong>(2)。</p>
+<ul>
+<li>
+<p>情况2：说明命题成立</p>
+</li>
+<li>
+<p>情况1：可以把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 迭代入现在讨论的点 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> ，<strong>递归思考</strong>，最终肯定能遇到情况2，然后层层回溯回来。把最终遇到情况2时的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><msup><mrow></mrow><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">v{&#x27;}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord"><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span> 记作 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>。那么 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> 都是从 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 出发，并且可以转一圈回到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 的路径上的点，说明处在同一个强连通分量中。</p>
+<p>稍加画图分析发现</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo fence="false">(</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo separator="true">,</mo><mtext>  </mtext><mi>d</mi><mi>f</mi><mi>n</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo fence="false">)</mo></mrow><annotation encoding="application/x-tex">low[u] = min\Big(low[u],\;dfn[v]\Big)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.80002em;vertical-align:-0.65002em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord"><span class="delimsizing size2">(</span></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mord"><span class="delimsizing size2">)</span></span></span></span></span></p>
+<p>并不影响结果。所以大部分代码是这样写的，因为这样适用于情况2，写起来就很简洁。</p>
+<p>但我总感觉应该改成</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo fence="false">(</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo separator="true">,</mo><mtext>  </mtext><mi>l</mi><mi>o</mi><mi>w</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo fence="false">)</mo></mrow><annotation encoding="application/x-tex">low[u] = min\Big(low[u],\;low[v]\Big)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.80002em;vertical-align:-0.65002em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord"><span class="delimsizing size2">(</span></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mord"><span class="delimsizing size2">)</span></span></span></span></span></p>
+<p>才更符合定义。</p>
+<p>也可能是自己还<strong>没裹清楚</strong>，回头再问问</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>所以，进行上述步骤即可找到强连通分量。</p>
+<h2 id="拓扑排序">拓扑排序</h2>
+<p>这个简单。</p>
+<p>记录每个点的入度，首先把<strong>入度</strong>为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的点入队。</p>
+<p>随后每次从队首取出一个，把它指向的节点入度减一。如果此时入度被减为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> ，那么入队。</p>
+<p>记录下入队顺序，即是拓扑序列。</p>
+<p>正确性<strong>显然</strong>：一个点的入度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> ，只能是所有指向它的点都为其减一，说明所有指向它的点都已入队并弹出，那么这个点就可以入队了，一定在指向它的所有点之后。</p>
+<p>当然，这个容器<strong>不一定是队列</strong>。但选择队列，根据  <strong>FIFO</strong> 原则，就可以不用入队的时候记录顺序，而在出队的时候记录，<strong>更为方便</strong>。</p>
+<h2 id="dp">DP</h2>
+<p>没啥好讲的，做完上述工作就可以视情况 DP 了。</p>
+<h2 id="处理细节">处理细节</h2>
+<p>处理细节参考代码</p>
+<h1 id="代码">代码</h1>
+<p>原题: <a href="https://www.luogu.com.cn/problem/P3387">【模板】缩点</a></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>tarjan</mtext></mrow><annotation encoding="application/x-tex">\text{tarjan}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623000000000001em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">tarjan</span></span></span></span></span></span></p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: 【模板】缩点 
+
+State: Accepted
+
+From: 【模板】 
+
+Algorithm: tajan, topsort, DP
+
+Author: cyh_toby
+
+last updated on 2020.3.3
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;utility&gt;
+using namespace std;
+#define pb push_back
+#define pii pair&lt;int,int&gt;
+const int N = 10005;
+int n, m, num = 0;
+int a[N];
+vector&lt;int&gt; g1[N], g2[N];
+map&lt;pii, int&gt; mp;
+int dfn[N], low[N], book[N], id[N];
+int f[N], deg[N], w[N];
+int tot=0;
+int s[N], tp = 0;
+int q[N], hd, tl;
+int ans = 0;
+void tarjan(int cur)
+{
+	dfn[cur] = low[cur] = ++tot;
+	s[++tp] = cur;
+	book[cur] = 1;
+	int len = g1[cur].size();
+	for (int i = 0; i &lt; len; i++) {
+		int t = g1[cur][i];
+		if (!dfn[t]) {
+			tarjan(t);
+			low[cur] = min(low[cur], low[t]);
+			continue;
+		}
+		if (book[t])
+			low[cur] = min(low[cur], dfn[t]);
+	}
+	if (dfn[cur] == low[cur]) {
+		num++;
+		int t;
+		do {
+			t = s[tp--];
+			w[num] += a[t];
+			id[t] = num;
+			book[t] = 0;
+		} while(t != cur);
+	}
+	return;
+}
+inline void make_graph()
+{
+	for (int i = 1; i &lt;= n; i++) {
+		int len = g1[i].size();
+		int x = id[i], y;
+		for (int j = 0; j &lt; len; j++) {
+			y = id[g1[i][j]];
+			if (x==y) 
+				continue;//自环 
+			if (mp[make_pair(x,y)]==1)
+				continue;//重边 
+			mp[make_pair(x,y)] = 1;
+			g2[x].pb(y);
+			deg[y]++;
+		}
+	}
+	return;
+}
+inline void top_sort_dp()//拓扑 + DP 
+{
+	hd = tl = 0;
+	for (int i = 1; i &lt;= num; i++)
+		if (!deg[i])
+			q[tl++] = i;
+	while (hd != tl) {
+		int x = q[hd++];
+		f[x] += w[x];
+		ans = max(ans, f[x]);
+		int len = g2[x].size();
+		for (int i = 0; i &lt; len; i++) {
+			int y = g2[x][i];
+			f[y] = max(f[y], f[x]);
+			if (--deg[y] == 0)
+				q[tl++] = y;
+		}
+	}
+	return;
+}
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	for (int i = 1; i &lt;= n; i++) 
+		scanf(&quot;%d&quot;, &amp;a[i]);
+	for (int i = 1; i &lt;= m; i++) {
+		int x, y;
+		scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+		g1[x].pb(y);
+	}
+	for (int i = 1; i &lt;= n; i++)
+		if (!dfn[i])
+			tarjan(i);
+	make_graph();
+	top_sort_dp();
+	printf(&quot;%d&quot;, ans);
+	return 0;
+}
+
+</code></pre>
+<h1 id="参考资料">参考资料</h1>
+<p><a href="https://blog.csdn.net/hjf1201/article/details/79860576">某CSDN博客-tarjan</a></p>
+<p><a href="https://www.cnblogs.com/lyp-Bird/p/10770802.html">某博客园博客-两种解法</a></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8Fscc">强连通分量(scc)</a></li>
+<li><a href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8Ftopsort">拓扑排序(topsort)</a></li>
+<li><a href="#%E4%BD%9C%E7%94%A8">作用</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a>
+<ul>
+<li><a href="#%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F">强连通分量</a></li>
+<li><a href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F">拓扑排序</a></li>
+<li><a href="#dp">DP</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82">处理细节</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/na-xie-li-zhi-de-sui-pian/">
+              <h3 class="post-title">
+                那些励志的碎片
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

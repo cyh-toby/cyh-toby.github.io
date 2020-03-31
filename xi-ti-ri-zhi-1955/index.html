@@ -1,0 +1,464 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志-19.5.5 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1585633162228">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志-19.5.5 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目:树的层次遍历(uva122)
+知识点:bfs、队列、树
+代码：
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+#include &lt..." />
+    <meta name="keywords" content="习题日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1585633162228" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/post/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/post/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志-19.5.5
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-05-05 21:38
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
+                  # 习题日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>题目:树的层次遍历(uva122)</p>
+<p>知识点:bfs、队列、树</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;//sscanf
+#include &lt;cstring&gt;
+
+using namespace std;
+
+#define maxn 100000
+
+int nsize = 1;
+bool allok = true;
+int ans[maxn];
+
+struct node{
+	bool have_value;
+	int value;
+	int left;
+	int right;
+};
+node tree[maxn];
+
+void setagain(){
+	for (int i = 0; i &lt; maxn;i++){//可优化 
+		tree[i].left = -1;
+		tree[i].right = -1;
+		tree[i].value = -1;
+		tree[i].have_value = false;
+	}
+	nsize = 1;
+	allok = true;
+}
+
+bool read()
+{
+	char s[maxn];
+	char s1[maxn];
+	int v = 0;
+	int u = 0;
+	
+	bool have_reads = false;
+	while (scanf(&quot;%s&quot;, s)){
+		have_reads = true;
+		if (strlen(s) == 2){
+			break;
+		}	
+		sscanf(&amp;s[1], &quot;%d&quot;, &amp;v);
+		sscanf(strchr(s, ',')+1, &quot;%s&quot;, &amp;s1);//IMPORTANT!sscanf( &amp;+name, &quot;%+sth&quot;, &amp;+name);格式注意：前加&amp; 
+		u = 0;	
+		for (int i = 0; i &lt; strlen(s1)-1;i++){
+			if (s1[i] == 'L'){
+				if (tree[u].left == -1){
+					tree[u].left = nsize++;
+				}
+				u = tree[u].left;
+			}
+			if (s1[i] == 'R'){
+				if (tree[u].right == -1){
+					tree[u].right = nsize++;
+				}
+				u = tree[u].right;
+			}
+		}
+		
+//		cout &lt;&lt; u &lt;&lt; &quot; &quot;&lt;&lt; v&lt;&lt;endl;
+		tree[u].value = v;
+		if (!tree[u].have_value)//没有value 
+		{
+			
+			tree[u].have_value = true;
+		}
+		else{
+			allok = false;//allok here is changeing
+		}
+	}
+	
+	if (have_reads){
+		return true;
+	}	
+	else{
+		return false;
+	}
+}
+
+void bfs(){
+	queue &lt;int&gt; q;//队列 
+	q.push(0);
+	int p = 0;
+	while (!q.empty()){
+		int u = q.front();
+		q.pop();
+		if (tree[u].value != -1){
+			ans[p++] = tree[u].value;
+		}
+		else{
+			allok = false;
+			return;
+		}
+		
+		if (tree[u].left != -1){
+			q.push(tree[u].left);
+		}
+		if (tree[u].right != -1){
+			q.push(tree[u].right);
+		}
+	}
+	return;
+}
+
+int main()
+{	
+	setagain();	//初始化不能在循环一次后再实施 也不能放一开始，应放最后 
+	while (read()){
+		
+		bfs();
+		
+		if (allok == false){
+			cout &lt;&lt; &quot;not complete&quot;&lt;&lt;endl;
+			continue;
+		}
+		
+		for (int i = 0; i &lt; nsize;i++){
+			cout &lt;&lt; ans[i]&lt;&lt;&quot; &quot;;
+		}
+		cout&lt;&lt;endl;
+		
+		setagain();
+	}
+	return 0;
+}
+</code></pre>
+<p>心得：本题难度较大，作为本人首次接触的队列题，难以攻克的却是输入及用数组模拟树。花了将近共4个多小时才解出，但问题主要出在几个很<s>弱智</s>低级的错误，以下给予自己今后做题以提醒：</p>
+<ol>
+<li>只用一次的代码不要手残放到循环内，指不定会发生什么；</li>
+<li>没有初始化或初始化了却没赋予应有值的变量不可轻易使用，尤其是作为for的判断条件;</li>
+<li><cstdio>/&lt;stdio.h&gt;下的sscanf( ，，)函数一三两项是地址而不是变量名 eg.sscanf(&amp;s, &quot;%s&quot;, &amp;s1);//其中，s and s1都必须为char类型变量/数组</li>
+<li>用途为初始化的代码/函数注意位置，<strong>循环外应使用一次，循环内应放最后</strong>；</li>
+</ol>
+<p>最后，贴上一些新学的函数：</p>
+<ul>
+<li><queue>:queue <int> 变量名 --队列</li>
+<li><cstdio>:sscanf( , , ) --从变量读到变量</li>
+<li><cstring>:strchr(数组名， 字符）--char数组中此字符的<strong>位置</strong></li>
+<li><ctsring>:strlen(数组名） --char数组的长度</li>
+</ul>
+<p>代码修正（AC源码）：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;//sscanf
+#include &lt;cstring&gt;
+
+using namespace std;
+
+#define maxn 100000
+
+int nsize = 1;
+bool allok = true;
+int ans[maxn];
+
+struct node{
+  bool have_value;
+  int value;
+  int left;
+  int right;
+};
+node tree[maxn];
+
+void setagain(){
+  for (int i = 0; i &lt; maxn;i++){//可优化 
+  	tree[i].left = -1;
+  	tree[i].right = -1;
+  	tree[i].value = -1;
+  	tree[i].have_value = false;
+  }
+  nsize = 1;
+  allok = true;
+}
+
+bool read()
+{
+  char s[maxn];
+  char s1[maxn];
+  int v = 0;
+  int u = 0;
+  
+  bool have_reads = false;
+  while (scanf(&quot;%s&quot;, s)!=EOF){
+  	have_reads = true;
+  	if (strlen(s) == 2){
+  		break;
+  	}	
+  	sscanf(&amp;s[1], &quot;%d&quot;, &amp;v);
+  	sscanf(strchr(s, ',')+1, &quot;%s&quot;, s1);//IMPORTANT!sscanf( &amp;+name, &quot;%+sth&quot;, &amp;+name);格式注意：前加&amp; ,但数组前不用加&amp; 
+  	u = 0;	
+  	for (int i = 0; i &lt; strlen(s1)-1;i++){
+  		if (s1[i] == 'L'){
+  			if (tree[u].left == -1){
+  				tree[u].left = nsize++;
+  			}
+  			u = tree[u].left;
+  		}
+  		if (s1[i] == 'R'){
+  			if (tree[u].right == -1){
+  				tree[u].right = nsize++;
+  			}
+  			u = tree[u].right;
+  		}
+  	}
+  	
+//		cout &lt;&lt; u &lt;&lt; &quot; &quot;&lt;&lt; v&lt;&lt;endl;
+  	tree[u].value = v;
+  	if (!tree[u].have_value)//没有value 
+  	{
+  		
+  		tree[u].have_value = true;
+  	}
+  	else{
+  		allok = false;//allok here is changeing
+  	}
+  }
+  
+  if (have_reads){
+  	return true;
+  }	
+  else{
+  	return false;
+  }
+}
+
+void bfs(){
+  queue &lt;int&gt; q;//队列 
+  q.push(0);
+  int p = 0;
+  while (!q.empty()){
+  	int u = q.front();
+  	q.pop();
+  	if (tree[u].value != -1){
+  		ans[p++] = tree[u].value;
+  	}
+  	else{
+  		allok = false;
+  		return;
+  	}
+  	
+  	if (tree[u].left != -1){
+  		q.push(tree[u].left);
+  	}
+  	if (tree[u].right != -1){
+  		q.push(tree[u].right);
+  	}
+  }
+  return;
+}
+
+int main()
+{	
+  setagain();	//初始化不能在循环一次后再实施 也不能放一开始，应放最后 
+  while (read()){
+  	
+  	bfs();
+  	
+  	if (allok == false){
+  		cout &lt;&lt; &quot;not complete&quot;&lt;&lt;endl;
+  	} else {
+  		for(int i = 0; i &lt; nsize; i++) {
+      		if(i != 0) 
+        			printf(&quot; &quot;);
+      		printf(&quot;%d&quot;, ans[i]);
+      	}
+   		printf(&quot;\n&quot;);
+   	}
+  	setagain();
+  }
+  return 0;
+}
+
+</code></pre>
+<p>稍后给出二次总结</p>
+<p>二次总结：机器检测答案时<strong>末尾不能有多余的空格</strong></p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

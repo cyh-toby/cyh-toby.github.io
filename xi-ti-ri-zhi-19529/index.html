@@ -1,0 +1,265 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志-19.5.29 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1585633162228">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志-19.5.29 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目：油田uva572
+知识点：dfs,图(很简单的图的应用)
+源码：
+#include &lt;iostream&gt;
+
+using namespace std;
+
+#define maxn 105 
+
+int m, n;
+char p..." />
+    <meta name="keywords" content="习题日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1585633162228" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/post/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/post/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志-19.5.29
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-05-29 20:53
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
+                  # 习题日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>题目：油田uva572</p>
+<p>知识点：dfs,图(很简单的图的应用)</p>
+<p>源码：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+using namespace std;
+
+#define maxn 105 
+
+int m, n;
+char pic[maxn][maxn];
+int idx[maxn][maxn];
+
+void setagain()
+{
+	for (int i = 0; i &lt; maxn; i++){
+		for (int j = 0; j &lt; maxn; j++){
+			idx[i][j] = 0;
+		}
+	}
+	return;
+}
+
+void dfs(int r, int c, int id){
+	if (r &lt; 0 || r &gt;= m || c &lt; 0 || c &gt;= n)
+		return;
+	if (idx[r][c] &gt; 0 || pic[r][c] != '@')
+		return;
+	
+	idx[r][c] = id;
+	for (int i = -1; i &lt;= 1; i++){
+		for (int j = -1; j &lt;= 1; j++){
+			dfs(r+i, c+j, id);
+		}
+	}
+	
+	return;
+}
+
+int main()
+{
+	while (1){
+		setagain();
+		int num = 0;
+		cin&gt;&gt;m&gt;&gt;n;
+		if (m==0)
+			break;
+		
+		for (int i = 0 ; i&lt; m; i++){
+			for (int j = 0; j &lt; n; j++){
+				cin &gt;&gt;pic[i][j];
+			}
+		}
+		
+		for (int i = 0 ; i &lt; m; i++){
+			for (int j = 0 ;j &lt; n; j++){
+				if (idx[i][j]==0 &amp;&amp; pic[i][j] == '@'){
+					num++;
+					dfs(i, j , num);
+				}
+				
+			}
+		}
+		
+		cout&lt;&lt;num&lt;&lt;endl;
+		
+	}
+	return 0;
+}
+</code></pre>
+<p>心得：dfs的简单应用，几乎不涉及图的理论。调试时出错就在于没有写setagain()函数（初始化），导致第二个和后面结果不对，要加强对处理多组数据需重置的敏感度。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/xi-ti-ri-zhi-19521/">
+              <h3 class="post-title">
+                习题日志-19.5.21
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

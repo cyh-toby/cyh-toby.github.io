@@ -1,0 +1,299 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>习题日志-19.5.21 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1585633162228">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="习题日志-19.5.21 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目：乌龟棋
+知识点：动态规划
+源码：其一递归(TLE)
+#include &lt;iostream&gt;
+#include &lt;climits&gt;
+
+using namespace std;
+
+#define maxn 350
+..." />
+    <meta name="keywords" content="习题日志" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1585633162228" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/post/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/post/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              习题日志-19.5.21
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-05-21 22:18
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
+                  # 习题日志
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>题目：乌龟棋</p>
+<p>知识点：动态规划</p>
+<p>源码：其一递归(TLE)</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;climits&gt;
+
+using namespace std;
+
+#define maxn 350
+
+int n, m;
+int a[maxn], b[maxn];
+int ans = INT_MIN;
+
+void dfs(int cur,int sum){
+	
+	sum += a[cur];
+	
+	if (cur == n){
+		ans = max(ans,sum);
+		return;
+	}
+	
+	for (int i = 1;i &lt;= 4; i++){
+		if (b[i]){
+			b[i]--;
+			dfs(cur+i, sum);
+			b[i]++;
+		}
+	}
+}
+
+int main()
+{
+	cin &gt;&gt; n &gt;&gt; m;
+	for (int i = 1; i &lt;= n; i++){
+		cin&gt;&gt;a[i];
+	}
+	for (int i = 1; i &lt;= m; i++){
+		int t;
+		cin &gt;&gt; t;
+		b[t]++;
+	}
+	
+	dfs(1, 0);
+	
+	cout&lt;&lt; ans&lt;&lt;endl;
+	
+	return 0;
+		
+}
+</code></pre>
+<p>其二动归(AC)</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+using namespace std;
+
+#define maxn 355
+#define maxa 45
+
+int n, m;
+int card[maxn];//卡牌 
+int board[maxn];//棋盘 
+int f[maxa][maxa][maxa][maxa];
+
+int main()
+{
+	cin &gt;&gt; n &gt;&gt; m;
+	for (int i = 1; i &lt;= n; i++){
+		cin&gt;&gt;board[i];
+	}
+	for (int i = 1; i &lt;= m; i++){
+		int t;
+		cin &gt;&gt; t;
+		card[t]++;
+	}
+	
+	f[0][0][0][0] = board[1];//board数组从1开始 
+	
+	for (int i = 0; i &lt;= card[1];i++){
+		for (int j = 0; j &lt;= card[2]; j++){
+			for (int k = 0; k &lt;= card[3]; k++){
+				for (int l = 0; l &lt;= card[4]; l++){
+					
+					int t = i + j*2 + k*3 + l*4 +1;//board数组从1开始所以加1 IMPORTANT!! 
+					
+					if (i&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i-1][j][k][l] + board[t]);
+					if (j&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i][j-1][k][l] + board[t]);
+					if (k&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i][j][k-1][l] + board[t]);
+					if (l&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i][j][k][l-1] + board[t]);
+					
+			//		cout&lt;&lt;f[i][j][k][l]&lt;&lt;endl;
+				}
+			}
+		}
+	}
+	
+	cout&lt;&lt;f[card[1]][card[2]][card[3]][card[4]]&lt;&lt;endl;
+	
+	return 0;
+}
+</code></pre>
+<p>心得：初次做普及+的动归题，一开始用dfs结果正确但有7个TLE，于是参考了题解，根据首个题解摸索着大概理解了本题的动归思想。其实在看题解前就想到了最好的方式是从棋盘开始到结束依次求出到达每个点的最大值，<strong>但这个思维仍有误，因为其最终结果还会受到卡牌张数的影响。</strong> 再看题解，貌似还是没搞懂，自己再琢磨琢磨，稍后补全心得。</p>
+<p>稍后：<br>
+自己的思想并非全错，动归算法本质是将每一个点的最优路径保存下来，要用时直接调用，再次算到这个点时如果有更优路径就将其值更新，形成动归。</p>
+<p>手算即可证实这一logic。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/xi-ti-ri-zhi-19515/">
+              <h3 class="post-title">
+                习题日志-19.5.15
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,319 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>题解 [NOIp2009]/P1074 【靶形数独】 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1585633162228">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="题解 [NOIp2009]/P1074 【靶形数独】 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题意
+原题：P1074 靶形数独
+给定数独初始形态，每个格子都有分值，求所填数与相应格子分值乘积之和的最大值。无解输出 −1-1−1 。
+分析
+普通数独算法加分值统计即可。
+数独处理即普通 dfs 搜索空格，加必要剪枝即可。
+剪枝
+
+
+首先..." />
+    <meta name="keywords" content="题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1585633162228" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/post/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/post/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              题解 [NOIp2009]/P1074 【靶形数独】
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-19 22:35
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/ti-jie/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="题意">题意</h1>
+<p>原题：<a href="https://www.luogu.com.cn/problem/P1074">P1074 靶形数独</a></p>
+<p>给定数独初始形态，每个格子都有分值，求所填数与相应格子分值乘积之和的最大值。无解输出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 。</p>
+<h1 id="分析">分析</h1>
+<p>普通数独算法加分值统计即可。</p>
+<p>数独处理即普通 dfs 搜索空格，加必要剪枝即可。</p>
+<h2 id="剪枝">剪枝</h2>
+<ul>
+<li>
+<p>首先，找到需要填的且可填数字最少的格子，优先填写，减少冗余非法状态。</p>
+</li>
+<li>
+<p>若当前状态某个格子什么都不能填了，立即回溯。</p>
+</li>
+<li>
+<p>还有其它剪枝方案，但此题不需要。详见 《算法竞赛进阶指南》0x22 ，0x23 节。</p>
+</li>
+</ul>
+<p>对于状态的处理，可以使用二进制状态压缩，实时分别统计每个格子所在的行、列、九宫格中已经使用的数。</p>
+<h1 id="源码">源码</h1>
+<pre><code class="language-cpp">/**********************************
+
+Problem: [NOIpTG2009] - 靶形数独 
+
+State: Accepted
+
+From: [NOIpTG2009]
+
+Algorithm: dfs, 剪枝, 状压 
+
+Author: cyh_toby
+
+Last updated on 2020.3.19
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 13;
+int b[N][N], id[N][N];
+int a1[N], a2[N], a3[N];//状压，存每行、每列、每九宫格已填的数 
+int w[9][9] = {6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,6,6,7,8,8,8,8,8,7,6,6,7,8,9,9,9,8,7,6,6,7,8,9,10,9,8,7,6,6,7,8,9,9,9,8,7,6,6,7,8,8,8,8,8,7,6,6,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6};
+int num = 0, ans = -1, sum = 0;
+
+inline void init() {
+	for (int i = 1; i &lt;= 9; i++)
+		for (int j = 1; j &lt;= 9; j++)
+			id[i][j] = (i-1) / 3 * 3 + (j-1) / 3 + 1;
+	return;
+}
+
+inline void cgnum(int x, int y) {
+	a1[x] ^= (1 &lt;&lt; b[x][y]);
+	a2[y] ^= (1 &lt;&lt; b[x][y]);
+	a3[id[x][y]] ^= (1 &lt;&lt; b[x][y]);
+	return;
+}
+
+inline int gtnum(int x) {
+	int res = 0;
+	for (; x; x -= x &amp; (-x))
+		res++;
+	return 9 - res;
+}
+
+void dfs(int cur, int res) {
+	if (cur &gt; num) {
+		ans = max(ans, res);
+		return;
+	}
+	int x, y, tmp = 10, cnt;
+	for (int i = 1; i &lt;= 9; i++) {//优化搜索顺序
+		for (int j = 1; j &lt;= 9; j++) {
+			if (b[i][j]) continue;
+			cnt = gtnum(a1[i] | a2[j] | a3[id[i][j]]);
+			if (!cnt) return;//剪枝
+			if (cnt &lt; tmp)
+				x = i, y = j, tmp = cnt;
+		}
+	}
+	int st = a1[x] | a2[y] | a3[id[x][y]];
+	for (int i = 1; i &lt;= 9; i++) {
+		if (st &amp; (1 &lt;&lt; i)) continue;
+		b[x][y] = i;
+		cgnum(x, y);
+		dfs(cur+1, res + i * w[x-1][y-1]);
+		cgnum(x, y);
+		b[x][y] = 0;
+	}
+	return;
+}
+
+int main()
+{
+	init();
+	for (int i = 1; i &lt;= 9; i++) {
+		for (int j = 1; j &lt;= 9; j++) {
+			scanf(&quot;%d&quot;, &amp;b[i][j]);
+			if (b[i][j]) {
+				cgnum(i, j);
+				sum += b[i][j] * w[i-1][j-1];
+			}
+			else
+				num++;
+		}
+	}
+	dfs(1, 0);
+	printf(&quot;%d&quot;, (ans==-1)?ans:ans+sum);
+	return 0;
+} 
+
+</code></pre>
+<h1 id="参考资料传送门">参考资料&amp;传送门</h1>
+<p>AcWing题库：<a href="https://www.acwing.com/problem/content/171/">16*16数独</a></p>
+<p>AcWing题库：<a href="https://www.acwing.com/problem/content/168/">9*9数独</a></p>
+<p><strong>注意</strong> 洛谷题库中的数独题目纯属水，无法锻炼剪枝能力，建议参考 AcWing 题库中的数独，数据更强力。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A2%98%E6%84%8F">题意</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a>
+<ul>
+<li><a href="#%E5%89%AA%E6%9E%9D">剪枝</a></li>
+</ul>
+</li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E4%BC%A0%E9%80%81%E9%97%A8">参考资料&amp;传送门</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/cai-yong-gridea-he-github-page-zhi-zuo-de-xin-bo-ke-yi-wan-cheng-da-jian/">
+              <h3 class="post-title">
+                采用Gridea和Github Page制作的新博客已完成搭建
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

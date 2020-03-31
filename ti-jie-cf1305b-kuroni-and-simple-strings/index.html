@@ -1,0 +1,272 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>题解 CF1305B 【Kuroni and Simple Strings】 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1585633162228">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="题解 CF1305B 【Kuroni and Simple Strings】 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题意
+原题：CF 1305B 【Kuroni and Simple Strings】
+给定一小括号序列。
+每次可以删除其形如 () 或 (()) 等形式的子串，子串可以不连续，求最少操作多少次，以及操作方案，使括号序列不再包含这样形式的子串..." />
+    <meta name="keywords" content="题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1585633162228" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/post/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/post/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              题解 CF1305B 【Kuroni and Simple Strings】
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-04 10:33
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/ti-jie/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="题意">题意</h1>
+<p>原题：<a href="https://www.luogu.com.cn/problem/CF1305B">CF 1305B 【Kuroni and Simple Strings】</a></p>
+<p>给定一小括号序列。</p>
+<p>每次可以删除其形如 <code>()</code> 或 <code>(())</code> 等形式的子串，子串可以不连续，求最少操作多少次，以及操作方案，使括号序列不再包含这样形式的子串。</p>
+<h1 id="分析">分析</h1>
+<p>睿智的我们发现，如果某子串呈现类似于 <code>)(</code> 的形式，就不需要管它，一定不可以构成可以删除的子串。</p>
+<p>接着，分析一个括号串</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mtext> </mtext><mo>)</mo><mtext> </mtext><mo>(</mo><mtext> </mtext><mo>(</mo><mtext> </mtext><mo>)</mo><mtext> </mtext><mo>)</mo><mtext> </mtext></mrow><annotation encoding="application/x-tex">(\,)\,(\,(\,)\,)\,
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span></span></span></span></span></p>
+<p>如果我们把他分成这样</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Blue"><mo>(</mo><mtext> </mtext><mo>)</mo><mtext>  </mtext><mstyle mathcolor="Orange"><mo>(</mo><mtext> </mtext><mo>(</mo><mtext> </mtext><mo>)</mo><mtext> </mtext><mo>)</mo></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\color{Blue}(\,)\;\color{Orange}(\,(\,)\,)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen" style="color:Blue;">(</span><span class="mspace" style="color:Blue;margin-right:0.16666666666666666em;"></span><span class="mclose" style="color:Blue;">)</span><span class="mspace" style="color:Blue;margin-right:0.2777777777777778em;"></span><span class="mopen" style="color:Orange;">(</span><span class="mspace" style="color:Orange;margin-right:0.16666666666666666em;"></span><span class="mopen" style="color:Orange;">(</span><span class="mspace" style="color:Orange;margin-right:0.16666666666666666em;"></span><span class="mclose" style="color:Orange;">)</span><span class="mspace" style="color:Orange;margin-right:0.16666666666666666em;"></span><span class="mclose" style="color:Orange;">)</span></span></span></span></span></p>
+<p>就需要操作两次，因为不允许删除形如 <code>()()</code> 的子串</p>
+<p>可是，如果我们这样</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><mo>(</mo><mtext>  </mtext><mstyle mathcolor="Black"><mo>)</mo><mstyle mathcolor="Red"><mo>(</mo><mtext>  </mtext><mstyle mathcolor="Black"><mo>(</mo><mtext>  </mtext><mstyle mathcolor="Red"><mo>)</mo><mtext> </mtext><mo>)</mo></mstyle></mstyle></mstyle></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}(\;\color{Black})\color{Red}(\;\color{Black}(\;\color{Red})\,)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen" style="color:Red;">(</span><span class="mspace" style="color:Red;margin-right:0.2777777777777778em;"></span><span class="mclose" style="color:Black;">)</span><span class="mopen" style="color:Red;">(</span><span class="mspace" style="color:Red;margin-right:0.2777777777777778em;"></span><span class="mopen" style="color:Black;">(</span><span class="mspace" style="color:Black;margin-right:0.2777777777777778em;"></span><span class="mclose" style="color:Red;">)</span><span class="mspace" style="color:Red;margin-right:0.16666666666666666em;"></span><span class="mclose" style="color:Red;">)</span></span></span></span></span></p>
+<p>删去红色括号，留下不能构成可删除子串的黑色括号，就可以只用操作一次。</p>
+<p>进而发现，什么情况可以在同一次操作处理？</p>
+<p>就是<strong>左括号和右括号的出现分别连续</strong>，一旦出现左右括号匹配上的情况，就只能继续往后找右括号而不能找左括号了。</p>
+<p>此外，上述例子还告诉我们，需要找到一种方法，把 <strong>不得不匹配上</strong> 的括号删去，留下形如 <code>)(</code> 的子串。</p>
+<p>注意到所谓 <code>)(</code> 形式，其实是左右括号位置相反，那我们考虑尽可能删去原串左侧的 <code>(</code> ， 原串右侧的 <code>)</code>，而不处理左侧的 <code>)</code> 和右侧的 <code>(</code> 。</p>
+<p>因为只有左侧删 <code>(</code> ，右侧删 <code>)</code> 才能保证上述的左右括号分别连续。</p>
+<p>可是何谓左侧右侧呢，并不是相对于原串中心，而是一种<strong>相对关系</strong></p>
+<p>因此，考虑建立两个指针 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo separator="true">,</mo><mtext> </mtext><mi>j</mi></mrow><annotation encoding="application/x-tex">i,\,j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>，从原串头尾向彼此扫，即</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>−</mo><mo>&gt;</mo><mtext>  </mtext><mtext>  </mtext><mtext>  </mtext><mtext>  </mtext><mtext>  </mtext><mtext>  </mtext><mo>&lt;</mo><mo>−</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i-&gt;\;\;\;\;\;\;&lt;-j
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">i</span><span class="mord">−</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord">−</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mo>(</mo><mo>)</mo><mo>)</mo><mo>(</mo><mo>)</mo><mo>)</mo><mo>(</mo><mo>(</mo></mrow><annotation encoding="application/x-tex">(())())((
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mopen">(</span><span class="mclose">)</span><span class="mclose">)</span><span class="mopen">(</span><span class="mclose">)</span><span class="mclose">)</span><span class="mopen">(</span><span class="mopen">(</span></span></span></span></span></p>
+<p>一旦两个指针所指位置匹配成一对括号，删去，否则跳过。</p>
+<p>然后发现操作数要么是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 要么是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></p>
+<p>虽然很玄幻，但考场上试一试发现对的就交了，理论上按上述过程想应该是对的。虽然不会严格证明。</p>
+<p>可能有点贪心的思路吧</p>
+<h1 id="源码">源码</h1>
+<p>其实可以更精简，但考场上没有顾虑那么多。</p>
+<p>一开始有另一个思路，所以建立数组 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> ，但那是错的，并且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 也没啥用。</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 1005;
+char s[N];
+int a[N];
+int flag = 0, tot = 0;
+int main()
+{
+	scanf(&quot;%s&quot;, s+1);
+	int n = strlen(s+1);
+	for (int i = 1; i &lt;= n; i++) {
+		if (s[i] == '(') {
+			a[i] = 1;
+		}
+		if (s[i] == ')') {
+			a[i] = 2;
+		}
+	}
+	int i = 1, j = n;
+	while (1) {
+		while (i &lt;= j &amp;&amp; (a[i]==2))
+			i++;
+		while (i &lt;= j &amp;&amp; (a[j]==1))
+			j--;
+		if (i &gt;= j) {
+			break;
+		}
+		a[i] = a[j] = -1;
+		flag = 1;
+		tot += 2;
+		i++, j--;
+	}
+	if (flag) {
+		printf(&quot;1\n%d\n&quot;, tot);
+		for (int i = 1; i &lt;= n; i++)
+			if (a[i] == -1)
+				printf(&quot;%d &quot;, i);
+	}
+	else {
+		printf(&quot;0\n&quot;);
+	}
+	return 0;
+}
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A2%98%E6%84%8F">题意</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/ti-jie-cf1305a-kuroni-and-the-gifts/">
+              <h3 class="post-title">
+                题解 CF1305A 【Kuroni and the Gifts】
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
