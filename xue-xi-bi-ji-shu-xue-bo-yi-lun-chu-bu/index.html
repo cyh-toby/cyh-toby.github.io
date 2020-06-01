@@ -1,0 +1,578 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>学习笔记：数学-博弈论初步 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1591018777572">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="学习笔记：数学-博弈论初步 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="公平组合游戏ICG
+公平组合游戏 (Impartial Combinatorial Games) :
+
+两名选手交替进行游戏
+任一操作只与游戏本身有关，与操作选手等其他因素无关
+不存在平局
+
+博弈论中，有一些有代表性的 ICG  ，和一些常..." />
+    <meta name="keywords" content="博弈论,学习笔记" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1591018777572" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/flinks" class="menu">
+          友链
+        </a>
+      
+    
+      
+        <a href="/problem-bank" class="menu">
+          题库
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              学习笔记：数学-博弈论初步
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-06-01 20:40
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/bo-yi-lun/" class="post-tag">
+                  # 博弈论
+                </a>
+              
+                <a href="https://cyh-toby.github.io/xue-xi-bi-ji/" class="post-tag">
+                  # 学习笔记
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="公平组合游戏icg">公平组合游戏ICG</h1>
+<p>公平组合游戏 (Impartial Combinatorial Games) :</p>
+<ul>
+<li>两名选手交替进行游戏</li>
+<li>任一操作只与游戏本身有关，与操作选手等其他因素无关</li>
+<li>不存在平局</li>
+</ul>
+<p>博弈论中，有一些有代表性的 ICG  ，和一些常用方法。</p>
+<h2 id="nim游戏">Nim游戏</h2>
+<h3 id="定义">定义</h3>
+<blockquote>
+<p>通常的Nim游戏的定义是这样的：有若干堆石子，每堆石子的数量都是有限的，合法的移动是“选择一堆石子并拿走若干颗（不能不拿）”，如果轮到某个人时所有的石子堆都已经被拿空了，则判负（因为他此刻没有任何合法的移动）。</p>
+</blockquote>
+<h3 id="结论">结论</h3>
+<p>记各堆石子数分别为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">a_1, a_2, ... , a_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 。<br>
+先手必胜，当且仅当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">XOR</mi><mo>⁡</mo><mtext> </mtext><msub><mi>a</mi><mi>i</mi></msub><mi mathvariant="normal">≠</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">\operatorname{XOR} \, a_i \neq 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></p>
+<p>考虑证明。</p>
+<p>当没有石子时，显然先手必败，一次性拿完即可。</p>
+<p>考虑 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">XOR</mi><mo>⁡</mo><mtext> </mtext><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\operatorname{XOR} \, a_i = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的局面。<br>
+此时一定不存在一种拿法，使得拿完之后其异或和仍为0。<br>
+假设存在，把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">a_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 拿完变成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>a</mi><mn>1</mn><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_1&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span>。那么有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>a</mi><mn>1</mn><mo mathvariant="normal">′</mo></msubsup><mi mathvariant="normal">XOR</mi><mo>⁡</mo><msub><mi>a</mi><mn>2</mn></msub><mi mathvariant="normal">XOR</mi><mo>⁡</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">XOR</mi><mo>⁡</mo><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a_1&#x27; \operatorname{XOR} a_2 \operatorname{XOR} ... \operatorname{XOR} a_n = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span><br>
+则可知 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><msubsup><mi>a</mi><mn>1</mn><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_1 = a_1&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span>，相当于没有拿，这是不合法的。<br>
+故一定不存在这种拿法。<br>
+故先手会一直因后手的操作，保持在异或和为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的局面，直至最后没有石子。<br>
+故先手必败。</p>
+<p>换言之，先手必胜，当且仅当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">XOR</mi><mo>⁡</mo><mtext> </mtext><msub><mi>a</mi><mi>i</mi></msub><mi mathvariant="normal">≠</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">\operatorname{XOR} \, a_i \neq 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>。</p>
+<h3 id="题目源码">题目&amp;源码</h3>
+<p><a href="https://www.luogu.com.cn/problem/P2197">【模板】Nim游戏</a></p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: luogu - P2197 - 【模板】Nim游戏 
+
+State: Accepted
+
+From: 【模板】 
+
+Algorithm: 博弈论 
+
+Author: cyh_toby
+
+Last updated on 2020.5.31
+
+ps. 洛谷与acoj的输入格式略有不同 
+**********************************/
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int T, n, res;
+
+inline void work_luogu()
+{
+	scanf(&quot;%d&quot;, &amp;T);
+	while (T--) {
+		scanf(&quot;%d&quot;, &amp;n);
+		res = 0;
+		for (int i = 1; i &lt;= n; i++) {
+			int x;
+			scanf(&quot;%d&quot;, &amp;x);
+			res ^= x;
+		}
+		if (res)
+			printf(&quot;Yes\n&quot;);
+		else
+			printf(&quot;No\n&quot;);
+	}
+	return;
+}
+
+inline void work_acoj()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	res = 0;
+	for (int i = 1; i &lt;= n; i++) {
+		int x;
+		scanf(&quot;%d&quot;, &amp;x);
+		res ^= x;
+	}
+	if (res)
+		printf(&quot;win\n&quot;);
+	else
+		printf(&quot;lose\n&quot;);
+	return;
+}
+
+int main()
+{
+	work_luogu();
+//	work_acoj();
+	
+	return 0;
+}
+
+</code></pre>
+<h2 id="有向图游戏">有向图游戏</h2>
+<p>给定一个 <strong>有向无环图</strong> 和一个起始顶点上的一枚棋子，两名选手交替的将这枚棋子沿有向边进行移动，无法移 动者判负。事实上，这个游戏可以认为是 <strong>所有公平组合游戏的抽象模型</strong>。</p>
+<p>解决这种问题，常用 SG 函数</p>
+<h3 id="sg函数">SG函数</h3>
+<h4 id="定义-2">定义</h4>
+<p>记 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">g(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 为点 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 的 SG 函数。引入 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">mex</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\operatorname{mex}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mop"><span class="mord mathrm">m</span><span class="mord mathrm">e</span><span class="mord mathrm">x</span></span></span></span></span> 运算 ，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">mex</mi><mo>⁡</mo><mo>{</mo><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>a</mi><mi>n</mi></msub><mo>}</mo></mrow><annotation encoding="application/x-tex">\operatorname{mex}\{ a_1, a_2, ... , a_n\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">m</span><span class="mord mathrm">e</span><span class="mord mathrm">x</span></span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span></span></span></span> 的结果为此集合中未出现的最小自然数。</p>
+<p>那么 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">mex</mi><mo>⁡</mo><mo>{</mo><mi>g</mi><mo>(</mo><msub><mi>u</mi><mi>i</mi></msub><mo>)</mo><mo>}</mo></mrow><annotation encoding="application/x-tex">g(x) = \operatorname{mex} \{g(u_i)\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">m</span><span class="mord mathrm">e</span><span class="mord mathrm">x</span></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">}</span></span></span></span> ，其中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>u</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">u_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 所指向的节点。</p>
+<h4 id="结论-2">结论</h4>
+<p>对于上述有向图游戏，记起点为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> ，那么 先手必胜当且仅当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>(</mo><mi>s</mi><mo>)</mo><mi mathvariant="normal">≠</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">g(s) \neq 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 。根据每步操作带来的变化，可以用类似于 Nim游戏 的证明方法加以证明。</p>
+<p>对于多个有无环向图，则先手必胜当且仅当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">XOR</mi><mo>⁡</mo><mi>g</mi><mo>(</mo><msub><mi>s</mi><mi>i</mi></msub><mo>)</mo><mi mathvariant="normal">≠</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">\operatorname{XOR} g(s_i) \neq 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">X</span><span class="mord mathrm">O</span><span class="mord mathrm">R</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 。</p>
+<h4 id="求法">求法</h4>
+<p>对于一个有向无环图，dfs 即可计算求解 SG 函数。</p>
+<h3 id="题目源码-2">题目&amp;源码</h3>
+<h4 id="acoj12754移棋子游戏">acoj12754移棋子游戏</h4>
+<p><a href="https://www.acoj.com/problems/12754">acoj - 12754 - 移棋子游戏</a></p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: acoj - 12754 - 移棋子游戏 
+
+State: Accepted
+
+From: acoj
+
+Algorithm: 博弈论 
+
+Author: cyh_toby
+
+Last updated on 2020.5.24
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+
+using namespace std;
+
+const int N = 2005, M = 6005;
+
+int g[N], nxt[M], v[M], idx;
+int n, m, k;
+int f[N];//SG
+int ans = 0;
+
+inline void add(int x, int y) {
+	idx++;
+	v[idx] = y;
+	nxt[idx] = g[x];
+	g[x] = idx;
+	return;
+}
+
+int dfs(int u) {//求u的SG值 
+	if (f[u] &gt;= 0)
+		return f[u];
+	
+	f[u] = 0;
+	set&lt;int&gt; s;
+	for (int i = g[u]; i; i = nxt[i])
+		s.insert(dfs(v[i]));
+	
+	for (int i = 0; ; i++) {
+		if (!s.count(i)) {
+			f[u] = i;
+			break;
+		}
+	}
+	
+	return f[u];
+}
+
+int main()
+{
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;k);
+	for (int i = 1; i &lt;= m; i++) {
+		int a, b;
+		scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+		add(a, b);
+	}
+	
+	memset(f, -1, sizeof(f));
+	
+	for (int i = 1; i &lt;= k; i++) {
+		int x;
+		scanf(&quot;%d&quot;, &amp;x);
+		ans ^= dfs(x);
+	}
+	
+	if (ans)
+		puts(&quot;win&quot;);
+	else
+		puts(&quot;lose&quot;);
+	
+	return 0;
+}
+
+</code></pre>
+<h4 id="acoj12755牛的数字游戏">acoj12755牛的数字游戏</h4>
+<p><a href="https://www.acoj.com/problems/12755">acoj - 12755 - 牛的数字游戏</a></p>
+<p>把每个数字拆分开，按题意模拟建图，使用 SG 函数。</p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: acoj - 12755 - 牛的数字游戏 
+
+State: Accepted
+
+From: acoj
+
+Algorithm: 博弈论, SG函数 
+
+Author: cyh_toby
+
+Last updated on 2020.5.31
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 1000005;
+
+int f[N];
+
+inline void getm(int x, int &amp;r1, int &amp;r2) {
+	r1 = 0, r2 = 10;
+	while (x) {
+		r1 = max(r1, x % 10);
+		r2 = min(r2, x % 10 == 0 ? 10 : (x % 10));
+		x /= 10;
+	}
+	return;
+}
+
+inline void init() {
+	f[0] = 0;
+	for (int i = 1; i &lt;= N-5; i++) {
+		int x, y;
+		getm(i, x, y);
+		x = i - x, y = i - y;
+		x = f[x], y = f[y];
+		if (x &lt; y)
+			swap(x, y);
+			
+		if ((x == 0 &amp;&amp; y == 0) || (x == 2 &amp;&amp; y == 0))
+			f[i] = 1;
+		if (y &gt; 0)
+			f[i] = 0;
+		if (x == 1 &amp;&amp; y == 0)
+			f[i] = 2;
+	}
+	return;
+}
+
+int main()
+{
+	init();
+	
+	int T;
+	scanf(&quot;%d&quot;, &amp;T);
+	while (T--) {
+		int n;
+		scanf(&quot;%d&quot;, &amp;n);
+		if (f[n])
+			puts(&quot;YES&quot;);
+		else
+			puts(&quot;NO&quot;);
+	}
+	return 0;
+}
+
+</code></pre>
+<h4 id="acoj12756取石子游戏">acoj12756取石子游戏</h4>
+<p><a href="https://www.acoj.com/problems/12756">acoj - 12756 - 取石子游戏</a></p>
+<p>与上一题类似，根据取石子的限制条件建图（可以不用真的建出来），随后 SG 求解。</p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: acoj - 12756 - 取石子游戏 
+
+State: Accepted
+
+From: acoj
+
+Algorithm: 博弈论, SG函数 
+
+Author: cyh_toby
+
+Last updated on 2020.5.31
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;set&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+const int N = 15, K = 1005;
+
+int n, m, a[N], b[N], f[K];
+int book[K];
+
+inline void init() {
+	f[0] = 0;
+	for (int i = 1; i &lt; K; i++) {
+		memset(book, 0, sizeof(book));
+		for (int j = 1; j &lt;= m; j++) {
+			if (i &lt; b[j]) break;
+			book[f[i-b[j]]] = 1;
+		}
+		for (int j = 0; ; j++) {
+			if (!book[j]) {
+				f[i] = j;
+				break;
+			}
+		}
+	}
+	return;
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++)
+		scanf(&quot;%d&quot;, &amp;a[i]);
+	scanf(&quot;%d&quot;, &amp;m);
+	for (int i = 1; i &lt;= m; i++)
+		scanf(&quot;%d&quot;, &amp;b[i]);
+	
+	init();
+	
+	int res = 0;
+	for (int i = 1; i &lt;= n; i++)
+		res ^= f[a[i]];
+	
+	if (res)
+		puts(&quot;YES&quot;);
+	else
+		puts(&quot;NO&quot;);
+	
+	for (int i = 1; i &lt;= n; i++) {
+		for (int j = 1; j &lt;= m; j++) {
+			if (a[i] - b[j] &gt;= 0 &amp;&amp; ((res ^ f[a[i]] ^ f[a[i] - b[j]]) == 0)) {
+				printf(&quot;%d %d\n&quot;, i, b[j]);
+				return 0;
+			}
+		}
+	}
+	
+	return 0;
+}
+
+</code></pre>
+<h2 id="相关例题">相关例题</h2>
+<h3 id="acoj12757取石子">acoj12757取石子</h3>
+<p><a href="https://www.acoj.com/problems/12757">acoj - 12757 - 取石子</a></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%85%AC%E5%B9%B3%E7%BB%84%E5%90%88%E6%B8%B8%E6%88%8Ficg">公平组合游戏ICG</a>
+<ul>
+<li><a href="#nim%E6%B8%B8%E6%88%8F">Nim游戏</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%BA%90%E7%A0%81">题目&amp;源码</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F">有向图游戏</a>
+<ul>
+<li><a href="#sg%E5%87%BD%E6%95%B0">SG函数</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89-2">定义</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA-2">结论</a></li>
+<li><a href="#%E6%B1%82%E6%B3%95">求法</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%BA%90%E7%A0%81-2">题目&amp;源码</a>
+<ul>
+<li><a href="#acoj12754%E7%A7%BB%E6%A3%8B%E5%AD%90%E6%B8%B8%E6%88%8F">acoj12754移棋子游戏</a></li>
+<li><a href="#acoj12755%E7%89%9B%E7%9A%84%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F">acoj12755牛的数字游戏</a></li>
+<li><a href="#acoj12756%E5%8F%96%E7%9F%B3%E5%AD%90%E6%B8%B8%E6%88%8F">acoj12756取石子游戏</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E4%BE%8B%E9%A2%98">相关例题</a>
+<ul>
+<li><a href="#acoj12757%E5%8F%96%E7%9F%B3%E5%AD%90">acoj12757取石子</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/ti-jie-acoj12748-loj6160er-fen-tu-ran-se/">
+              <h3 class="post-title">
+                题解 acoj12748 / loj6160【二分图染色】
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
