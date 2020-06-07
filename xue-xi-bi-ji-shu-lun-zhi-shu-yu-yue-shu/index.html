@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：数论-质数与约数 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1591018777572">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1591499917792">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：数论-质数与约数 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -31,7 +31,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1591018777572" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1591499917792" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -137,7 +137,7 @@
 <p>否则为合数。</p>
 </li>
 </ul>
-<p>埃氏筛法已经很高效了，但缺陷在于，某个合数可能会被几个质数筛掉，导致重复了无效操作，拉低复杂度。</p>
+<p>埃氏筛法已经很高效了，但缺陷在于，某个合数可能会被几个质数筛掉，导致重复了无效操作，拉低效率。</p>
 <pre><code class="language-cpp">for (int i = 2; i &lt;= n; i++) {
 	if (!vis[i]) {
 		p[++cnt] = i;
