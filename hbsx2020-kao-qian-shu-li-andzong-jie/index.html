@@ -2,18 +2,26 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>学习笔记：数论-欧拉函数 | cyh_toby&#39;s blog</title>
+<title>HBSX2020 考前梳理&amp;总结 | cyh_toby&#39;s blog</title>
 <link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592319124004">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="学习笔记：数论-欧拉函数 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="HBSX2020 考前梳理&amp;总结 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="欧拉函数：φ(n)\varphi(n)φ(n) 表示 [1,n)[1,n)[1,n) 中与 nnn 互质的数的个数。
-..." />
-    <meta name="keywords" content="学习笔记" />
+    <meta name="description" content="知识点
+
+堆 - priority_queue  ∈\in∈ &lt;queue&gt;
+
+top(), size(), empty(), push(), pop() ...
+here
+
+
+LCA - 倍增等
+差分约束 - SPFA - 建..." />
+    <meta name="keywords" content="梳理" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -91,29 +99,57 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              学习笔记：数论-欧拉函数
+              HBSX2020 考前梳理&amp;总结
             </h2>
             <div class="post-info">
               <span>
-                2020-03-15 20:55
+                2020-06-16 21:18
               </span>
               <span>
                 1 min read
               </span>
               
-                <a href="https://cyh-toby.github.io/xue-xi-bi-ji/" class="post-tag">
-                  # 学习笔记
+                <a href="https://cyh-toby.github.io/shu-li/" class="post-tag">
+                  # 梳理
                 </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>欧拉函数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>φ</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\varphi(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">φ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">[1,n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 中与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 互质的数的个数。</p>
+                <h1 id="知识点">知识点</h1>
+<ul>
+<li>堆 - priority_queue  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">∈</span></span></span></span> <code>&lt;queue&gt;</code>
+<ul>
+<li>top(), size(), empty(), push(), pop() ...</li>
+<li><a href="https://www.cnblogs.com/huashanqingzhu/p/11040390.html">here</a></li>
+</ul>
+</li>
+<li>LCA - 倍增等</li>
+<li>差分约束 - SPFA - 建立虚点虚边</li>
+<li></li>
+</ul>
+<h1 id="杂">杂</h1>
+<ul>
+<li>关注数组大小问题，尤其如前向星、线段树等有系数的空间</li>
+<li>IO数据量决定 scanf printf / 快读快输</li>
+<li>各种标记（如tarjan和SPFA关于是否在栈/队列中的标记）要及时打上</li>
+<li>初始值，memset</li>
+</ul>
+<h1 id="tricks">Tricks</h1>
+<ul>
+<li>two pointers 应用在单调的数组中，去掉二分的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span></li>
+<li><strong>敢于下手，暴力出奇迹</strong></li>
+</ul>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li><a href="#%E7%9F%A5%E8%AF%86%E7%82%B9">知识点</a></li>
+<li><a href="#%E6%9D%82">杂</a></li>
+<li><a href="#tricks">Tricks</a></li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -122,9 +158,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://cyh-toby.github.io/xue-xi-bi-ji-shu-lun-zui-da-gong-yue-shu/">
+            <a href="https://cyh-toby.github.io/xue-xi-bi-ji-sao-miao-xian/">
               <h3 class="post-title">
-                学习笔记：数论-最大公约数
+                学习笔记：扫描线
               </h3>
             </a>
           </div>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-06-15T14:20:56.902Z</updated>
+    <updated>2020-06-16T14:52:06.738Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -10,6 +10,38 @@
     <logo>https://cyh-toby.github.io/images/avatar.png</logo>
     <icon>https://cyh-toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[HBSX2020 考前梳理&总结]]></title>
+        <id>https://cyh-toby.github.io/hbsx2020-kao-qian-shu-li-andzong-jie/</id>
+        <link href="https://cyh-toby.github.io/hbsx2020-kao-qian-shu-li-andzong-jie/">
+        </link>
+        <updated>2020-06-16T13:18:03.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="知识点">知识点</h1>
+<ul>
+<li>堆 - priority_queue  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">∈</span></span></span></span> <code>&lt;queue&gt;</code>
+<ul>
+<li>top(), size(), empty(), push(), pop() ...</li>
+<li><a href="https://www.cnblogs.com/huashanqingzhu/p/11040390.html">here</a></li>
+</ul>
+</li>
+<li>LCA - 倍增等</li>
+<li>差分约束 - SPFA - 建立虚点虚边</li>
+<li></li>
+</ul>
+<h1 id="杂">杂</h1>
+<ul>
+<li>关注数组大小问题，尤其如前向星、线段树等有系数的空间</li>
+<li>IO数据量决定 scanf printf / 快读快输</li>
+<li>各种标记（如tarjan和SPFA关于是否在栈/队列中的标记）要及时打上</li>
+<li>初始值，memset</li>
+</ul>
+<h1 id="tricks">Tricks</h1>
+<ul>
+<li>two pointers 应用在单调的数组中，去掉二分的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span></li>
+<li><strong>敢于下手，暴力出奇迹</strong></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[学习笔记：扫描线]]></title>
         <id>https://cyh-toby.github.io/xue-xi-bi-ji-sao-miao-xian/</id>
@@ -2113,15 +2145,6 @@ int main()
 	printf(&quot;%d&quot;, ans);
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[学习笔记：数论-欧拉函数]]></title>
-        <id>https://cyh-toby.github.io/xue-xi-bi-ji-shu-lun-ou-la-han-shu/</id>
-        <link href="https://cyh-toby.github.io/xue-xi-bi-ji-shu-lun-ou-la-han-shu/">
-        </link>
-        <updated>2020-03-15T12:55:35.000Z</updated>
-        <content type="html"><![CDATA[<p>欧拉函数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>φ</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\varphi(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">φ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">[1,n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 中与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 互质的数的个数。</p>
 ]]></content>
     </entry>
 </feed>

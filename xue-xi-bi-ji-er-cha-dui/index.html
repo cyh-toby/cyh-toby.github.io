@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：（二叉）堆 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592230851456">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592319124004">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：（二叉）堆 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -24,7 +24,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592230851456" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592319124004" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -100,7 +100,7 @@
                 2019-12-27 17:56
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://cyh-toby.github.io/xue-xi-bi-ji/" class="post-tag">
@@ -120,7 +120,85 @@
 <p>然后采取<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mi>p</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo separator="true">,</mo><mi>d</mi><mi>o</mi><mi>w</mi><mi>n</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">up(p),down(p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span>操作，使<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">hp</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">h</span><span class="mord mathdefault">p</span></span></span></span>时刻拥有&quot;父亲大于/小于儿子&quot;的性质</p>
 <p>这样就可以添加/删除，并且不破坏堆的性质了</p>
 <h2 id="代码">代码</h2>
-<p>略</p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: luogu - P3378 - 【模板】堆 
+
+State: Uncompleted
+
+From: 【模板】 
+
+Algorithm: 堆 
+
+Author: cyh_toby
+
+Last updated on 2020.6.16
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 1e6+5;
+
+int n;
+int hp[N], tot;
+
+inline void uph(int p) {
+	while (p &gt; 1) {
+		if (hp[p] &lt; hp[p&gt;&gt;1]) {
+			swap(hp[p], hp[p&gt;&gt;1]);
+			p &gt;&gt;= 1;
+		}
+		else break;
+	}
+	return;
+}
+
+inline void downh(int p) {
+	int s = p &lt;&lt; 1;
+	while (s &lt;= tot) {
+		if (s &lt; tot &amp;&amp; hp[s] &gt; hp[s+1]) s++;
+		if (hp[p] &gt; hp[s]) {
+			swap(hp[p], hp[s]);
+			p = s, s = p&lt;&lt;1;
+		}
+		else break;
+	}
+	return;
+}
+
+inline void inserth(int x) {
+	hp[++tot] = x;
+	uph(tot);
+}
+
+inline void removeh(int p) {
+	swap(hp[p], hp[tot--]);
+	uph(p), downh(p);
+	return;
+}
+
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++) {
+		int op, x;
+		scanf(&quot;%d&quot;, &amp;op);
+		if (op == 1) {
+			scanf(&quot;%d&quot;, &amp;x);
+			inserth(x);
+		}
+		if (op == 2) 
+			printf(&quot;%d\n&quot;, hp[1]);
+		if (op == 3)
+			removeh(1);
+	}
+	return 0;
+}
+
+</code></pre>
 <h2 id="应用">应用</h2>
 <p>十分常用，但比较单一，我认为大多情况下只能求数组最值</p>
 <h2 id="技巧">技巧</h2>
