@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HBSX2020 考前梳理&amp;总结 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592319124004">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592402352444">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="HBSX2020 考前梳理&amp;总结 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -17,10 +17,7 @@
 
 top(), size(), empty(), push(), pop() ...
 here
-
-
-LCA - 倍增等
-差分约束 - SPFA - 建..." />
+尽量少用原理未知的 priority_queue&lt..." />
     <meta name="keywords" content="梳理" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -30,7 +27,7 @@ LCA - 倍增等
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592319124004" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592402352444" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -106,7 +103,7 @@ LCA - 倍增等
                 2020-06-16 21:18
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
                 <a href="https://cyh-toby.github.io/shu-li/" class="post-tag">
@@ -123,6 +120,10 @@ LCA - 倍增等
 <ul>
 <li>top(), size(), empty(), push(), pop() ...</li>
 <li><a href="https://www.cnblogs.com/huashanqingzhu/p/11040390.html">here</a></li>
+<li>尽量少用原理未知的 <code>priority_queue&lt;Type, vector&lt;Type&gt;, less&lt;Type&gt; &gt;</code>，用重载代替</li>
+<li><strong>千万不要忘记 down 操作中 while 循环里的</strong> <code>s = p * 2</code></li>
+<li>up() 与 down() 的参数千万不要传成节点的值，<strong>应为节点编号即 p</strong></li>
+<li>需要维护多信息的堆，如Dijkstra的堆，应当把 dis 和节点 <strong>捆绑存入堆</strong>，而不能调用 dis[hp[x]] 进行比大小。原因：Dijkstra对节点dis值会有修改，如果是 dis[hp[x]] 的做法，堆里面的元素的权值（即关键字）会在运行时发生改变，堆将不能时刻保持其性质 ！！</li>
 </ul>
 </li>
 <li>LCA - 倍增等</li>
