@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：线段树 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592402352444">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592529169299">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：线段树 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -27,7 +27,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592402352444" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592529169299" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -181,87 +181,117 @@
 <h1 id="源码">源码</h1>
 <p>原题：<a href="https://www.luogu.com.cn/problem/P3372">P3372【模板】线段树1</a></p>
 <p>总时间复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mtext> </mtext><mtext>log</mtext><mtext> </mtext><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n+m\,\text{log}\,n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord text"><span class="mord">log</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></p>
-<pre><code class="language-cpp">//luoguP3327
-//【模板】线段树(求和) 
+<pre><code class="language-cpp">/**********************************
+
+Problem: luogu - P3372 - 【模板】线段树 
+
+State: Accepted
+
+From: 【模板】 
+
+Algorithm: 线段树 
+
+Author: cyh_toby
+
+Last updated on 2020.6.18
+
+**********************************/
 #include &lt;cstdio&gt;
+
 using namespace std;
-#define N 100005
-#define ll long long 
+
+const int N = 1e5+5;
+typedef long long ll;
+
 int n, m;
-ll a[N];
-struct SegmentTree {
-	int l, r;
+int a[N];
+
+struct SegmentTree{
+	int p, l, r;
 	ll sum, add;
 } t[4*N];
+
 void buildt(int p, int l, int r) {
 	t[p].l = l, t[p].r = r;
-	if(l==r) {
+	if (l == r) {
 		t[p].sum = a[l];
 		return;
 	}
-	int mid = (l+r)&gt;&gt;1;
+	int mid = (l + r) &gt;&gt; 1;
 	buildt(p&lt;&lt;1, l, mid);
-	buildt((p&lt;&lt;1)+1, mid+1, r);
-	t[p].sum = t[p&lt;&lt;1].sum + t[(p&lt;&lt;1)+1].sum;
+	buildt(p&lt;&lt;1|1, mid+1, r);
+	t[p].sum = t[p&lt;&lt;1].sum + t[p&lt;&lt;1|1].sum;
 	return;
 }
+
 inline void spreadt(int p) {
-	if(!t[p].add) return;
-	int q = p&lt;&lt;1; 
-	t[q].sum += t[p].add*(t[q].r - t[q].l + 1), t[q].add += t[p].add;
-	q++;
-	t[q].sum += t[p].add*(t[q].r - t[q].l + 1), t[q].add += t[p].add;
-	t[p].add = 0ll;
+	ll w = t[p].add;
+	if (w) {
+		t[p&lt;&lt;1].sum += w * (t[p&lt;&lt;1].r - t[p&lt;&lt;1].l + 1);
+		t[p&lt;&lt;1].add += w;
+		t[p&lt;&lt;1|1].sum += w * (t[p&lt;&lt;1|1].r - t[p&lt;&lt;1|1].l + 1);
+		t[p&lt;&lt;1|1].add += w;
+		t[p].add = 0;
+	}
 	return;
 }
+
 void updatet(int p, int l, int r, ll v) {
-	if(t[p].l &gt;= l &amp;&amp; t[p].r &lt;= r) {
-		t[p].sum += v * (t[p].r - t[p].l +1);
+	if (l &lt;= t[p].l &amp;&amp; t[p].r &lt;= r) {
+		t[p].sum += v * (t[p].r - t[p].l + 1);
 		t[p].add += v;
 		return;
 	}
-	int mid = (t[p].l+t[p].r)&gt;&gt;1;
-	spreadt(p);//IMPORETANT 因为43行为赋值&quot;=&quot;，又因为要时刻保证sum为真实值(因为query直接返回sum)，所以要把标记下传 
-	if(mid&gt;=l) updatet(p&lt;&lt;1, l, r, v);
-	if(mid&lt;r) updatet((p&lt;&lt;1)+1, l, r, v);
-	t[p].sum = t[p&lt;&lt;1].sum + t[(p&lt;&lt;1)+1].sum;//第43行 
+	
+	int mid = (t[p].l + t[p].r) &gt;&gt; 1;
+	spreadt(p);
+	if (l &lt;= mid)
+		updatet(p&lt;&lt;1, l, r, v);
+	if (mid &lt; r)
+		updatet(p&lt;&lt;1|1, l, r, v);
+		
+	t[p].sum = t[p&lt;&lt;1].sum + t[p&lt;&lt;1|1].sum;
 	return;
 }
-ll query(int p, int l, int r) {
-	if(t[p].l &gt;= l &amp;&amp; t[p].r &lt;= r) {
+
+ll queryt(int p, int l, int r) {
+	if (l &lt;= t[p].l &amp;&amp; t[p].r &lt;= r)
 		return t[p].sum;
-	}
-	int mid = (t[p].l+t[p].r)&gt;&gt;1;
-	ll res = 0ll;
+	
+	int mid = (t[p].l + t[p].r) &gt;&gt; 1;
 	spreadt(p);
-	if(mid&gt;=l) {
-		res += query(p&lt;&lt;1, l, r);
-	}
-	if(mid&lt;r) {
-		res += query((p&lt;&lt;1)+1, l, r);
-	}
+	ll res = 0;
+	if (l &lt;= mid)
+		res += queryt(p&lt;&lt;1, l, r);
+	if (mid &lt; r)
+		res += queryt(p&lt;&lt;1|1, l, r);
+		
 	return res;
 }
-int main() {
+
+int main()
+{
 	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
-	for(int i = 1; i &lt;= n; i++) scanf(&quot;%lld&quot;, &amp;a[i]);
+	for (int i = 1; i &lt;= n; i++)
+		scanf(&quot;%d&quot;, &amp;a[i]);
+	
 	buildt(1, 1, n);
-	for(int i = 1; i &lt;= m; i++) {
-		int op, x, y;
-		ll v;
+	
+	for (int i = 1; i &lt;= m; i++) {
+		int op, x, y; ll z;
 		scanf(&quot;%d&quot;, &amp;op);
-		if(op==1) {
-			scanf(&quot;%d%d%lld&quot;, &amp;x, &amp;y, &amp;v);
-			updatet(1, x, y, v);
+		if (op == 1) {
+			scanf(&quot;%d%d%lld&quot;, &amp;x, &amp;y, &amp;z);
+			updatet(1, x, y, z);
 		}
-		if(op==2) {
+		if (op == 2) {
 			scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
-			printf(&quot;%lld\n&quot;, query(1, x, y));
+			printf(&quot;%lld\n&quot;, queryt(1, x, y));
 		}
 	}
+	
 	return 0;
-} 
-
+}
 </code></pre>
 <h1 id="参考资料">参考资料</h1>
 <p>《算法竞赛进阶指南》- 0x43 - 线段树</p>
