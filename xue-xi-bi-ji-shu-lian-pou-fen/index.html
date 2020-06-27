@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：树链剖分 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1592529169299">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1593217904902">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：树链剖分 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -12,9 +12,16 @@
 
 
     <meta name="description" content="待完成
-模板
-【模板】树链剖分
-" />
+源码
+/**********************************
+
+Problem: luogu - P3384 - 【模板】树链剖分 
+
+State: Accepted
+
+From: 【模板】 
+
+Algorithm:..." />
     <meta name="keywords" content="学习笔记" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -24,7 +31,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1592529169299" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1593217904902" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -100,10 +107,10 @@
                 2020-02-05 16:40
               </span>
               <span>
-                1 min read
+                6 min read
               </span>
               
-                <a href="https://cyh-toby.github.io/xue-xi-bi-ji/" class="post-tag">
+                <a href="https://cyh-toby.github.io/tag/xue-xi-bi-ji/" class="post-tag">
                   # 学习笔记
                 </a>
               
@@ -112,13 +119,193 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p>待完成</p>
+<h1 id="源码">源码</h1>
+<pre><code class="language-cpp">/**********************************
+
+Problem: luogu - P3384 - 【模板】树链剖分 
+
+State: Accepted
+
+From: 【模板】 
+
+Algorithm: 线段树, 树链剖分 
+
+Author: cyh_toby
+
+Last updated on 2020.6.21
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+const int N = 1e5+5, M = 1e5+5;
+
+int n, m, rt, mod;
+ll a[N];
+int g[N], v[2*M], nxt[2*M], tot;
+int f[N], dep[N], Siz[N], son[N], id[N], rk[N], top[N], cnt;
+
+inline void add(int x, int y) {
+	v[++tot] = y, nxt[tot] = g[x], g[x] = tot;
+	return;
+}
+
+//SegmentTree---
+struct SegmentTree{
+	int l, r;
+	ll sum, add;
+} t[4*N];
+void buildt(int p, int l, int r) {
+	t[p].l = l, t[p].r = r;
+	if (l == r) {
+		t[p].sum = a[rk[l]], t[p].add = 0;
+		return;
+	}
+	
+	int mid = (l+r) &gt;&gt; 1;
+	buildt(p&lt;&lt;1, l, mid);
+	buildt(p&lt;&lt;1|1, mid+1, r);
+	t[p].sum = (t[p&lt;&lt;1].sum + t[p&lt;&lt;1|1].sum) % mod;
+	return;
+}
+inline void spreadt(int p) {
+	ll w = t[p].add;
+	if (w) {
+		t[p&lt;&lt;1].sum = (t[p&lt;&lt;1].sum + w * (t[p&lt;&lt;1].r - t[p&lt;&lt;1].l + 1) % mod) % mod;
+		t[p&lt;&lt;1].add = (t[p&lt;&lt;1].add + w) % mod;
+		t[p&lt;&lt;1|1].sum = (t[p&lt;&lt;1|1].sum + w * (t[p&lt;&lt;1|1].r - t[p&lt;&lt;1|1].l + 1) % mod) % mod;
+		t[p&lt;&lt;1|1].add = (t[p&lt;&lt;1|1].add + w) % mod;
+		t[p].add = 0;
+	}
+	return;
+}
+void updatet(int p, int l, int r, ll v) {
+	if (t[p].l &gt;= l &amp;&amp; t[p].r &lt;= r) {
+		t[p].sum = (t[p].sum + v * (t[p].r - t[p].l + 1) % mod) % mod;
+		t[p].add = (t[p].add + v) % mod;
+		return;
+	}
+	
+	int mid = (t[p].l + t[p].r) &gt;&gt; 1;
+	spreadt(p);
+	if (l &lt;= mid) updatet(p&lt;&lt;1, l, r, v);
+	if (mid &lt; r) updatet(p&lt;&lt;1|1, l, r, v);
+	t[p].sum = (t[p&lt;&lt;1].sum + t[p&lt;&lt;1|1].sum) % mod;
+	return;
+}
+ll queryt(int p, int l, int r) {
+	if (t[p].l &gt;= l &amp;&amp; t[p].r &lt;= r)
+		return t[p].sum;
+	
+	int mid = (t[p].l + t[p].r) &gt;&gt; 1;
+	spreadt(p);
+	ll res = 0;
+	if (l &lt;= mid) res = (res + queryt(p&lt;&lt;1, l, r)) % mod;
+	if (mid &lt; r) res = (res + queryt(p&lt;&lt;1|1, l, r)) % mod;
+	return res;
+}
+//---
+//Tree Chain Partition
+void dfs1(int u, int fa, int depth) {
+	f[u] = fa, dep[u] = depth, Siz[u] = 1, son[u] = 0;
+	for (int i = g[u]; i; i = nxt[i]) {
+		int y = v[i];
+		if (y == f[u]) continue;
+		dfs1(y, u, depth+1);
+		if (Siz[y] &gt; Siz[son[u]])
+			son[u] = y;
+		Siz[u] += Siz[y];
+	}
+	return;
+}
+void dfs2(int u) {
+	id[u] = ++cnt, rk[cnt] = u;
+	if (!top[u]) top[u] = u;
+	if (son[u]) {
+		top[son[u]] = top[u];
+		dfs2(son[u]);
+	}
+	for (int i = g[u]; i; i = nxt[i]) {
+		int y = v[i];
+		if (y == f[u] || y == son[u]) continue;
+		dfs2(y);
+	}
+	return;
+}
+inline void update_chain(int x, int y, ll v) {
+	while (top[x] != top[y]) {
+		if (dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+		updatet(1, id[top[x]], id[x], v);
+		x = f[top[x]];
+	}
+	if (dep[x] &lt; dep[y]) swap(x, y);
+	updatet(1, id[y], id[x], v);
+	return;
+}
+inline ll query_chain(int x, int y) {
+	ll res = 0;
+	while (top[x] != top[y]) {
+		if (dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+		res = (res + queryt(1, id[top[x]], id[x])) % mod;
+		x = f[top[x]];
+	}
+	if (dep[x] &lt; dep[y]) swap(x, y);
+	res = (res + queryt(1, id[y], id[x])) % mod;
+	return res;
+}
+//---
+
+int main()
+{
+	scanf(&quot;%d%d%d%d&quot;, &amp;n, &amp;m, &amp;rt, &amp;mod);
+	for (int i = 1; i &lt;= n; i++) 
+		scanf(&quot;%lld&quot;, &amp;a[i]);
+	for (int i = 1; i &lt;= n-1; i++) {
+		int x, y;
+		scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+		add(x, y);
+		add(y, x);
+	}
+	
+	dfs1(rt, 0, 0);
+	dfs2(rt);
+	buildt(1, 1, n);
+	
+	for (int i = 1; i &lt;= m; i++) {
+		int op, x, y;
+		ll z;
+		scanf(&quot;%d&quot;, &amp;op);
+		if (op == 1) {
+			scanf(&quot;%d%d%lld&quot;, &amp;x, &amp;y, &amp;z);
+			update_chain(x, y, z);
+		}
+		if (op == 2) {
+			scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+			printf(&quot;%lld\n&quot;, query_chain(x, y));
+		}
+		if (op == 3) {
+			scanf(&quot;%d%lld&quot;, &amp;x, &amp;z);
+			updatet(1, id[x], id[x] + Siz[x] - 1, z);
+		}
+		if (op == 4) {
+			scanf(&quot;%d&quot;, &amp;x);
+			printf(&quot;%lld\n&quot;, queryt(1, id[x], id[x] + Siz[x] - 1));
+		}
+	}
+	
+	return 0;
+}
+</code></pre>
 <h2 id="模板">模板</h2>
 <p><a href="https://www.luogu.com.cn/paste/97bt97vz">【模板】树链剖分</a></p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a>
 <ul>
 <li><a href="#%E6%A8%A1%E6%9D%BF">模板</a></li>
 </ul>
