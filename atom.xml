@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-07-02T14:45:52.738Z</updated>
+    <updated>2020-07-02T14:47:13.133Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://cyh-toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
     <entry>
-        <title type="html"><![CDATA[题解 【CF1371】]]></title>
+        <title type="html"><![CDATA[题解 CF1371]]></title>
         <id>https://cyh-toby.github.io/ti-jie-cf1371/</id>
         <link href="https://cyh-toby.github.io/ti-jie-cf1371/">
         </link>
@@ -164,6 +164,82 @@ int main()
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.10556em;vertical-align:0em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span></span></p>
 <p>我们按照这种法则构造出最优的矩阵 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> ，然后模拟求解 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>A</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">f(A)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mclose">)</span></span></span></span> 。</p>
 <p>时间复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>T</mi><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(T n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。</p>
+<h2 id="源码-4">源码</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+const int N = 305;
+
+int a[N][N];
+int ans = 0;
+
+int main()
+{
+	int T;
+	scanf(&quot;%d&quot;, &amp;T);
+	while (T--) {
+		memset(a, 0, sizeof(a));
+		ans = 0;
+		
+		int n, k;
+		scanf(&quot;%d%d&quot;, &amp;n, &amp;k);
+	
+		int t = k / n;
+		
+//		printf(&quot;t = %d\n&quot;, t);
+		
+		for (int c = 1; c &lt;= t; c++) {
+			for (int i = 1; i &lt;= n; i++) {
+				if (i+c-1 &gt; n)
+					a[i+c-1-n][i] = 1;
+				else
+					a[i+c-1][i] = 1;
+			}
+		}
+		
+		int r = k - t * n;
+		
+//		printf(&quot;r = %d\n&quot;, r);
+		for (int i = 1; i &lt;= r; i++) {
+			if (i + t &gt; n)
+				a[i+t-n][i] = 1;
+			else
+				a[i+t][i] = 1;
+		}
+		
+		int mxr = 0, mnr = n, mxc = 0, mnc = n;
+		for (int i = 1; i &lt;= n; i++) {
+			int tmp = 0;
+			for (int j = 1; j &lt;= n ; j++) {
+				tmp += a[i][j];
+			}
+			mxr = max(mxr, tmp);
+			mnr = min(mnr, tmp);
+		}
+		
+		for (int i = 1; i &lt;= n; i++) {
+			int tmp = 0;
+			for (int j = 1; j &lt;= n; j++) {
+			tmp += a[j][i];
+			}
+			mxc = max(mxc, tmp);
+			mnc = min(mnc, tmp);
+		}
+		
+		printf(&quot;%d\n&quot;, (mxr - mnr) * (mxr - mnr) + (mxc - mnc) * (mxc - mnc));
+		for (int i = 1; i &lt;= n; i++) {
+			for (int j = 1; j &lt;= n; j++) {
+				printf(&quot;%d&quot;, a[i][j]);
+			}
+			printf(&quot;\n&quot;);
+		}
+		
+	}
+
+	return 0;	
+}
+</code></pre>
 <h1 id="e-asterism">E. Asterism</h1>
 <p>咕</p>
 <h1 id="f-raging-thunder">F. Raging Thunder</h1>
