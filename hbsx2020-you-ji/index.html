@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HBSX2020 游记 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1593241722960">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1593701148600">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="HBSX2020 游记 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -17,7 +17,8 @@
 Day 0
 考前主要是把一些常用的板子复习了一遍。但时间紧凑，只是打了打最短路的算法、线段树树状数组、LCA 以及堆之类的玩意。
 发现容易犯很多弱智错误。
-..." />
+Day 1
+难得起早床赶去外校，本来以为去的挺早的，结果到了之后..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -27,7 +28,7 @@ Day 0
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1593241722960" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1593701148600" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -67,12 +68,6 @@ Day 0
         </a>
       
     
-      
-        <a href="/problem-bank" class="menu">
-          题库
-        </a>
-      
-    
   </div>
   <div class="social-container">
     
@@ -103,7 +98,7 @@ Day 0
                 2020-06-21 20:53
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
@@ -116,11 +111,22 @@ Day 0
 <h1 id="day-0">Day 0</h1>
 <p>考前主要是把一些常用的板子复习了一遍。但时间紧凑，只是打了打最短路的算法、线段树树状数组、LCA 以及堆之类的玩意。</p>
 <p>发现容易犯很多弱智错误。</p>
+<h1 id="day-1">Day 1</h1>
+<p>难得起早床赶去外校，本来以为去的挺早的，结果到了之后发现人基本到齐了。。。</p>
+<p>随后发现好像只有我一个人带了一堆什么免洗洗手液、酒精纸、餐巾纸以及额外两片口罩，摆的整个桌子都是的。宣布可以动键盘后别人都开始打代码，就我卑微地擦键盘/kk。然后我也像模像样地敲敲键盘检查设备，调调设置。</p>
+<p>突然发现只发了两张草稿纸。<s>不过我也知道我大概两张都用不掉。</s></p>
+<p>开始了。</p>
+<p>按照 xht 的建议，先把题全看了一遍。T1 读完题在纸上画了画感觉能做，用两个树状数组维护一下再二分——结果应该是一个单峰函数。然后就有种想写的冲动，不过还是压着看完后面的题。然而后面的看看估计是不可做题。</p>
+<p>于是就开始肝 T1 了。刷刷写完，还庆幸头一天复习了树状数组（当然也只有我这种蒟蒻才需要复习这玩意）。但突然意识到三分的印象不是很深，然后我不断从脑子里挖出残余的记忆，终于凑出可行的写法。测测样例，没过。</p>
+<p>反复检查很多遍都没啥问题，但就是没过。</p>
+<p>接着，仔细分析样例发现一个严重问题——答案构成的函数两侧是非单调的（常函数），三分法无法正确得出结果。于是琢磨着分别在两个树状数组上二分一下求出每一段常函数的最右侧与最左侧的端点，然后再三分。想想似乎可行，于是又开始专注打代码。结果测测样例，仍旧没过。</p>
+<p>似乎已经过去将近两个小时了。我考虑先放一放，于是看 T2 去了。</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li><a href="#day-0">Day 0</a></li>
+<li><a href="#day-1">Day 1</a></li>
 </ul>
 
               </div>
@@ -128,15 +134,6 @@ Day 0
           </article>
         </div>
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://cyh-toby.github.io/xue-xi-bi-ji-shu-zhuang-shu-zu/">
-              <h3 class="post-title">
-                学习笔记：树状数组
-              </h3>
-            </a>
-          </div>
         
 
         
