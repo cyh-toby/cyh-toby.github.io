@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：平衡树 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595158938499">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595163867824">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：平衡树 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -32,7 +32,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595158938499" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595163867824" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -102,7 +102,7 @@
                 2020-07-10 10:11
               </span>
               <span>
-                9 min read
+                13 min read
               </span>
               
                 <a href="https://cyh-toby.github.io/tag/ping-heng-shu/" class="post-tag">
@@ -174,7 +174,17 @@
 <h3 id="按值查排名">按值查排名</h3>
 <p>类似于插入的检索方式，把途经的节点的左子树的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">size</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span></span></span></span> 和途经节点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 加起来，直到找到符合的节点，（找到的这个节点不用加它的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> ）并对累积的和加 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ，就是排名。</p>
 <h3 id="查前驱后继">查前驱/后继</h3>
-<p>查前驱和后继是类似的。以前驱为例，只需要查当前值的排名 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> ，然后查找排名为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的数即可。</p>
+<p>查前驱和后继是类似的。以前驱为例。</p>
+<ul>
+<li>
+<p>方法一<br>
+只需要查当前值的排名 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> ，然后查找排名为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的数即可。但这涉及到查排名和和查值的实现细节，因为所询问的值可能不在当前序列中。比如我第一遍尝试这样做就错了，因为上述两个函数的实现对序列中不存在的值直接返回特殊值了。所以不推荐。</p>
+</li>
+<li>
+<p>方法二<br>
+先找到当前值，然后走向左子树，接着能往右走就往右走，直到叶子结点。可以循环或递归进行。</p>
+</li>
+</ul>
 <h2 id="小结">小结</h2>
 <p>二叉搜索树是比较强大的数据结构，处理理想的随机数据时，每次操作时间复杂度是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。但其缺陷在于，如果数据是人为制造而非随机生成，树可能退化为链，进而导致时间复杂度退化为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。</p>
 <h1 id="平衡树">平衡树</h1>
@@ -198,13 +208,13 @@
 <p>我们按照口诀写出代码：</p>
 <pre><code class="language-cpp">inline void zig(int &amp;p) {
     int q = t[p].l;
-    t[p].l = t[q].r, t[q].r = p;
-    p = q;//注意p为引用
+    t[p].l = t[q].r, t[q].r = p, p = q;//注意p为引用
+    updatet(t[p].r), updatet(p);
 }
 inline void zag(int &amp;p) {
     int q = t[p].r;
-    t[p].r = t[q].l, t[q].l = p;
-    p = q;//注意p为引用 
+    t[p].r = t[q].l, t[q].l = p, p = q;//注意p为引用 
+    updatet(t[p].l), updatet(p);
 }
 </code></pre>
 <p>但是，怎样的旋转才能让树维持在平衡状态却是问题。接下来讨论的几种平衡树各有各的方法。</p>
@@ -221,6 +231,162 @@ inline void zag(int &amp;p) {
 <h3 id="其它操作">其它操作</h3>
 <p>其它操作类似于二叉搜索树。</p>
 <h2 id="源码">源码</h2>
+<pre><code class="language-cpp">/**********************************
+
+Problem: luogu - P3369 - 【模板】普通平衡树 (treap)
+
+State: Accepted
+
+From: 【模板】 
+
+Algorithm: treap 
+
+Author: cyh_toby
+
+Last updated on 2020.7.19
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 1e5+5, inf = 1e8;
+
+struct Treap{
+	int l, r;
+	int val, dat;//真实权, 随机权 
+	int cnt, siz;
+} t[N];
+int n, rt, tot;
+
+inline int createt(int x) {
+	t[++tot].val = x, t[tot].dat = rand(), t[tot].cnt = t[tot].siz = 1;
+	return tot;
+}
+inline void updatet(int p) {
+	t[p].siz = t[p].cnt + t[t[p].l].siz + t[t[p].r].siz;
+}
+int rnk(int p, int v) {
+	if (p == 0) return 0;
+	if (v == t[p].val) return t[t[p].l].siz+1;
+	if (v &lt; t[p].val) return rnk(t[p].l, v);
+	return rnk(t[p].r, v) + t[t[p].l].siz + t[p].cnt;
+}
+int kth(int p, int k) {
+	if (p == 0) return inf;
+	if (t[t[p].l].siz &gt;= k) return kth(t[p].l, k);
+	if (t[t[p].l].siz + t[p].cnt &gt;= k) return t[p].val;
+	return kth(t[p].r, k - t[t[p].l].siz - t[p].cnt);
+}
+inline void zig(int &amp;p) {
+	int q = t[p].l;
+    t[p].l = t[q].r, t[q].r = p, p = q;
+    updatet(t[p].r), updatet(p);
+}
+inline void zag(int &amp;p) {
+	int q = t[p].r;
+    t[p].r = t[q].l, t[q].l = p, p = q;
+    updatet(t[p].l), updatet(p);
+}
+inline void buildt() {
+	createt(-inf), createt(inf);
+	rt = 1, t[rt].r = 2;
+	if (t[1].dat &lt; t[2].dat)
+		zag(rt);
+}
+void ins(int &amp;p, int v) {
+	if (p == 0) {
+		p = createt(v);
+		return;
+	}
+	if (v == t[p].val) {
+		t[p].cnt++, updatet(p);
+		return;
+	}
+	if (v &lt; t[p].val) {
+		ins(t[p].l, v);
+		if (t[t[p].l].dat &gt; t[p].dat) zig(p);
+	}
+	if (v &gt; t[p].val) {
+		ins(t[p].r, v);
+		if (t[t[p].r].dat &gt; t[p].dat) zag(p);
+	}
+	updatet(p);
+}
+//若要用kth和rnk完成pre和nxt, 需要修改kth和rnk函数细节 
+int pre(int p, int v) {
+	if (!p)
+		return -inf;
+	if (v &lt;= t[p].val)
+		return pre(t[p].l, v);
+	int res = pre(t[p].r, v);
+	return res == -inf? t[p].val : res;
+}
+int nxt(int p, int v) {
+	if (!p)
+		return inf;
+	if (v &gt;= t[p].val)
+		return nxt(t[p].r, v);
+	int res = nxt(t[p].l, v);
+	return res == inf? t[p].val : res;
+}
+void del(int &amp;p, int v) {
+	if (p == 0) return;
+	if (v == t[p].val) {
+		if (t[p].cnt &gt; 1) {
+			t[p].cnt--, updatet(p);
+			return;
+		}
+		if (t[p].l || t[p].r) {//非叶子 
+			if (t[p].r == 0 || t[t[p].l].dat &gt; t[t[p].r].dat)
+				zig(p), del(t[p].r, v);
+			else
+				zag(p), del(t[p].l, v);
+			updatet(p);
+		}
+		else p = 0;//叶子
+		return;
+	}
+	if (v &lt; t[p].val)
+		del(t[p].l, v);
+	else
+		del(t[p].r, v);
+	updatet(p);
+}
+
+int main()
+{
+	buildt();
+	scanf(&quot;%d&quot;, &amp;n);
+	while (n--) {
+		int op, x;
+		scanf(&quot;%d%d&quot;, &amp;op, &amp;x);
+		switch (op) {
+			case 1:
+				ins(rt, x);
+				break;
+			case 2:
+				del(rt, x);
+				break;
+			case 3:
+				printf(&quot;%d\n&quot;, rnk(rt, x)-1);
+				break;
+			case 4:
+				printf(&quot;%d\n&quot;, kth(rt, x+1));
+				break;
+			case 5:
+				printf(&quot;%d\n&quot;, pre(rt, x));
+				break;
+			case 6:
+				printf(&quot;%d\n&quot;, nxt(rt, x));
+				break;
+		}
+	}
+	return 0;
+}
+</code></pre>
 <h1 id="splay">Splay</h1>
 <h2 id="简介-3">简介</h2>
 <p>Splay 的核心操作是 Splay 。<s>感觉这句话可以无限循环下去。</s></p>
