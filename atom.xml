@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-07-14T15:13:25.883Z</updated>
+    <updated>2020-07-19T11:44:33.852Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -72,6 +72,74 @@
 </ul>
 <h3 id="按值查排名">按值查排名</h3>
 <p>类似于插入的检索方式，把途经的节点的左子树的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">size</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span></span></span></span> 和途经节点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 加起来，直到找到符合的节点，（找到的这个节点不用加它的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> ）并对累积的和加 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ，就是排名。</p>
+<h3 id="查前驱后继">查前驱/后继</h3>
+<p>查前驱和后继是类似的。以前驱为例，只需要查当前值的排名 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> ，然后查找排名为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的数即可。</p>
+<h2 id="小结">小结</h2>
+<p>二叉搜索树是比较强大的数据结构，处理理想的随机数据时，每次操作时间复杂度是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。但其缺陷在于，如果数据是人为制造而非随机生成，树可能退化为链，进而导致时间复杂度退化为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。</p>
+<h1 id="平衡树">平衡树</h1>
+<h2 id="模板链接">模板链接</h2>
+<p><a href="https://www.luogu.com.cn/problem/P3369">【模板】普通平衡树</a></p>
+<h2 id="平衡树的概念">平衡树的概念</h2>
+<p>我们通过一些特殊处理，以保证二叉搜索树不会退化为链，并且结构“平衡”（使得操作复杂度可观）。这些处理与二叉搜索树的结合就称为<strong>平衡树</strong>。</p>
+<p>平衡树有很多种，常见的有 Treap, Splay, 红黑树，替罪羊树 等。C++中一些STL容器就是用红黑树实现的。</p>
+<p>竞赛中常用的是 Treap 和 Splay，因为大多时候都够用，并且写起来没那么复杂。</p>
+<h2 id="旋转平衡树的核心操作">旋转：平衡树的核心操作</h2>
+<p>事实上，一颗二叉搜索树的中序遍历，对应的就是维护的序列的不降序排列方式。而我们知道，同一中序遍可以对应不同形态的树，因此我们可以在不改变二叉搜索树中序遍历的情况下改变数的形态。</p>
+<p>平衡树的核心操作，<strong>旋转</strong>，就是这样，可以在满足二叉搜索树性质的情况下，对树的结构做出改变。</p>
+<p>旋转分为左旋 (zag) 和右旋 (zig) 。</p>
+<figure data-type="image" tabindex="1"><img src="https://cyh-toby.github.io/post-images/1595153488077.png" alt="" loading="lazy"></figure>
+<p><s>其实很难用语言表述这一过程，所以就直接挂个图</s> 上图表述已经很清晰了。</p>
+<p>关于旋转，有一个口诀，方便记忆和写程序：</p>
+<p><strong>左旋拎右左挂右，右旋拎左右挂左</strong>。</p>
+<p>至于<strong>旋转不改变二叉搜索树的性质</strong>这一结论，这里不作证明<s>因为压根不会</s>。</p>
+<p>后面所涉及的代码中，都没有记录父亲节点的信息，因此我们调用旋转函数所传参数为父亲节点，即上图右旋 <code>zig(y)</code> 这种形式 。</p>
+<p>另外需要注意的是，我们会改变这棵树的结构，但转移节点维护的信息略显麻烦，因此我们只改变节点左右儿子指针指向的节点编号。而为便于写程序简便，调用函数要传地址。（比如zig(p)，那么调用完毕后，p 节点被旋转到下方，而其左儿子到达它原本位置，因此 p 的父亲的儿子指针应指向 p 的左儿子。若直接传地址，并且在函数结尾把 p 地址 赋值为其左儿子的地址，那么 p 的父亲的儿子指针自然指向了 p 的左儿子。）</p>
+<p>我们按照口诀写出代码：</p>
+<pre><code class="language-cpp">inline void zig(int &amp;p) {
+    int q = t[p].l;
+    t[p].l = t[q].r, t[q].r = p;
+    p = q;//注意p为引用
+}
+inline void zag(int &amp;p) {
+    int q = t[p].r;
+    t[p].r = t[q].l, t[q].l = p;
+    p = q;//注意p为引用 
+}
+</code></pre>
+<p>但是，怎样的旋转才能让树维持在平衡状态却是问题。接下来讨论的几种平衡树各有各的方法。</p>
+<h1 id="treap">Treap</h1>
+<h2 id="简介-2">简介</h2>
+<p>Treap 就是把二叉搜索树 (Tree) 和堆 (Heap) 结合（就连单词本身亦是如此）。每个节点有两个权值， 一个是真实的权值，一个是程序随机生成权值。以真实权值为关键字，排列方式满足二叉搜索树的性质；以随机权值为关键字，排列方式满足堆的性质。也就是说，维护的节点将同时满足堆和二叉搜索树的性质和结构。</p>
+<p>由于堆必定不会退化为链，因此 Treap 不会退化为链。那么可以保证操作时间复杂度维持在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。</p>
+<p>所以，只要树不满足堆的性质，我们就不停旋转直到它满足，以保证树的平衡。</p>
+<h2 id="操作-2">操作</h2>
+<h3 id="插入-2">插入</h3>
+<p>插入，Treap需要先按二叉搜索树的方式插入，并生成一个随机权值。完成后不停把这个更新的点向上旋转，直到满足堆的性质。这与堆的 up 操作是类似的，只不过每次不是纯粹交换两个点，而是旋转。</p>
+<h3 id="删除-2">删除</h3>
+<p>删除，类似堆的想法，我们把要删除的点向下旋转到叶子，然后直接删除。</p>
+<h3 id="其它操作">其它操作</h3>
+<p>其它操作类似于二叉搜索树。</p>
+<h2 id="源码">源码</h2>
+<h1 id="splay">Splay</h1>
+<h2 id="简介-3">简介</h2>
+<p>Splay 的核心操作是 Splay 。<s>感觉这句话可以无限循环下去。</s></p>
+<p>Splay 由丹尼尔·斯立特Daniel Sleator 和 罗伯特·恩卓·塔扬Robert Endre Tarjan 在1985年发明的。<strong>又是伟大的Tarjan!</strong></p>
+<p>一次 Splay 操作，其实就是两次旋转，称之为<strong>双旋</strong>。但这两次旋转在不同情况下，顺序、种类都是不同的。在 Splay 所规定的双旋操作下，可以尽可能维持树的平衡。Splay 通过把每次操作的点，按照它所规定的旋转方式旋转到根节点，以维持平衡。其中，旋转至根节点的旋转原则是：能双旋就双旋，否则单旋。</p>
+<h2 id="双旋splay的核心操作">双旋：Splay的核心操作</h2>
+<p>具体而言，对于三个节点，其排列方式可能是共线也可能非共线。</p>
+<p>对于共线的，我们要先将父亲向上旋转，再将要旋转的节点向上旋转。</p>
+<figure data-type="image" tabindex="2"><img src="https://cyh-toby.github.io/post-images/1595157893418.png" alt="" loading="lazy"></figure>
+<p>对于非共线的，我们直接把要旋转的节点向上旋转两次即可。</p>
+<figure data-type="image" tabindex="3"><img src="https://cyh-toby.github.io/post-images/1595158404855.png" alt="" loading="lazy"></figure>
+<p>至于为什么双旋可以使树平衡，这里不作论述。<s>还是因为不会。</s></p>
+<h2 id="操作-3">操作</h2>
+<h3 id="删除-3">删除</h3>
+<p>首先把要删除的点伸展到根节点。</p>
+<p>如果没有右子树，直接把根节点指向它的左儿子，以删除此点。<br>
+否则找到它的后继，把后继伸展到根节点的右儿子。随后改变指针，用右儿子替代根节点。</p>
+<h3 id="其它操作-2">其它操作</h3>
+<p>需要注意，所有操作结束后，均需把操作的点 splay 到根节点。</p>
+<h2 id="源码-2">源码</h2>
 ]]></content>
     </entry>
     <entry>
