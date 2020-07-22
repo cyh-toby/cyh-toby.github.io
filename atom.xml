@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-07-20T04:03:34.784Z</updated>
+    <updated>2020-07-22T13:53:24.216Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -11,13 +11,168 @@
     <icon>https://cyh-toby.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, cyh_toby&apos;s blog</rights>
     <entry>
+        <title type="html"><![CDATA[题解 CF723F 【st-Spanning Tree】]]></title>
+        <id>https://cyh-toby.github.io/ti-jie-cf723f-st-spanning-tree/</id>
+        <link href="https://cyh-toby.github.io/ti-jie-cf723f-st-spanning-tree/">
+        </link>
+        <updated>2020-07-22T13:52:15.000Z</updated>
+        <content type="html"><![CDATA[<p>题目链接：<a href="https://www.luogu.com.cn/problem/CF723F">CF723F 【st-Spanning Tree】</a></p>
+<h1 id="分析">分析</h1>
+<p>考虑先把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 点隔离开，找一遍连通块。</p>
+<p>找的时候分别记录一下这个连通块是否能到达 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 。</p>
+<p>由于原图联通，不存在既不与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 联通，也不与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 联通的连通块。那么连通块有两种：</p>
+<ul>
+<li>
+<p>只与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 中一个相连。对于这种连通块，这条连接的边是必须选入生成树的。（如果有多条边，选一条即可，下同。）</p>
+</li>
+<li>
+<p>与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 都相连。如果当前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 还不连通，那么把这两条边都选入生成树；否则，只选择一条。</p>
+</li>
+</ul>
+<p>需要注意到，我们应该先处理第一种连通块，然后再做第二种。否则可能会把有解误判为无解。</p>
+<p>如果处理完上述两种连通块，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 都仍然没有连通，根据<strong>原图是联通的</strong>，它们之间必定存在至少一条边，那么加入这条边即可。</p>
+<p>在过程中，只要有必须加边而度数不满足的时候，则判定无解。</p>
+<h1 id="源码">源码</h1>
+<p>代码有亿点乱，有亿点长。</p>
+<pre><code class="language-cpp">const int N = 2e5+5, M = 4e5+5;
+
+int n, m, s, t;
+int ds, dt, b = 0;
+int g[N], v[2*M], nxt[2*M], tot = 1;
+int vis[N], es1[M], et1[M], idx1, es2[M], et2[M], idx2;
+int e[M], cnt, flag = 1;
+
+inline void add(int x, int y) {
+	v[++tot] = y, nxt[tot] = g[x], g[x] = tot;
+}
+
+void dfs(int u, int &amp;e1, int &amp;e2) {
+	vis[u] = 1;
+	for (int i = g[u]; i; i = nxt[i]) {
+		int y = v[i];
+		if (vis[y]) continue;
+		if (y == s) {
+			e1 = i;
+			continue;
+		}
+		if (y == t) {
+			e2 = i;
+			continue;
+		}
+		e[++cnt] = i;
+		dfs(y, e1, e2);
+	}
+}
+
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	for (int i = 1; i &lt;= m; i++) {
+		int x, y;
+		scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+		add(x, y), add(y, x);
+	}
+	scanf(&quot;%d%d%d%d&quot;, &amp;s, &amp;t, &amp;ds, &amp;dt);
+	
+	for (int i = 1; i &lt;= n; i++) {
+		if (vis[i] || i == s || i == t) continue;
+		int e1 = 0, e2 = 0;
+		dfs(i, e1, e2);
+		if (e1 &amp;&amp; e2) {
+			idx2++;
+			es2[idx2] = e1, et2[idx2] = e2;
+		}
+		else {
+			idx1++;
+			es1[idx1] = e1, et1[idx1] = e2;
+		}
+	}
+	
+	for (int i = 1; i &lt;= idx1; i++) {
+		if (es1[i]) {
+			if (!ds) {
+				flag = 0;
+				break;
+			}
+			ds--;
+			e[++cnt] = es1[i];
+		}
+		else {
+			if (!dt) {
+				flag = 0;
+				break;
+			}
+			dt--;
+			e[++cnt] = et1[i];
+		}
+	}
+	
+	if (!flag) {
+		printf(&quot;No\n&quot;);
+		return 0;
+	}
+	
+	for (int i = 1; i &lt;= idx2; i++) {
+		if (!b) {
+			if (!ds || !dt) {
+				flag = 0;
+				break;
+			}
+			ds--, dt--, b = 1;
+			e[++cnt] = es2[i];
+			e[++cnt] = et2[i];
+			continue;
+		}
+		
+		if (ds) {
+			ds--;
+			e[++cnt] = es2[i];
+		}
+		else {
+			if (!dt) {
+				flag = 0;
+				break;
+			}
+			dt--;
+			e[++cnt] = et2[i];
+		}
+	}
+	
+	if (!b) {
+		if (!ds || !dt) {
+			flag = 0;
+		}
+		else {
+			ds--, dt--, b = 1;
+			e[++cnt] = -1;
+		}
+	}
+	
+	if (!flag) {
+		printf(&quot;No\n&quot;);
+	}
+	else {
+		printf(&quot;Yes\n&quot;);
+		for (int i = 1; i &lt;= cnt; i++)
+			if (e[i] == -1)
+				printf(&quot;%d %d\n&quot;, s, t);
+			else
+				printf(&quot;%d %d\n&quot;, v[e[i]], v[e[i]^1]);
+	}
+	
+	return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[学习笔记：平衡树]]></title>
         <id>https://cyh-toby.github.io/xue-xi-bi-ji-ping-heng-shu/</id>
         <link href="https://cyh-toby.github.io/xue-xi-bi-ji-ping-heng-shu/">
         </link>
         <updated>2020-07-10T02:11:06.000Z</updated>
-        <content type="html"><![CDATA[<p>未完成</p>
-<blockquote>
+        <content type="html"><![CDATA[<blockquote>
 <p>比较厉害的一种数据结构</p>
 </blockquote>
 <h1 id="二叉搜索树-bst">二叉搜索树 BST</h1>
@@ -298,6 +453,8 @@ int main()
 <p>对于非共线的，我们直接把要旋转的节点向上旋转两次即可。</p>
 <figure data-type="image" tabindex="3"><img src="https://cyh-toby.github.io/post-images/1595158404855.png" alt="" loading="lazy"></figure>
 <p>至于为什么双旋可以使树平衡，这里不作论述。<s>还是因为不会。</s></p>
+<p>上图中的 zig() 和 zag() 都是上文 treap 中的函数，所传参数为父亲节点，原因是没有记录父亲节点。</p>
+<p>但在下面的 Splay 代码中，记录了节点父亲节点的编号。这个目的是简化代码，并且在如下实现方式中可以把左旋和右旋合并为一个函数 rot() ，而这个函数所传参数为所要旋转上升的点编号。</p>
 <h2 id="操作-3">操作</h2>
 <h3 id="删除-3">删除</h3>
 <p>首先把要删除的点伸展到根节点。如果其个数标记大于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ，对个数进行修改即可，不必继续进行下面的操作。</p>
@@ -1130,157 +1287,6 @@ int main()
 <li>two pointers 应用在单调的数组中，去掉二分的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span></li>
 <li><strong>敢于下手，暴力出奇迹</strong></li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[学习笔记：扫描线]]></title>
-        <id>https://cyh-toby.github.io/xue-xi-bi-ji-sao-miao-xian/</id>
-        <link href="https://cyh-toby.github.io/xue-xi-bi-ji-sao-miao-xian/">
-        </link>
-        <updated>2020-06-10T14:30:42.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>扫描线是线段树应用之一，是特殊的计算几何问题，但难以拓展。</p>
-</blockquote>
-<h1 id="问题">问题</h1>
-<p>给定 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 个矩形，求面积并。</p>
-<p><a href="https://www.luogu.com.cn/problem/P5490">【模板】扫描线</a></p>
-<figure data-type="image" tabindex="1"><img src="https://cyh-toby.github.io/post-images/1591800334418.png" alt="" loading="lazy"></figure>
-<h1 id="分析">分析</h1>
-<p>这就是扫描线的板子。</p>
-<p>显然需要把面积并化为规则图形计算。因此我们把它分成条状，具体方式为：作出所有矩形的与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 轴垂直的边所在的直线，用这些直线将整个图形划分成若干份，然后分别计算这若干份中的面积。（当然也可以是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 轴，效果一样）</p>
-<figure data-type="image" tabindex="2"><img src="https://cyh-toby.github.io/post-images/1591800437852.png" alt="" loading="lazy"></figure>
-<p>我们取其中一个部分出来分析。我们会发现每个部分中的面积，其实是由若干个矩形构成的。并且这些矩形平行于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 轴的边是相等的。</p>
-<p>在一个部分中，显然，这部分面积的高（指图中红色线段）是容易求出的（就是两个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 值相减，而只需将输入的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 排序即可）。但底（所有蓝色线段之和）是不容易直接计算的，因为不连续且有重合。</p>
-<figure data-type="image" tabindex="3"><img src="https://cyh-toby.github.io/post-images/1591875059866.png" alt="" loading="lazy"></figure>
-<p>但由于我们需要依次计算所有的，可以考虑递推，进而发现可以考虑用线段树维护。</p>
-<p>用类似于上面沿 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 轴分区间的方法，沿 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 轴将图形分为若干区间（或说将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 轴分为若干段），然后用线段树维护每个“红色边”所对应的 “蓝色边”的长度并。</p>
-<p>我们为矩形的两条侧边添加参数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> ，其中若是左边一条边， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ，否则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 。这样就可以在线段树维护的时候知道是加上这条边还是减去这条边。</p>
-<p>此外，线段树的一个节点除了原本需要维护的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mtext> </mtext><mo separator="true">,</mo><mtext> </mtext><mi>r</mi><mtext> </mtext><mo separator="true">,</mo><mtext> </mtext><mi>l</mi><mi>e</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">l\,,\,r\,,\,len</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span></span></span></span> 之外，还要添加一个参数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 记录此区间被<strong>完整覆盖</strong>过几次。这种方法可以取代懒标记。具体如下：</p>
-<p>在加入一条新的边时，先按线段树的基本套路寻找需要修改的线段树区间。然后当确定一个区间需要修改的时候，<strong>首先修改</strong>此区间的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">cnt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> ，然后可以如下进行更新：</p>
-<ul>
-<li>
-<p>修改后 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">cnt &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65418em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> ，那么此区间被完整覆盖了，只需要用区间的首尾相减即是这个区间的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">len</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span></span></span></span> 。</p>
-</li>
-<li>
-<p>修改后 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>n</mi><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">cnt = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> ，那么这个区间并没有被完全覆盖（或者没有被覆盖）。由于确定更新这个区间，说明不需要继续往下递归，即这个区间节点的子节点不需要被修改，那么它们维护的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">len</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span></span></span></span> 就是实际的值，所以只需要将它们求和，就是此节点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">len</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span></span></span></span> 了。</p>
-</li>
-</ul>
-<p>查询的时候，由于需要知道的是整个线段树维护的区间的长度并，因此直接查询 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mo>[</mo><mn>1</mn><mo>]</mo><mi mathvariant="normal">.</mi><mi>l</mi><mi>e</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">t[1].len</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span></span></span></span> 即可。</p>
-<h1 id="细节处理">细节处理</h1>
-<p>显然首先需要将输入的数据排序。由于后续处理中，矩形已经不重要了，要紧的是矩形的两条侧边，因此存储输入数据的时候只需要存储 线段 即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 值即可。随后按照 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 排序。</p>
-<p>在线段树修改操作的时候，显然不可能一次修改多条线段。但显然一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 轴区间内存在多个矩形，即每次其实需要修改多个线段才能进行计算，这无疑是很麻烦的。一个 trick : 可以每次都查询当前的蓝色边的长度并，并且乘上 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">x_{i+1}-x_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.791661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 。为什么这样可以？因为对于上述情况的线段，其 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 都相同，因而 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta x = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Δ</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> ，所以不会对答案造成影响。</p>
-<p>此外，需要先对数据进行离散化操作。而离散化时注意千万不要把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 也加入离散化。一来 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 不需要离散化，这么做会浪费资源。二来，这会导致 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>8</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">8n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mord mathdefault">n</span></span></span></span> 大的线段树在建树的时候越界。</p>
-<p>详见代码。</p>
-<h1 id="源码">源码</h1>
-<pre><code class="language-cpp">/**********************************
-
-Problem: 【模板】扫描线 Luogu - P5490 
-
-State: Accepted
-
-From: 【模板】 
-
-Algorithm: 线段树，离散化 
-
-Author: cyh_toby
-
-Last updated on 2020.6.10
-
-ps. 沿水平方向由左向右扫描 
-第一次写时犯了个zz错误：把x跟着y一起离散化，这样会导致线段树越界，RE 
-**********************************/
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-
-using namespace std;
-
-const int N = 1e5+5;
-typedef long long ll;
-
-int n, m;
-int b[2*N], tot;//离散化数组 
-ll ans;
-
-struct Segment {//把矩形化为线段存储 
-	int x, y1, y2, k;
-	
-	const bool operator &lt; (const Segment &amp;t) {
-		return x &lt; t.x;
-	}
-} s[2*N];
-
-inline int disc(int x) {//查询离散化结果 
-	return lower_bound(b+1, b+1+m, x) - b;
-}
-
-//SegmentTree---
-struct SegmentTree {
-	int l, r, cnt;
-	ll len;
-} t[8*N];
-
-void buildt(int p, int l, int r) {
-	t[p].l = l, t[p].r = r;
-	if (l == r) 
-		return;
-	int mid = (l+r) &gt;&gt; 1;
-	buildt(p&lt;&lt;1, l, mid);
-	buildt(p&lt;&lt;1|1, mid+1, r);
-	return;
-}
-
-inline void updat(int p) {
-	if (t[p].cnt)
-		t[p].len = b[t[p].r+1] - b[t[p].l];
-	else if (t[p].l != t[p].r) //有子节点 
-		t[p].len = t[p&lt;&lt;1].len + t[p&lt;&lt;1|1].len;
-	else
-		t[p].len = 0;
-	return;
-}
-
-void updatet(int p, int l, int r, int x) {
-	if (l &lt;= t[p].l &amp;&amp; t[p].r &lt;= r) {
-		t[p].cnt += x;
-		updat(p);
-		return;
-	}
-	int mid = (t[p].l+t[p].r) &gt;&gt; 1;
-	if (l &lt;= mid) updatet(p&lt;&lt;1, l, r, x);
-	if (mid &lt; r) updatet(p&lt;&lt;1|1, l, r, x);
-	updat(p);
-	return;
-}
-//---
-
-int main()
-{
-	scanf(&quot;%d&quot;, &amp;n);
-	for (int i = 1, j = 0; i &lt;= n; i++) {
-		int x1, x2, y1, y2;
-		scanf(&quot;%d%d%d%d&quot;, &amp;x1, &amp;y1, &amp;x2, &amp;y2);
-		s[++j].x = x1, s[j].y1 = y1, s[j].y2 = y2, s[j].k = 1;
-		s[++j].x = x2, s[j].y1 = y1, s[j].y2 = y2, s[j].k = -1;
-		b[++tot] = y1, b[++tot] = y2;
-	}
-	
-	sort(b+1, b+1+2*n);
-	m = unique(b+1, b+1+2*n) - b - 1;
-	buildt(1, 1, m-1);
-	
-	sort(s+1, s+1+2*n);
-	
-	for (int i = 1; i &lt;= 2*n; i++) {
-		if (i &gt; 1) 
-			ans += t[1].len * (s[i].x - s[i-1].x);
-		updatet(1, disc(s[i].y1), disc(s[i].y2)-1, s[i].k);
-	}
-	
-	printf(&quot;%lld&quot;, ans);
-	
-	return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>

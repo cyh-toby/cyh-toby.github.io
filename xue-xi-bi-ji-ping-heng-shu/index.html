@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：平衡树 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595217781800">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595426000007">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：平衡树 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -11,8 +11,7 @@
 
 
 
-    <meta name="description" content="未完成
-
+    <meta name="description" content="
 比较厉害的一种数据结构
 
 二叉搜索树 BST
@@ -22,7 +21,7 @@
 
 空树是二叉搜索树。
 若二叉搜索树的左子树不为空，则其左子树上所有点的附加权值均小于其根节点的值。
-若二叉搜索树的右子树不为..." />
+若二叉搜索树的右子树不为空，则其..." />
     <meta name="keywords" content="splay,treap,BST,平衡树,学习笔记" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -32,7 +31,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595217781800" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595426000007" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -129,8 +128,7 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>未完成</p>
-<blockquote>
+                <blockquote>
 <p>比较厉害的一种数据结构</p>
 </blockquote>
 <h1 id="二叉搜索树-bst">二叉搜索树 BST</h1>
@@ -411,6 +409,8 @@ int main()
 <p>对于非共线的，我们直接把要旋转的节点向上旋转两次即可。</p>
 <figure data-type="image" tabindex="3"><img src="https://cyh-toby.github.io/post-images/1595158404855.png" alt="" loading="lazy"></figure>
 <p>至于为什么双旋可以使树平衡，这里不作论述。<s>还是因为不会。</s></p>
+<p>上图中的 zig() 和 zag() 都是上文 treap 中的函数，所传参数为父亲节点，原因是没有记录父亲节点。</p>
+<p>但在下面的 Splay 代码中，记录了节点父亲节点的编号。这个目的是简化代码，并且在如下实现方式中可以把左旋和右旋合并为一个函数 rot() ，而这个函数所传参数为所要旋转上升的点编号。</p>
 <h2 id="操作-3">操作</h2>
 <h3 id="删除-3">删除</h3>
 <p>首先把要删除的点伸展到根节点。如果其个数标记大于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ，对个数进行修改即可，不必继续进行下面的操作。</p>

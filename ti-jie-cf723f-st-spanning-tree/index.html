@@ -1,0 +1,346 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>题解 CF723F 【st-Spanning Tree】 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595426000007">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="题解 CF723F 【st-Spanning Tree】 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目链接：CF723F 【st-Spanning Tree】
+分析
+考虑先把 sss 和 ttt 点隔离开，找一遍连通块。
+找的时候分别记录一下这个连通块是否能到达 sss 和 ttt 。
+由于原图联通，不存在既不与 sss 联通，也不与 ..." />
+    <meta name="keywords" content="图论,生成树,连通块,题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595426000007" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/flinks" class="menu">
+          友链
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              题解 CF723F 【st-Spanning Tree】
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-07-22 21:52
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/tu-lun/" class="post-tag">
+                  # 图论
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/sheng-cheng-shu/" class="post-tag">
+                  # 生成树
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/lian-tong-kuai/" class="post-tag">
+                  # 连通块
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/ti-jie/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>题目链接：<a href="https://www.luogu.com.cn/problem/CF723F">CF723F 【st-Spanning Tree】</a></p>
+<h1 id="分析">分析</h1>
+<p>考虑先把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 点隔离开，找一遍连通块。</p>
+<p>找的时候分别记录一下这个连通块是否能到达 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 。</p>
+<p>由于原图联通，不存在既不与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 联通，也不与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 联通的连通块。那么连通块有两种：</p>
+<ul>
+<li>
+<p>只与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 中一个相连。对于这种连通块，这条连接的边是必须选入生成树的。（如果有多条边，选一条即可，下同。）</p>
+</li>
+<li>
+<p>与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 都相连。如果当前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 还不连通，那么把这两条边都选入生成树；否则，只选择一条。</p>
+</li>
+</ul>
+<p>需要注意到，我们应该先处理第一种连通块，然后再做第二种。否则可能会把有解误判为无解。</p>
+<p>如果处理完上述两种连通块，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> 都仍然没有连通，根据<strong>原图是联通的</strong>，它们之间必定存在至少一条边，那么加入这条边即可。</p>
+<p>在过程中，只要有必须加边而度数不满足的时候，则判定无解。</p>
+<h1 id="源码">源码</h1>
+<p>代码有亿点乱，有亿点长。</p>
+<pre><code class="language-cpp">const int N = 2e5+5, M = 4e5+5;
+
+int n, m, s, t;
+int ds, dt, b = 0;
+int g[N], v[2*M], nxt[2*M], tot = 1;
+int vis[N], es1[M], et1[M], idx1, es2[M], et2[M], idx2;
+int e[M], cnt, flag = 1;
+
+inline void add(int x, int y) {
+	v[++tot] = y, nxt[tot] = g[x], g[x] = tot;
+}
+
+void dfs(int u, int &amp;e1, int &amp;e2) {
+	vis[u] = 1;
+	for (int i = g[u]; i; i = nxt[i]) {
+		int y = v[i];
+		if (vis[y]) continue;
+		if (y == s) {
+			e1 = i;
+			continue;
+		}
+		if (y == t) {
+			e2 = i;
+			continue;
+		}
+		e[++cnt] = i;
+		dfs(y, e1, e2);
+	}
+}
+
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	for (int i = 1; i &lt;= m; i++) {
+		int x, y;
+		scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+		add(x, y), add(y, x);
+	}
+	scanf(&quot;%d%d%d%d&quot;, &amp;s, &amp;t, &amp;ds, &amp;dt);
+	
+	for (int i = 1; i &lt;= n; i++) {
+		if (vis[i] || i == s || i == t) continue;
+		int e1 = 0, e2 = 0;
+		dfs(i, e1, e2);
+		if (e1 &amp;&amp; e2) {
+			idx2++;
+			es2[idx2] = e1, et2[idx2] = e2;
+		}
+		else {
+			idx1++;
+			es1[idx1] = e1, et1[idx1] = e2;
+		}
+	}
+	
+	for (int i = 1; i &lt;= idx1; i++) {
+		if (es1[i]) {
+			if (!ds) {
+				flag = 0;
+				break;
+			}
+			ds--;
+			e[++cnt] = es1[i];
+		}
+		else {
+			if (!dt) {
+				flag = 0;
+				break;
+			}
+			dt--;
+			e[++cnt] = et1[i];
+		}
+	}
+	
+	if (!flag) {
+		printf(&quot;No\n&quot;);
+		return 0;
+	}
+	
+	for (int i = 1; i &lt;= idx2; i++) {
+		if (!b) {
+			if (!ds || !dt) {
+				flag = 0;
+				break;
+			}
+			ds--, dt--, b = 1;
+			e[++cnt] = es2[i];
+			e[++cnt] = et2[i];
+			continue;
+		}
+		
+		if (ds) {
+			ds--;
+			e[++cnt] = es2[i];
+		}
+		else {
+			if (!dt) {
+				flag = 0;
+				break;
+			}
+			dt--;
+			e[++cnt] = et2[i];
+		}
+	}
+	
+	if (!b) {
+		if (!ds || !dt) {
+			flag = 0;
+		}
+		else {
+			ds--, dt--, b = 1;
+			e[++cnt] = -1;
+		}
+	}
+	
+	if (!flag) {
+		printf(&quot;No\n&quot;);
+	}
+	else {
+		printf(&quot;Yes\n&quot;);
+		for (int i = 1; i &lt;= cnt; i++)
+			if (e[i] == -1)
+				printf(&quot;%d %d\n&quot;, s, t);
+			else
+				printf(&quot;%d %d\n&quot;, v[e[i]], v[e[i]^1]);
+	}
+	
+	return 0;
+}
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/xue-xi-bi-ji-ping-heng-shu/">
+              <h3 class="post-title">
+                学习笔记：平衡树
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
