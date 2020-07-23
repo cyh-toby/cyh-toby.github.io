@@ -1,0 +1,330 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>学习笔记：后缀数组、后缀树与后缀自动机 | cyh_toby&#39;s blog</title>
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595510951284">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="学习笔记：后缀数组、后缀树与后缀自动机 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+后缀数组、后缀树与后缀自动机。
+
+字符串的子串，往往可以表示为一个前缀的后缀。这些工具将有效处理后缀及子串相关问题。
+约定
+
+后缀 iii 表示以 iii 为起始位置的后缀。
+s[i:j]s[i:j]s[i:j] 表示字符串 sss 的 ..." />
+    <meta name="keywords" content="SA,SAM,后缀树,学习笔记" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cyh-toby.github.io">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595510951284" alt="">
+  </a>
+  <h1 class="site-title">
+    cyh_toby&#39;s blog
+  </h1>
+  <p class="site-description">
+    每一步不一定完美，但每一步都值得深思
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          分类
+        </a>
+      
+    
+      
+        <a href="/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/flinks" class="menu">
+          友链
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/cyh-toby" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              学习笔记：后缀数组、后缀树与后缀自动机
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-07-23 20:52
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://cyh-toby.github.io/tag/sa/" class="post-tag">
+                  # SA
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/sam/" class="post-tag">
+                  # SAM
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/hou-zhui-shu/" class="post-tag">
+                  # 后缀树
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/xue-xi-bi-ji/" class="post-tag">
+                  # 学习笔记
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>后缀数组、后缀树与后缀自动机。</p>
+</blockquote>
+<p>字符串的子串，往往可以表示为一个前缀的后缀。这些工具将有效处理后缀及子串相关问题。</p>
+<h1 id="约定">约定</h1>
+<ul>
+<li>后缀 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 表示以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 为起始位置的后缀。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mo>[</mo><mi>i</mi><mo>:</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">s[i:j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span> 表示字符串 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> 的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>i</mi><mtext> </mtext><mo separator="true">,</mo><mtext> </mtext><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[i\,,\,j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span> 子串。</li>
+</ul>
+<h1 id="后缀数组-sa">后缀数组 SA</h1>
+<h2 id="概念">概念</h2>
+<p>后缀数组，即SA (Suffix Array) ，主要包括两个数组：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">sa</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">a</span></span></span></span> 与 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">rk</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 。</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>a</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">sa[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">a</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示将字符串的所有后缀排序后排名为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 的后缀的起始位置。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>k</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">rk[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示排序后后缀 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 的排名。</li>
+</ul>
+<h2 id="求解">求解</h2>
+<p>首先，可以直接 <code>string</code> + <code>sort</code> 暴力做，时间复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mi>log</mi><mo>⁡</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。但这显然不够优秀。</p>
+<p>考虑倍增。</p>
+<p>假设我们已经知道了长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span> 的所有子串中每个长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span> 的子串的排名 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><msub><mi>k</mi><mi>w</mi></msub><mo>[</mo><mn>1...</mn><mi>n</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">rk_w[1...n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord">1</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord mathdefault">n</span><span class="mclose">]</span></span></span></span>。这时，以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><msub><mi>k</mi><mi>w</mi></msub><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">rk_w[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 为第一关键字，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><msub><mi>k</mi><mi>w</mi></msub><mo>[</mo><mi>i</mi><mo>+</mo><mi>w</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">rk_w[i+w]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mclose">]</span></span></span></span> 为第二关键字（当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>+</mo><mi>w</mi><mo>&gt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">i+w&gt;n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 时，令其为无穷小）进行排序，就可以求解 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><msub><mi>k</mi><mrow><mn>2</mn><mo>∗</mo><mi>w</mi></mrow></msub><mo>[</mo><mn>1..</mn><mi>n</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">rk_{2*w}[1..n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mbin mtight">∗</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord">1</span><span class="mord">.</span><span class="mord">.</span><span class="mord mathdefault">n</span><span class="mclose">]</span></span></span></span> 了。至于为什么，根据排名关系推出两个子串之间的关系，进而可以得出新排名的关系，过程很简单，此处不做赘述。</p>
+<p>而且，显然，对原串按每个字符排序即可求出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><msub><mi>k</mi><mn>1</mn></msub><mo>[</mo><mn>1...</mn><mi>n</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">rk_1[1...n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord">1</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord mathdefault">n</span><span class="mclose">]</span></span></span></span> 。</p>
+<p>在最后排序阶段，若直接用 <code>sort()</code> ，时间复杂度将为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><msup><mi>log</mi><mo>⁡</mo><mn>2</mn></msup><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n\log^2 n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.148448em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。这个平方并不顺眼，要去掉。</p>
+<p>可以联想到基数排序。这里只有两个关键字，值域为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> ，复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>k</mi><mo>+</mo><mo>∑</mo><mi>w</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nk + \sum w)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mclose">)</span></span></span></span> 将化为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。但常数会有点大。</p>
+<h2 id="细节卡常">细节卡常</h2>
+<p>如果我们把倍增内的排序写成这样标准的基数排序：</p>
+<pre><code class="language-cpp">        //id为sa的备份数组
+        for (int i = 1; i &lt;= n; i++) id[i] = sa[i];
+		//按第二关键字排序, 即rk[id[i]+j] 
+		memset(cnt, 0, sizeof(cnt));
+		for (int i = 1; i &lt;= n; i++) cnt[rk[id[i] + j]]++;
+		for (int i = 1; i &lt;= w; i++) cnt[i] += cnt[i-1];
+		for (int i = n; i &gt;= 1; i--) sa[cnt[rk[id[i] + j]]--] = id[i];
+		
+        for (int i = 1; i &lt;= n; i++) id[i] = sa[i];
+		//按第一关键字排序, 即rk[id[i]]
+		memset(cnt, 0, sizeof(cnt));
+		for (int i = 1; i &lt;= n; i++) cnt[rk[id[i]]]++;
+		for (int i = 1; i &lt;= w; i++) cnt[i] += cnt[i-1];
+		for (int i = n; i &gt;= 1; i--) sa[cnt[rk[id[i]]]--] = id[i];
+</code></pre>
+<p>提交 OJ 会有一部分测试点 TLE 。这便是常数过大导致的。</p>
+<p>考虑以第二关键字排序的阶段，<strong>其实并不需要基数排序</strong>。可以替换为如下代码：</p>
+<pre><code class="language-cpp">		int t = 0;
+		for (int i = n; i &gt; n-j; i--) id[++t] = i;//第二关键字为无穷小的直接放前面 
+		for (int i = 1; i &lt;= n; i++)//按第二关键字找到后缀s[l:l+j-1]并更新 
+			if (sa[i] &gt; j) id[++t] = sa[i] - j;
+</code></pre>
+<p>依照注释理解一下，发现的确是可行的。而这样做 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的并且常数很小，<s>甚至还能省去一次 memset</s> 。</p>
+<p>此外，我们可以尽可能避免非连续内存的访问。就如 <code>rk[id[i]]</code> 这个玩意可以用 <code>p[i]</code> 代替；一些访问层数多的操作可以写成函数，只需要传一次参数即可。</p>
+<p>随后就没有什么大问题了。实现有很多小细节，见代码。</p>
+<h2 id="源码">源码</h2>
+<p><a href="https://www.luogu.com.cn/problem/P3809">P3809 【模板】后缀排序</a></p>
+<pre><code class="language-cpp">/**********************************
+
+Problem: luogu - P3809 - 【模板】后缀数组(SA) 
+
+State: Accepted
+
+From:【模板】 
+
+Algorithm: 字符串, 后缀数组SA 
+
+Author: cyh_toby
+
+Last updated on 2020.7.23
+
+**********************************/
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+
+const int N = 1e6+5;
+
+int n, w;
+char s[N];
+int sa[N], rk[N&lt;&lt;1], oldrk[N&lt;&lt;1], cnt[N], id[N], p[N];//p[i] = rk[id[i]], 防止多次不连续访问造成常数较大 
+
+inline bool cmp(int x, int y, int j) {
+	return oldrk[x] == oldrk[y] &amp;&amp; oldrk[x+j] == oldrk[y+j];
+}
+
+int main()
+{
+	scanf(&quot;%s&quot;, s+1);
+	n = strlen(s+1);
+	for (int i = 1; i &lt;= n; i++) cnt[(int)s[i]]++;
+	w = '9' + 'Z' + 'z' + 5;
+	for (int i = 1; i &lt;= w; i++) cnt[i] += cnt[i-1];
+	for (int i = n; i &gt;= 1; i--) sa[cnt[(int)s[i]]--] = i;
+	w = 0;
+	for (int i = 1; i &lt;= n; i++)
+		if (s[sa[i]] == s[sa[i-1]]) rk[sa[i]] = w;
+		else rk[sa[i]] = ++w;
+	
+	for (int j = 1; j &lt; n; j &lt;&lt;= 1) {//枚举长度, 表示正在计算长度为 2*j 的 
+		for (int i = 1; i &lt;= n; i++) id[i] = sa[i];
+		int t = 0;
+		for (int i = n; i &gt; n-j; i--) id[++t] = i;//第二关键字为无穷小的直接放前面 
+		for (int i = 1; i &lt;= n; i++)//按第二关键字找到后缀s[l:l+j-1]并更新 
+			if (sa[i] &gt; j) id[++t] = sa[i] - j;
+		
+		//按第一关键字排序, 即rk[id[i]]
+		memset(cnt, 0, sizeof(cnt));
+		for (int i = 1; i &lt;= n; i++) cnt[p[i] = rk[id[i]]]++;
+		for (int i = 1; i &lt;= w; i++) cnt[i] += cnt[i-1];
+		for (int i = n; i &gt;= 1; i--) sa[cnt[p[i]]--] = id[i];
+		
+		//更新rk, 并尽可能缩小值域 
+		memcpy(oldrk, rk, sizeof(oldrk));	
+		w = 0;	 
+		for (int i = 1; i &lt;= n; i++) {
+			rk[sa[i]] = cmp(sa[i-1], sa[i], j) ? w : ++w; //两段的排名都相等, 说明合在一起排名也相同
+		}	
+	}
+	
+	for (int i = 1; i &lt;= n; i++)
+		printf(&quot;%d &quot;, sa[i]);
+	
+	return 0;
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E7%BA%A6%E5%AE%9A">约定</a></li>
+<li><a href="#%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84-sa">后缀数组 SA</a>
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E6%B1%82%E8%A7%A3">求解</a></li>
+<li><a href="#%E7%BB%86%E8%8A%82%E5%8D%A1%E5%B8%B8">细节卡常</a></li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cyh-toby.github.io/xue-xi-bi-ji-pai-xu/">
+              <h3 class="post-title">
+                学习笔记：排序
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://github.com">Github</a>
+  <a class="rss" href="https://cyh-toby.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
