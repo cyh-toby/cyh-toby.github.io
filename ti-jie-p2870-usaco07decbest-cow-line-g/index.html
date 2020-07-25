@@ -2,26 +2,21 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>那些励志的碎片 | cyh_toby&#39;s blog</title>
+<title>题解 P2870 【[USACO07DEC]Best Cow Line G】 | cyh_toby&#39;s blog</title>
 <link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595678174541">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="那些励志的碎片 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="题解 P2870 【[USACO07DEC]Best Cow Line G】 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="歌曲
-
-
-B站: 千里邀月 - OI版
-
-
-个人整合歌单: I am an  OIerI\,am\,an\;OIerIamanOIer
-
-
-..." />
-    <meta name="keywords" content="记录" />
+    <meta name="description" content="题意
+题目链接：P2870 [USACO07DEC]Best Cow Line G
+分析
+容易想到贪心处理，尽可能选首尾字符中较小的那个；而当它们相等的时候，就需要比较第二个和倒数第二个，才能按最优策略实现；若还相等，就递归进行下去。
+这其..." />
+    <meta name="keywords" content="字符串,SA,题解" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -93,42 +88,103 @@ B站: 千里邀月 - OI版
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              那些励志的碎片
+              题解 P2870 【[USACO07DEC]Best Cow Line G】
             </h2>
             <div class="post-info">
               <span>
-                2020-02-27 16:00
+                2020-07-25 19:55
               </span>
               <span>
-                1 min read
+                4 min read
               </span>
               
-                <a href="https://cyh-toby.github.io/tag/ji-lu/" class="post-tag">
-                  # 记录
+                <a href="https://cyh-toby.github.io/tag/zi-fu-chuan/" class="post-tag">
+                  # 字符串
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/sa/" class="post-tag">
+                  # SA
+                </a>
+              
+                <a href="https://cyh-toby.github.io/tag/ti-jie/" class="post-tag">
+                  # 题解
                 </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h2 id="歌曲">歌曲</h2>
-<ul>
-<li>
-<p>B站: <a href="https://www.bilibili.com/video/av42089198">千里邀月 - OI版</a></p>
-</li>
-<li>
-<p>个人整合歌单: <a href="https://c.y.qq.com/base/fcgi-bin/u?__=tjNvAns"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mtext> </mtext><mi>a</mi><mi>m</mi><mtext> </mtext><mi>a</mi><mi>n</mi><mtext>  </mtext><mi>O</mi><mi>I</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">I\,am\,an\;OIer</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span></a></p>
-</li>
-</ul>
+                <h1 id="题意">题意</h1>
+<p>题目链接：<a href="https://www.luogu.com.cn/problem/P2870">P2870 [USACO07DEC]Best Cow Line G</a></p>
+<h1 id="分析">分析</h1>
+<p>容易想到贪心处理，尽可能选首尾字符中较小的那个；而当它们相等的时候，就需要比较第二个和倒数第二个，才能按最优策略实现；若还相等，就递归进行下去。</p>
+<p>这其实就是在对字符串比大小——一段后缀和一段前缀。</p>
+<p>我们把前缀看成反串的后缀，就相当于比较两个后缀的大小了。容易联想到后缀数组。而要使用后缀数组，只需要把反串接在原串后面，并在接缝处插入一个无穷小的字符（其实只需要比原串中的所有字符小即可），然后在新串上直接求后缀数组即可。</p>
+<p>为什么要插入一个无穷小的字符？它相当于一个结尾标识，有了它，等价于接在原串后面的反串不会被算入原串的后缀中。如果不理解可以手动模拟。</p>
+<p>需要注意的是洛谷 #22 是个 hack 点，容易 TLE，<s>而且最近洛谷评测机日常波动</s>，所以要优化细节卡常。具体卡常技巧可以参考 <a href="https://oi-wiki.org/string/sa/#_4">oi-wiki</a> 。</p>
+<h1 id="源码">源码</h1>
+<pre><code class="language-cpp">const int N = 2*(5e5+5);
+#define gc getchar
+
+int n, w;
+char s[N];
+int sa[N], rk[N&lt;&lt;1], oldrk[N&lt;&lt;1], cnt[N], id[N], p[N]; 
+
+inline bool cmp(int x, int y, int j) {
+	return oldrk[x] == oldrk[y] &amp;&amp; oldrk[x+j] == oldrk[y+j];
+}
+
+int main()
+{	
+	scanf(&quot;%d&quot;, &amp;n);
+	for (int i = 1; i &lt;= n; i++) {
+		s[i] = gc();
+		while (s[i] &lt; 'A' || s[i] &gt; 'Z') s[i] = gc();
+		s[(n&lt;&lt;1)-i+2] = s[i];
+	}
+	s[n+1] = 'A' - 1;//赋值为极小, 避免对后缀排序产生影响 
+	n = (n&lt;&lt;1)+1;
+	
+	for (int i = 1; i &lt;= n; i++) cnt[(int)s[i]]++;
+	w = 'Z'+5;
+	for (int i = 1; i &lt;= w; i++) cnt[i] += cnt[i-1];
+	for (int i = n; i &gt;= 1; i--) sa[cnt[(int)s[i]]--] = i;
+	w = 0;
+	for (int i = 1; i &lt;= n; i++)
+		rk[sa[i]] = s[sa[i]] == s[sa[i-1]] ? w : ++w;
+	
+	for (int j = 1; j &lt; n; j &lt;&lt;= 1) {
+		int t = 0;
+		for (int i = n; i &gt; n - j; i--) id[++t] = i;
+		for (int i = 1; i &lt;= n; i++)
+			if (sa[i] &gt; j) id[++t] = sa[i] - j;
+		
+		memset(cnt, 0, sizeof(cnt));
+		for (int i = 1; i &lt;= n; i++) cnt[p[i] = rk[id[i]]]++;
+		for (int i = 1; i &lt;= w; i++) cnt[i] += cnt[i-1];
+		for (int i = n; i &gt;= 1; i--) sa[cnt[p[i]]--] = id[i];
+		
+		memcpy(oldrk, rk, sizeof(oldrk));
+		w = 0;
+		for (int i = 1; i &lt;= n; i++)
+			rk[sa[i]] = cmp(sa[i-1], sa[i], j) ? w : ++w;
+	}
+	
+	int l = 1, r = (n-1)&gt;&gt;1, tot = 0;
+	while (l &lt;= r) {
+		printf(&quot;%c&quot;, rk[l] &lt; rk[n-r+1] ? s[l++] : s[r--]);
+		if (++tot % 80 == 0) printf(&quot;\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E6%AD%8C%E6%9B%B2">歌曲</a></li>
-</ul>
-</li>
+<li><a href="#%E9%A2%98%E6%84%8F">题意</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E6%BA%90%E7%A0%81">源码</a></li>
 </ul>
 
               </div>
@@ -139,9 +195,9 @@ B站: 千里邀月 - OI版
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://cyh-toby.github.io/csp-js2019-you-ji/">
+            <a href="https://cyh-toby.github.io/ti-jie-cf1384-div2/">
               <h3 class="post-title">
-                CSP-J/S2019游记
+                题解 CF1384 (Div2)
               </h3>
             </a>
           </div>

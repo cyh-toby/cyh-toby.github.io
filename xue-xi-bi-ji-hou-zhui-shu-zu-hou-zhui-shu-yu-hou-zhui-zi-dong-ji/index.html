@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>学习笔记：后缀数组、后缀树与后缀自动机 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595510951284">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1595678174541">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="学习笔记：后缀数组、后缀树与后缀自动机 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -28,7 +28,7 @@ s[i:j]s[i:j]s[i:j] 表示字符串 sss 的 ..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595510951284" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1595678174541" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -217,7 +217,6 @@ int main()
 		else rk[sa[i]] = ++w;
 	
 	for (int j = 1; j &lt; n; j &lt;&lt;= 1) {//枚举长度, 表示正在计算长度为 2*j 的 
-		for (int i = 1; i &lt;= n; i++) id[i] = sa[i];
 		int t = 0;
 		for (int i = n; i &gt; n-j; i--) id[++t] = i;//第二关键字为无穷小的直接放前面 
 		for (int i = 1; i &lt;= n; i++)//按第二关键字找到后缀s[l:l+j-1]并更新 
@@ -243,6 +242,7 @@ int main()
 	return 0;
 }
 </code></pre>
+<p>其实后缀数组还有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的做法，即 DC3 算法，但上述已经够用了。</p>
 
               </div>
               <div class="toc-container">
