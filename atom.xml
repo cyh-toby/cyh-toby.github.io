@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-08-17T13:45:07.035Z</updated>
+    <updated>2020-08-31T11:25:06.498Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -17,8 +17,18 @@
         </link>
         <updated>2020-08-17T08:22:36.000Z</updated>
         <content type="html"><![CDATA[<ul>
-<li>BFS 在边权为 1 的图中找最短路可视情况加入 <code>if (now == goal) return f[now];</code> 这种语句，但 SPFA 中绝不可以脑残加入这玩意。</li>
+<li>
+<p>BFS 在边权为 1 的图中找最短路可视情况加入 <code>if (now == goal) return f[now];</code> 这种语句，但 SPFA 中绝不可以脑残加入这玩意。</p>
+</li>
+<li>
+<p>'std::sort' 及类似函数中，编写 'bool cmp()' 或重载须满足在此规则下，不存在 'x &lt; y' 且 'y &lt; x' ，如</p>
+<pre><code class="language-cpp">inline bool cmp(int x, int y) {
+    return x &lt;= y;
+}
+</code></pre>
+</li>
 </ul>
+<p>就<strong>不是</strong>合法规则。详见 <a href="https://www.cnblogs.com/hliu17/p/7399965.html">https://www.cnblogs.com/hliu17/p/7399965.html</a></p>
 ]]></content>
     </entry>
     <entry>
