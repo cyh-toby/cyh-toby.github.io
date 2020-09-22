@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cyh-toby.github.io</id>
     <title>cyh_toby&apos;s blog</title>
-    <updated>2020-08-31T11:25:06.498Z</updated>
+    <updated>2020-09-22T14:40:47.090Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cyh-toby.github.io"/>
     <link rel="self" href="https://cyh-toby.github.io/atom.xml"/>
@@ -29,6 +29,14 @@
 </li>
 </ul>
 <p>就<strong>不是</strong>合法规则。详见 <a href="https://www.cnblogs.com/hliu17/p/7399965.html">https://www.cnblogs.com/hliu17/p/7399965.html</a></p>
+<ul>
+<li>
+<p>不要在 <code>#define</code> 的时候手乱瞎写，把 <code>(i&lt;&lt;1)</code> 写成 <code>(1&lt;&lt;i)</code> 等，调死都发现不了。</p>
+</li>
+<li>
+<p>尽量减少宏的使用，不好调错。</p>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>

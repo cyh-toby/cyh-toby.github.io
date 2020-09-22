@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>一些细节 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1598872899919">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1600783586082">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="一些细节 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -26,7 +26,7 @@ BFS 在边权为 1 的图中找最短路可视情况加入 if (now == goal) retu
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1598872899919" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1600783586082" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -120,6 +120,14 @@ BFS 在边权为 1 的图中找最短路可视情况加入 if (now == goal) retu
 </li>
 </ul>
 <p>就<strong>不是</strong>合法规则。详见 <a href="https://www.cnblogs.com/hliu17/p/7399965.html">https://www.cnblogs.com/hliu17/p/7399965.html</a></p>
+<ul>
+<li>
+<p>不要在 <code>#define</code> 的时候手乱瞎写，把 <code>(i&lt;&lt;1)</code> 写成 <code>(1&lt;&lt;i)</code> 等，调死都发现不了。</p>
+</li>
+<li>
+<p>尽量减少宏的使用，不好调错。</p>
+</li>
+</ul>
 
               </div>
               <div class="toc-container">
