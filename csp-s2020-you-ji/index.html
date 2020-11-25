@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CSP-S2020游记 | cyh_toby&#39;s blog</title>
-<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1605958226079">
+<link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1606298842013">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="CSP-S2020游记 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
@@ -12,7 +12,7 @@
 
 
     <meta name="description" content="
-怎么就多出来一个比赛。
+CSP-S2020题解
 
 Day (-inf, 0]
 考虑到这个比赛很可能很重要，就停了两周课。并且不是连着停，中间还去上了一周学。
@@ -27,7 +27,7 @@ Day (-inf, 0]
       <div class="main-content">
         <div class="site-header">
   <a href="https://cyh-toby.github.io">
-  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1605958226079" alt="">
+  <img class="avatar" src="https://cyh-toby.github.io/images/avatar.png?v=1606298842013" alt="">
   </a>
   <h1 class="site-title">
     cyh_toby&#39;s blog
@@ -109,7 +109,7 @@ Day (-inf, 0]
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>怎么就多出来一个比赛。</p>
+<p><a href="https://cyh-toby.github.io/csp-s2020-ti-jie">CSP-S2020题解</a></p>
 </blockquote>
 <h1 id="day-inf-0">Day (-inf, 0]</h1>
 <p>考虑到这个比赛很可能很重要，就停了两周课。并且不是连着停，中间还去上了一周学。</p>
@@ -142,7 +142,7 @@ Day (-inf, 0]
 <p>C 确实和那题很像，但是 ZR 那题是只会调用前面的函数，所以从后往前扫一遍即可。这个不仅随便调用，还可以调用多个。这时只剩不到两个小时，想了想转化成图，也没有很有前途的思路，就决定直接打暴力随缘了。于是就套了个区间加乘求和的线段树板子，正好是头一天打过的，所以很顺利，没出问题。然后就过了。</p>
 <p>D 也没啥好想法，先把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 的送分拿了，然后琢磨模拟这个过程，写了个 <code>bool dfs(int x)</code> 判断在当前局面下 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 有没有可能活下来，然后结合这个函数暴力模拟，估计能拿 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>20</mn><mi>p</mi><mi>t</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">20pts</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault">s</span></span></span></span> ，只要正确性没问题。</p>
 <p>开始猜结论：只要吃了之后还有比自己小的就吃，否则结束。</p>
-<p>感觉很有道理，于是打出来试试，结果和样例有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>±</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\pm 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">±</span><span class="mord">1</span></span></span></span> 的差距。果然没这么简单。</p>
+<p>感觉很有道理，于是打出来试试，结果和样例有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>±</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\pm 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">±</span><span class="mord">1</span></span></span></span> 的差距。果然没这么简单。后来看题解这只是结论的一部分。还是蛮欣慰的，能对一半的结论。</p>
 <p>然后就快结束了。四个小时竟这样短。</p>
 <p>再检查一下文件啥的，都没问题。</p>
 <p>最后好像是用类似极域的东西手动交的文件夹。后来听说是为了节省时间，因为要各自确认自己代码无误，没有收上去的由工作人员下来收。</p>
