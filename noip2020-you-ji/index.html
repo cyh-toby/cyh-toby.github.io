@@ -2,26 +2,22 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>习题日志-19.5.21 | cyh_toby&#39;s blog</title>
+<title>NOIp2020游记 | cyh_toby&#39;s blog</title>
 <link rel="shortcut icon" href="https://cyh-toby.github.io/favicon.ico?v=1611380913386">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cyh-toby.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="习题日志-19.5.21 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="NOIp2020游记 | cyh_toby&#39;s blog - Atom Feed" href="https://cyh-toby.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="题目：乌龟棋
-知识点：动态规划
-源码：其一递归(TLE)
-#include &lt;iostream&gt;
-#include &lt;climits&gt;
+    <meta name="description" content="
+人 没 啦。
 
-using namespace std;
-
-#define maxn 350
-..." />
-    <meta name="keywords" content="习题日志" />
+Day 0
+感觉复习没有 CSP 的时候充分，仅仅最后一天翻了翻 CSP 的复习笔记，回顾了历年真题。
+这次想了想还是打了 KMP 和 Manacher 的板子。但其实是多余的，因为联赛不可能考字符串的，从来没有过。(fl..." />
+    <meta name="keywords" content="游记" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -93,134 +89,43 @@ using namespace std;
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              习题日志-19.5.21
+              NOIp2020游记
             </h2>
             <div class="post-info">
               <span>
-                2019-05-21 22:18
+                2020-12-05 19:24
               </span>
               <span>
-                4 min read
+                1 min read
               </span>
               
-                <a href="https://cyh-toby.github.io/tag/xi-ti-ri-zhi/" class="post-tag">
-                  # 习题日志
+                <a href="https://cyh-toby.github.io/tag/you-ji/" class="post-tag">
+                  # 游记
                 </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>题目：乌龟棋</p>
-<p>知识点：动态规划</p>
-<p>源码：其一递归(TLE)</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;climits&gt;
-
-using namespace std;
-
-#define maxn 350
-
-int n, m;
-int a[maxn], b[maxn];
-int ans = INT_MIN;
-
-void dfs(int cur,int sum){
-	
-	sum += a[cur];
-	
-	if (cur == n){
-		ans = max(ans,sum);
-		return;
-	}
-	
-	for (int i = 1;i &lt;= 4; i++){
-		if (b[i]){
-			b[i]--;
-			dfs(cur+i, sum);
-			b[i]++;
-		}
-	}
-}
-
-int main()
-{
-	cin &gt;&gt; n &gt;&gt; m;
-	for (int i = 1; i &lt;= n; i++){
-		cin&gt;&gt;a[i];
-	}
-	for (int i = 1; i &lt;= m; i++){
-		int t;
-		cin &gt;&gt; t;
-		b[t]++;
-	}
-	
-	dfs(1, 0);
-	
-	cout&lt;&lt; ans&lt;&lt;endl;
-	
-	return 0;
-		
-}
-</code></pre>
-<p>其二动归(AC)</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-
-using namespace std;
-
-#define maxn 355
-#define maxa 45
-
-int n, m;
-int card[maxn];//卡牌 
-int board[maxn];//棋盘 
-int f[maxa][maxa][maxa][maxa];
-
-int main()
-{
-	cin &gt;&gt; n &gt;&gt; m;
-	for (int i = 1; i &lt;= n; i++){
-		cin&gt;&gt;board[i];
-	}
-	for (int i = 1; i &lt;= m; i++){
-		int t;
-		cin &gt;&gt; t;
-		card[t]++;
-	}
-	
-	f[0][0][0][0] = board[1];//board数组从1开始 
-	
-	for (int i = 0; i &lt;= card[1];i++){
-		for (int j = 0; j &lt;= card[2]; j++){
-			for (int k = 0; k &lt;= card[3]; k++){
-				for (int l = 0; l &lt;= card[4]; l++){
-					
-					int t = i + j*2 + k*3 + l*4 +1;//board数组从1开始所以加1 IMPORTANT!! 
-					
-					if (i&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i-1][j][k][l] + board[t]);
-					if (j&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i][j-1][k][l] + board[t]);
-					if (k&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i][j][k-1][l] + board[t]);
-					if (l&gt;0) f[i][j][k][l] = max(f[i][j][k][l], f[i][j][k][l-1] + board[t]);
-					
-			//		cout&lt;&lt;f[i][j][k][l]&lt;&lt;endl;
-				}
-			}
-		}
-	}
-	
-	cout&lt;&lt;f[card[1]][card[2]][card[3]][card[4]]&lt;&lt;endl;
-	
-	return 0;
-}
-</code></pre>
-<p>心得：初次做普及+的动归题，一开始用dfs结果正确但有7个TLE，于是参考了题解，根据首个题解摸索着大概理解了本题的动归思想。其实在看题解前就想到了最好的方式是从棋盘开始到结束依次求出到达每个点的最大值，<strong>但这个思维仍有误，因为其最终结果还会受到卡牌张数的影响。</strong> 再看题解，貌似还是没搞懂，自己再琢磨琢磨，稍后补全心得。</p>
-<p>稍后：<br>
-自己的思想并非全错，动归算法本质是将每一个点的最优路径保存下来，要用时直接调用，再次算到这个点时如果有更优路径就将其值更新，形成动归。</p>
-<p>手算即可证实这一logic。</p>
+                <blockquote>
+<p>人 没 啦。</p>
+</blockquote>
+<h1 id="day-0">Day 0</h1>
+<p>感觉复习没有 CSP 的时候充分，仅仅最后一天翻了翻 CSP 的复习笔记，回顾了历年真题。</p>
+<p>这次想了想还是打了 KMP 和 Manacher 的板子。但其实是多余的，因为联赛不可能考字符串的，从来没有过。(<strong>flag1</strong>)</p>
+<p>照例还是打了线段树的板子，和其他各种板子，背了一堆数论和组合的公式。</p>
+<h1 id="day-1">Day 1</h1>
+<p>我居然不知道考场号就在准考证上。</p>
+<p>进考场居然还要用金属探测仪扫一下人。</p>
+<p>进考场，看座位表—— BJpers2，FZzzz，xiong_6 等巨佬都在这个考场。FZ 就在我左侧，隔一条走廊。</p>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li><a href="#day-0">Day 0</a></li>
+<li><a href="#day-1">Day 1</a></li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -229,9 +134,9 @@ int main()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://cyh-toby.github.io/xi-ti-ri-zhi-19515/">
+            <a href="https://cyh-toby.github.io/csp-s2020-ti-jie/">
               <h3 class="post-title">
-                习题日志-19.5.15
+                CSP-S2020 题解
               </h3>
             </a>
           </div>
