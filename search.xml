@@ -1,27 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>My First 博客 with Hexo 好耶！</title>
-    <url>/2022/01/27/Hexo/</url>
-    <content><![CDATA[<p>正文部分，嘿嘿</p>
-<h1 id="111"><a href="#111" class="headerlink" title="111"></a>111</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Hello, World!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Tags, Blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2022/01/27/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
+first post. Check <a href="https://hexo.io/docs/">documentation</a> for
+more info. If you get any problems when using Hexo, you can find the
+answer in <a
+href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>博客测试页</title>
+    <url>/2022/01/27/test-post/</url>
+    <content><![CDATA[<h1 id="一级标题">一级标题</h1>
+<h2 id="二级标题">二级标题</h2>
+<h2 id="三级标题">三级标题</h2>
+<p>正文部分，嘿嘿。</p>
+<span id="more"></span>
+<h1 id="代码块">代码块</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Hello, World!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标：求 <span class="math inline">\(g(n)=\sum_{p\le n} f(p)\)</span>
+。</p>
+<p>不妨设 <span class="math inline">\(f(p)\)</span>
+是完全积性函数，如果不是可以尝试拆成若干项完全积性函数，分别求然后相加。</p>
+<p>首先要线性筛求出 <span class="math inline">\(\sqrt n\)</span>
+以内的质数。</p>
+<p><span class="math inline">\(g(n)\)</span> 很难直接求解，考虑用 DP
+计算。设 <span
+class="math inline">\(g(n,j)=\sum_{i=1}^nf(i)[i\text{是质数或其最小质因子}&gt;p_j]\)</span>，其中
+<span class="math inline">\(p_j\)</span> 表示第 <span
+class="math inline">\(j\)</span> 个质数，那么我们要的就是 <span
+class="math inline">\(g(n,k),k\text{为最小的满足}p_k\ge \sqrt
+n\)</span>。考虑从 <span class="math inline">\(j-1\)</span> 变到 <span
+class="math inline">\(j\)</span> ，那么最小质因子为 <span
+class="math inline">\(p_j\)</span>
+的合数会被筛掉，那么它们的贡献要减去。则有转移 <span
+class="math display">\[
+g(n,j)=g(n,j-1)-f(p_j)\left(g\left(\left\lfloor\frac{n}{p_j}\right\rfloor,j-1\right)-g(p_{j-1},j-1)\right)
+\]</span> 系数 <span class="math inline">\(f(p_j)\)</span> 表示由于
+<span class="math inline">\(f(p)\)</span>
+是完全积性函数，所以可以把它从后面提出来。 <span
+class="math inline">\(g\left(\left\lfloor\frac{n}{p_j}\right\rfloor,j-1\right)\)</span>
+表示考虑所有 <span class="math inline">\(p_j\)</span> 的倍数，它们除以
+<span class="math inline">\(p_j\)</span> 之后，最小质因子 <span
+class="math inline">\(&gt;p_{j-1}\)</span>
+的合数<strong>以及所有质数</strong>的贡献，应当减去。但是，这些<strong>质数</strong>中可能有
+<span class="math inline">\(\le p_{k-1}\)</span>
+的，它们在之前就被筛掉过了，所以要加回来，也就是 <span
+class="math inline">\(g(p_{j-1},j-1)\)</span>。</p>
+<p>由于有公式 <span
+class="math inline">\(\lfloor\frac{\lfloor\frac{a}{b}\rfloor}{c}\rfloor=\lfloor\frac{a}{bc}\rfloor\)</span>
+，因此容易发现上述式子只会用到形如 <span
+class="math inline">\(\lfloor\frac{n}{x}\rfloor,x\le n\)</span> 的点处的
+DP 值，即第一项的状态数是 <span class="math inline">\(O(\sqrt
+n)\)</span>（实际实现的时候注意状态数是 <span
+class="math inline">\(2\sqrt n\)</span>）。我们预处理出这 <span
+class="math inline">\(O(\sqrt n)\)</span> 个数，把他们离散化，顺带求出
+<span class="math inline">\(g(x,0)\)</span>，然后 DP 即可。</p>
+<p>注意到上述转移式中还有一项 <span
+class="math inline">\(g(p_{j-1},j-1)\)</span>，我们只处理了所有形如
+<span class="math inline">\(\lfloor\frac{n}{x}\rfloor\)</span>
+的数，是否会漏掉某些质数 <span class="math inline">\(p\)</span>
+呢？其实不会漏。注意到，能用来转移的 <span
+class="math inline">\(p\)</span> 一定满足 <span class="math inline">\(p
+\le \sqrt n\)</span>。我们只需要证明 <span class="math inline">\(\forall
+k \le \sqrt n, \exists x,k=\lfloor\frac{n}{x}\rfloor\)</span>。</p>
+<blockquote>
+<p>证明：</p>
+<ol type="1">
+<li>若 <span class="math inline">\(k=\lfloor\sqrt n\rfloor\)</span>，设
+<span class="math inline">\(n=k^2+d\)</span>，则由于 <span
+class="math inline">\(k^2\le n &lt; (k+1)^2\)</span>，故 <span
+class="math inline">\(d\in[0,2k]\)</span>。
+<ol type="1">
+<li><span class="math inline">\(d\in [0,k)\)</span>，那么 <span
+class="math inline">\(\lfloor\frac{n}{k}\rfloor=k+\lfloor\frac{d}{k}\rfloor=k\)</span>。</li>
+<li><span class="math inline">\(d\in [k,2k]\)</span>，那么 <span
+class="math inline">\(\lfloor\frac{n}{k+1}\rfloor=\lfloor\frac{k^2+k+d-k}{k+1}\rfloor=k+\lfloor\frac{d-k}{k+1}\rfloor=k\)</span>。</li>
+</ol></li>
+<li>若 <span class="math inline">\(k &lt; \lfloor\sqrt n\rfloor\)</span>
+即 <span class="math inline">\(k \le \sqrt n - 1\)</span>，假设存在
+<span
+class="math inline">\(i,\lfloor\frac{n}{i+1}\rfloor&lt;k&lt;\lfloor\frac{n}{i}\rfloor\)</span>，此时
+<span class="math inline">\(k\)</span> 恰好夹在两个连续的 <span
+class="math inline">\(\lfloor\frac{n}{x}\rfloor\)</span>
+之间，即不可被表出。则 <span
+class="math inline">\(\frac{n}{i+1}&lt;k\)</span>，故 <span
+class="math inline">\(n&lt;k(i+1)\)</span>，从而 <span
+class="math inline">\(k&lt;\lfloor\frac{n}{i}\rfloor&lt;\lfloor\frac{k(i+1)}{i}\rfloor=k+\lfloor\frac{k}{i}\rfloor\)</span>。另一方面，<span
+class="math inline">\(\frac{n}{i+1}&lt;k&lt;\sqrt n\)</span>，所以 <span
+class="math inline">\(i+1&gt;\sqrt n\)</span>，于是 <span
+class="math inline">\(i&gt;\sqrt n - 1 \ge k\)</span>，因此 <span
+class="math inline">\(\lfloor\frac{k}{i}\rfloor=0\)</span>，于是得到
+<span
+class="math inline">\(k&lt;k\)</span>，故假设不成立，原命题成立。</li>
+</ol>
+</blockquote>
+<p>所以，上述担心就是多虑了。</p>
+<blockquote>
+<p>我看到很多博客、题解都额外预处理了 <span class="math inline">\(\sqrt
+n\)</span> 内所有素数处的函数值的前缀和，但因为我“粗心”，代码中直接调用
+<span class="math inline">\(g\)</span>
+数组，却顺利通过了一堆题目，写笔记时意识到这一点，于是琢磨出了奥妙所在。其实，在看
+zzt 集训队论文时注意到他说只需要用到 <span
+class="math inline">\(\lfloor\frac{n}{x}\rfloor\)</span>
+处的值，就心生疑惑，现在终于明白了。因此，在我看来，<strong>预处理根号内素数处的函数前缀和的值是不必要的</strong>。</p>
+</blockquote>
+<h3 id="时间复杂度">时间复杂度</h3>
+<p><span class="math display">\[
+\begin{aligned}&amp;\sum_{i\le \sqrt n}O(\pi(\sqrt i))+\sum_{i\le \sqrt
+n}O(\pi(\sqrt\frac{n}{i}))\\
+=&amp;\sum_{i\le \sqrt n}O(\pi(\sqrt\frac{n}{i}))\\
+=&amp;\sum_{i\le \sqrt
+n}O\left(\frac{\sqrt\frac{n}{i}}{\log\sqrt\frac{n}{i}}\right)\\
+=&amp;O\left(\int_1^{\sqrt n}
+\frac{\sqrt\frac{n}{x}}{\log\sqrt\frac{n}{x}}\right)\\
+=&amp;O\left(\frac{n^\frac{3}{4}}{\log n}\right)
+\end{aligned}
+\]</span></p>
+]]></content>
+      <tags>
+        <tag>测试标签1</tag>
+        <tag>测试标签2</tag>
+      </tags>
   </entry>
 </search>
